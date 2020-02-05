@@ -7,16 +7,22 @@
     <div id="turn">
       <img
         class="turnBg"
-        src="@/images/discount/turn/turnBg.png"
+        src="@/assets/images/discount/turn/turnBg.png"
         ondragstart="return false;"
         @click.prevent="playTurn"
-      >
-      <img class="turnTable" src="@/images/discount/turn/turnTable.png" ondragstart="return false;">
+      />
+      <img
+        class="turnTable"
+        src="@/assets/images/discount/turn/turnTable.png"
+        ondragstart="return false;"
+      />
     </div>
     <div :class="{'rewardAlert':isAlertBg,'d-none':isAlertBg === false}">
       <div class="alertBg" @click.prevent="isAlertBg = false"></div>
       <div class="alertInfo">
-        <span class="text-success"><i class="far fa-laugh-squint"></i></span>
+        <span class="text-success">
+          <i class="far fa-laugh-squint"></i>
+        </span>
         <p class="text-center">Save up to</p>
         <p class="text-center">{{price}}</p>
         <p class="text-center pt-2">優惠代碼: kaizbb90</p>
@@ -43,7 +49,7 @@ export default {
       let turnTable = document.querySelector(".turnTable");
       let num = Math.floor(Math.random() * 360);
       vm.isNum = num + 360;
-      console.log(num + 360);
+      //旋轉角度＋360,至少轉一圈//
       if (vm.isPlay === true) {
         turnTable.style.transform = `rotate(${vm.isNum}deg)`;
         turnTable.style.transition = `5s`;
@@ -51,28 +57,23 @@ export default {
           (vm.isNum >= 344 && vm.isNum <= 377) ||
           (vm.isNum >= 703 && vm.isNum <= 720)
         ) {
-          console.log("200");
           vm.price = "70%";
         } else if (
           (vm.isNum >= 378 && vm.isNum <= 489) ||
           (vm.isNum >= 738 && vm.isNum <= 849)
         ) {
-          console.log("20");
           vm.price = "80%";
         } else if (
           (vm.isNum >= 490 && vm.isNum <= 567) ||
           (vm.isNum >= 850 && vm.isNum <= 927)
         ) {
-          console.log("100");
           vm.price = "85%";
         } else if (
           (vm.isNum >= 568 && vm.isNum <= 635) ||
           (vm.isNum >= 928 && vm.isNum <= 995)
         ) {
-          console.log("80");
           vm.price = "90%";
         } else {
-          console.log("50");
           vm.price = "95%";
         }
         setTimeout(() => {
@@ -81,14 +82,14 @@ export default {
       }
       vm.isPlay = false;
     },
-    playAgain(){
+    playAgain() {
       const vm = this;
       let turnTable = document.querySelector(".turnTable");
       vm.isPlay = true;
       turnTable.style.transform = `rotate(0deg)`;
       turnTable.style.transition = `0s`;
       vm.isAlertBg = false;
-    },
+    }
   }
 };
 </script>
@@ -119,7 +120,7 @@ export default {
   width: 43%;
   transform: rotate(0deg);
 }
-.rewardAlert{
+.rewardAlert {
   .alertBg {
     position: fixed;
     z-index: 510;
@@ -143,8 +144,8 @@ export default {
     border-radius: 20px;
     font-weight: bold;
     & > span:nth-child(1) {
-      padding:30px;
-      font-size:5rem;
+      padding: 30px;
+      font-size: 5rem;
       text-align: center;
       display: block;
     }

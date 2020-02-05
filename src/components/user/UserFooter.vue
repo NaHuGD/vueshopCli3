@@ -205,7 +205,7 @@ export default {
       // 建立一個新地標
       const marker = new google.maps.Marker({
         // 設定地標的座標
-        position: { lat: this.lat, lng: this.lng },
+        position: { lat: vm.lat, lng: vm.lng },
         // 設定地標要放在哪一個地圖
         map: vm.map
       });
@@ -225,7 +225,7 @@ export default {
 #footer {
   background: $color-green;
   position: relative;
-  z-index:0;
+  z-index: 0;
   bottom: 0;
   padding: 1rem 5rem 0 5rem;
   @include mobile() {
@@ -254,8 +254,8 @@ export default {
     p {
       color: #d4d4d4;
       padding: 5px 0;
-      line-height:1.3rem;
-      text-align:justify;
+      line-height: 1.3rem;
+      text-align: justify;
     }
   }
   .follow {

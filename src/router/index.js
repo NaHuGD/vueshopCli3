@@ -11,7 +11,7 @@ const routes = [
   {
     path: '/',
     name: 'User',
-    component: () => import('@/views/user/User'),
+    component: () => import('@/views/user/User'), //載入元件
     redirect: 'home',
     children: [
       {   //首頁
@@ -110,7 +110,7 @@ const routes = [
     component: () => import('@/views/Login'),
   },
   {
-    path: '/admin', //路由網址
+    path: '/admin',
     name: 'Admin',
     component: () => import('@/views/admin/Admin'),
     children: [
@@ -121,13 +121,13 @@ const routes = [
         meta: { requiresAuth: true },//需要驗證，確保進入頁面需要驗正
       },
       {
-        path: 'orders', //路由網址
+        path: 'orders',
         name: 'Orders',
         component: () => import('@/views/admin/Orders'),
         meta: { requiresAuth: true },
       },
       {
-        path: 'coupons', //路由網址
+        path: 'coupons',
         name: 'Coupons',
         component: () => import('@/views/admin/Coupons'),
         meta: { requiresAuth: true },

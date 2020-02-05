@@ -52,7 +52,7 @@
           >
             <div class="border-0 shadow-sm shop_info" @click.prevent="goInside(item.id)">
               <span class="sale_style" v-if="item.origin_price != 0">SALE</span>
-              <img :src="item.imageUrl" :alt="item.title">
+              <img :src="item.imageUrl" :alt="item.title" />
             </div>
             <div class="item_info" @click.prevent="goInside(item.id)">
               <p class="pdname">{{item.title}}</p>
@@ -97,11 +97,9 @@ export default {
     getProducts(page = 1) {
       //取得api資料
       const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${
-        process.env.VUE_APP_CUSTOMPATH
-      }/products/all`;
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
       vm.isLoading = true; //讀取資料時開起
-      this.$http.get(api).then(response => {
+      vm.$http.get(api).then(response => {
         vm.products = response.data.products;
         vm.isLoading = false; //完成後關閉loading功能
       });
@@ -141,7 +139,6 @@ export default {
       });
     },
     addLike(item) {
-      console.log(item);
       const vm = this;
       let itemId = item.id;
       let itemTitle = item.title;
@@ -153,21 +150,19 @@ export default {
       localStorage.setItem("likeData", JSON.stringify(vm.likeData));
     },
     removeLike(item) {
-      console.log(item);
       const vm = this;
       const num = vm.likeData.findIndex(function(ele) {
         return ele.id === item.id;
       });
       vm.likeData.splice(num, 1);
       localStorage.setItem("likeData", JSON.stringify(vm.likeData));
-      console.log("ele", num);
+      //更新localstrage資料//
     }
   },
   computed: {
     filteredProducts() {
       const vm = this;
       const routeName = vm.$route.name;
-      console.log("route", vm.$route.name);
       let filtered = "";
       //判斷網頁顯示內容//
       if (routeName === "All") {
@@ -175,42 +170,42 @@ export default {
         return vm.products;
       } else if (routeName === "Protective") {
         vm.isMenuActive = "健身護具";
-        filtered = this.products.filter(function(item) {
+        filtered = vm.products.filter(function(item) {
           return item.category === "護具";
         });
         return filtered;
       } else if (routeName === "Whey") {
         vm.isMenuActive = "優質乳清";
-        filtered = this.products.filter(function(item) {
+        filtered = vm.products.filter(function(item) {
           return item.category === "乳清";
         });
         return filtered;
       } else if (routeName === "Like") {
         const vm = this;
         vm.isMenuActive = "最愛商品";
-        filtered = this.products.filter(function(item, index, arr) {
+        filtered = vm.products.filter(function(item, index, arr) {
           return vm.likeData.some(function(ele) {
             return item.id === ele.id;
           });
         });
         return filtered;
       } else {
-        filtered = this.products.filter(function(item) {
+        //搜尋//
+        filtered = vm.products.filter(function(item) {
           return item.title.includes(vm.searchId);
         });
         vm.isMenuActive = `查詢有關"${vm.searchId}"的結果`;
         return filtered;
-        console.log("搜尋", vm.searchId);
       }
     }
   },
   created() {
-    this.searchId = this.$route.params.id;
     const vm = this;
+    vm.searchId = vm.$route.params.id;
     vm.getProducts();
     vm.getLocalData();
     vm.$bus.$on("searchId:push", value => {
-      this.searchId = value;
+      vm.searchId = value;
     });
   }
 };
@@ -307,22 +302,22 @@ export default {
   }
   .box1 {
     clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
-    background-image: url("../../images/shop/m1.jpg");
+    background-image: url("../../assets/images/shop/m1.jpg");
     left: 0;
   }
   .box2 {
     clip-path: polygon(25% 0, 100% 0%, 75% 100%, 0% 100%);
-    background-image: url("../../images/shop/m2.jpg");
+    background-image: url("../../assets/images/shop/m2.jpg");
     left: -8.4%;
   }
   .box3 {
     clip-path: polygon(25% 0, 100% 0%, 75% 100%, 0% 100%);
-    background-image: url("../../images/shop/m3.jpg");
+    background-image: url("../../assets/images/shop/m3.jpg");
     left: -16.8%;
   }
   .box4 {
     clip-path: polygon(25% 0, 100% 0%, 100% 100%, 0% 100%);
-    background-image: url("../../images/shop/m4.jpg");
+    background-image: url("../../assets/images/shop/m4.jpg");
     left: -25.2%;
   }
   .subcate {

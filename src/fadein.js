@@ -4,13 +4,13 @@ function checkSlide() {
         // half way through the image
         const slideInAt = (window.scrollY + window.innerHeight) - fadeinDiv.offsetHeight / 1;
         // bottom of the image
-        const imageBottom = fadeinDiv.offsetTop + fadeinDiv.offsetParent.offsetTop  + fadeinDiv.offsetHeight / 2;
+        const imageBottom = fadeinDiv.offsetTop + fadeinDiv.offsetParent.offsetTop + fadeinDiv.offsetHeight / 2;
         const isHalfShown = slideInAt > (fadeinDiv.offsetParent.offsetTop);
         const isNotScrolledPast = window.scrollY < imageBottom;
         if (isHalfShown && isNotScrolledPast) {
             fadeinDiv.classList.add('active');
         }
-        if (slideInAt < (fadeinDiv.offsetTop + fadeinDiv.offsetParent.offsetTop )) {
+        if (slideInAt < (fadeinDiv.offsetTop + fadeinDiv.offsetParent.offsetTop)) {
             fadeinDiv.classList.remove('active');
         }
     });

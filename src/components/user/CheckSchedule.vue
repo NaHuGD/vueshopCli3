@@ -3,17 +3,17 @@
     <div class="row w-100 m-auto pt150">
       <div class="col-sm-8 col-10 m-auto" style="height:140px;">
         <div class="checkSchedule">
-          <span class=""></span>
+          <span></span>
           <div class="checkProduct">
-            <i class="fas fa-shopping-cart"></i>
+            <i class="fa fa-shopping-cart"></i>
             <p>確認購物車</p>
           </div>
           <div class="checkInfo">
-            <i class="fas fa-edit"></i>
+            <i class="fa fa-edit"></i>
             <p>填寫資料</p>
           </div>
           <div class="checkOut">
-            <i class="fas fa-comment-dollar"></i>
+            <i class="fa fa-check-square-o"></i>
             <p>確認結帳</p>
           </div>
         </div>
@@ -36,12 +36,12 @@ export default {
 .scheduleInfoAnimation {
   animation-name: scheduleInfo;
   animation-iteration-count: infinite;
-  animation-duration: .5s;
+  animation-duration: 0.5s;
 }
 .scheduleConfirmAnimation {
   animation-name: scheduleConfirm;
   animation-iteration-count: infinite;
-  animation-duration: .5s;
+  animation-duration: 0.5s;
 }
 .checkSchedule {
   position: relative;
@@ -231,8 +231,7 @@ export default {
       linear-gradient(45deg, #91afaf 100%, transparent 100%);
   }
   100% {
-    background: 
-    linear-gradient(45deg, #91afaf 10%, transparent 10%),
+    background: linear-gradient(45deg, #91afaf 10%, transparent 10%),
       linear-gradient(90deg, #235a55 20%, transparent 20%),
       linear-gradient(45deg, #91afaf 30%, transparent 30%),
       linear-gradient(45deg, #235a55 40%, transparent 40%),
@@ -241,7 +240,7 @@ export default {
       linear-gradient(45deg, #91afaf 70%, transparent 70%),
       linear-gradient(45deg, #235a55 80%, transparent 80%),
       linear-gradient(45deg, #91afaf 90%, transparent 90%),
-      linear-gradient(45deg, #235a55 100%, transparent 100%),
+      linear-gradient(45deg, #235a55 100%, transparent 100%);
   }
 }
 </style>

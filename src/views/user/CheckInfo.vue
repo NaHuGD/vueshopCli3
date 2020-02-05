@@ -167,11 +167,11 @@
                   <div class="cardFront">
                     <div class="number">{{form.user.card.number}}</div>
                     <div class="date">{{form.user.card.date.month}}/{{form.user.card.date.year}}</div>
-                    <img src="@/images/checkout/card_bg.png" alt="信用卡" class="pt-3" />
+                    <img src="@/assets/images/checkout/card_bg.png" alt="信用卡" class="pt-3" />
                   </div>
                   <div class="cardBack">
                     <div class="ccv">{{form.user.card.ccv}}</div>
-                    <img src="@/images/checkout/card_back_bg.png" alt="信用卡" class="pt-3" />
+                    <img src="@/assets/images/checkout/card_back_bg.png" alt="信用卡" class="pt-3" />
                   </div>
                 </div>
               </div>
@@ -236,10 +236,10 @@ export default {
       let d = date.getDate();
       vm.form.user.nowDate = `${y}/${m + 1}/${d}`;
       vm.isLoading = true;
-      this.$validator.validate().then(result => {
+      vm.$validator.validate().then(result => {
         if (result) {
           //email格式正確時發送訂單
-          this.$http.post(url, { data: order }).then(response => {
+          vm.$http.post(url, { data: order }).then(response => {
             console.log("訂單", response);
             if (response.data.success) {
               console.log("訂單確認建立 導頁至結帳畫面");

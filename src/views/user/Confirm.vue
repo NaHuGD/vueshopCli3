@@ -1,7 +1,7 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
-    <CheckSchedule/>
+    <CheckSchedule />
     <form @submit.prevent="paying">
       <div class="mx-auto mb-4 col-10">
         <div id="Confirm">
@@ -74,8 +74,8 @@
             :class="{'active':order.is_paid===false,'active':order.is_paid===true}"
           >
             <span class="box">
-              <i class="fas fa-check" v-if="order.is_paid===true"></i>
-              <i class="fas fa-times" v-else></i>
+              <i class="fa fa-check" v-if="order.is_paid===true"></i>
+              <i class="fa fa-times" v-else></i>
             </span>
             <p v-if="order.is_paid===true">結帳完成</p>
             <p v-else>點擊付款</p>
@@ -106,12 +106,10 @@ export default {
     getOrder() {
       //取得訂單資料
       const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${
-        vm.orderId
-      }`;
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
       console.log(url);
       vm.isLoading = true;
-      this.$http.get(url).then(response => {
+      vm.$http.get(url).then(response => {
         console.log("order", response);
         vm.order = response.data.order;
         vm.isLoading = false;
@@ -121,12 +119,10 @@ export default {
     paying() {
       const vm = this;
       if (vm.payingCheck) {
-        const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${
-          vm.orderId
-        }`;
+        const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
         console.log(url);
         vm.isLoading = true;
-        this.$http.post(url).then(response => {
+        vm.$http.post(url).then(response => {
           console.log("pay", response);
           if (response.data.success) {
             //付款完成時
@@ -140,8 +136,9 @@ export default {
     }
   },
   created() {
-    this.orderId = this.$route.params.orderId;
-    this.getOrder();
+    const vm = this;
+    vm.orderId = this.$route.params.orderId;
+    vm.getOrder();
   },
   mounted() {
     document.querySelector(".checkOut").style = `border:3px solid #235a55;`;
@@ -150,7 +147,9 @@ export default {
     document.querySelector(".checkInfo").style = `border:3px solid #235a55;`;
     document.querySelector(".checkInfo>i").style = `color:#235a55;`;
     document.querySelector(".checkInfo>p").style = `color:#235a55;`;
-    document.querySelector(".checkSchedule>span").classList.add('scheduleConfirmAnimation');
+    document
+      .querySelector(".checkSchedule>span")
+      .classList.add("scheduleConfirmAnimation");
   }
 };
 </script>

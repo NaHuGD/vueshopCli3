@@ -11,7 +11,7 @@
       </div>
       <div class="row mb-5 mt-4 align-items-center">
         <div class="col-md-6">
-          <img :src="product.imageUrl" :alt="product.title">
+          <img :src="product.imageUrl" :alt="product.title" />
           <span class="like">
             <i class="fa fa-heart text-danger" v-if="getIfLocalData(product)"></i>
             <i class="fa fa-heart-o" v-else></i>
@@ -84,7 +84,7 @@
         <div class="info row">
           <div class="col-6 col-lg-3 mt-4" v-for="(item,key) in moreLook" :key="key">
             <div @click.prevent="goPath(item.id)">
-              <img :src="item.imageUrl" alt>
+              <img :src="item.imageUrl" alt />
               <p class="text-left py-2">{{item.title}}</p>
               <p class="text-left">NT.{{item.price}}</p>
             </div>
@@ -114,11 +114,9 @@ export default {
     getProduct(id) {
       //取得指定商品資料
       const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${
-        process.env.VUE_APP_CUSTOMPATH
-      }/products/all`;
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
       vm.isLoading = true;
-      this.$http.get(url).then(response => {
+      vm.$http.get(url).then(response => {
         let newArray = response.data.products.filter(function(
           item,
           index,
@@ -130,22 +128,20 @@ export default {
         });
         vm.products = newArray;
         for (let i = 0; i < 4; i++) {
+          //隨機顯示物件中的商品//
           let num = Math.floor(Math.random() * vm.products.length);
-          console.log(i, num);
-          vm.moreLook.push(vm.products[num]);
-          vm.products.splice(num, 1);
+          vm.moreLook.push(vm.products[num]); //將隨機的商品新增到新物件//
+          vm.products.splice(num, 1); //新增後刪除該筆資料位置,避免重複//
         }
       });
-      const api = `${process.env.VUE_APP_APIPATH}/api/${
-        process.env.VUE_APP_CUSTOMPATH
-      }/product/${id}`;
-      this.$http.get(api).then(response => {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
+      vm.$http.get(api).then(response => {
         vm.product = response.data.product;
         vm.isLoading = false;
       });
     },
     goPath(id) {
-      console.log(id);
+      //透過id到指定內頁//
       const vm = this;
       vm.$router.push({ path: `/shop_inside/${id}` });
       location.reload();
@@ -159,16 +155,16 @@ export default {
       }
     },
     tasteValue() {
+      //選擇口味//
       const vm = this;
       vm.size = document.querySelector("#tasteValue").value;
       vm.isSize = false;
-      console.log("tasteValue", vm.size);
     },
     protectiveValue() {
+      //選擇尺寸//
       const vm = this;
       vm.size = document.querySelector("#protectiveValue").value;
       vm.isSize = false;
-      console.log("protectiveValue", vm.size);
     },
     addtoCart(id) {
       //qty加入的數量
@@ -186,8 +182,8 @@ export default {
         vm.isLoading = false;
         return;
       } else {
-        this.$http.post(url, { data: cart }).then(response => {
-          console.log("加入購物車", response.data);
+        vm.$http.post(url, { data: cart }).then(response => {
+          //加入購物車,response=商品資料//
           vm.getCart();
           vm.$bus.$emit("bagToggle:push", false);
           vm.isLoading = false;
@@ -195,7 +191,6 @@ export default {
       }
     },
     buyNow(id) {
-      console.log(id);
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       const cart = {
@@ -209,11 +204,11 @@ export default {
         vm.isLoading = false;
         return;
       } else {
-        this.$http.post(url, { data: cart }).then(response => {
-          console.log(response.data);
+        vm.$http.post(url, { data: cart }).then(response => {
+          //直接購買,導頁並更新購物車//
           vm.getCart();
         });
-        this.$router.push("/checkProduct");
+        vm.$router.push("/checkProduct");
       }
     },
     getCart() {
@@ -221,8 +216,8 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.isLoading = true;
-      this.$http.get(url).then(response => {
-        console.log("取得購物車資料", response);
+      vm.$http.get(url).then(response => {
+        //將購物車資料,總數透過eventbus傳遞//
         vm.$bus.$emit("cartnum:push", response.data.data.carts.length);
         vm.$bus.$emit("cartitem:push", response.data.data);
         vm.isLoading = false;
@@ -240,12 +235,12 @@ export default {
     }
   },
   created() {
-    this.itemId = this.$route.params.itemId;
-    this.getProduct(this.itemId); //將指定商品id帶入
-    this.getCart();
-    this.getLocalData();
-  },
-  mounted() {}
+    const vm = this;
+    vm.itemId = vm.$route.params.itemId;
+    vm.getProduct(vm.itemId); //將指定商品id帶入
+    vm.getCart();
+    vm.getLocalData();
+  }
 };
 </script>
 

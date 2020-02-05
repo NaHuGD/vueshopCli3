@@ -21,8 +21,7 @@ export default {
     signout() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/logout`; //登出api
-      this.$http.post(url).then(response => {
-        console.log("logout", response.data);
+      vm.$http.post(url).then(response => {
         if (response.data.success) {
           //確認登出時
           vm.$router.push("/login"); //導致登入頁面
@@ -34,9 +33,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  ul,li {
-    list-style: none;
-  }
+ul,
+li {
+  list-style: none;
+}
 </style>
 
 

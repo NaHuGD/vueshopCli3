@@ -62,20 +62,18 @@
 
 <script>
 export default {
-  data(){
-    return{
-
-    }
+  data() {
+    return {};
   },
-  methods:{
-    goTurn(){
+  methods: {
+    goTurn() {
       const vm = this;
       vm.$router.push({
         path: `/discount/turn`
       });
     }
   }
-}
+};
 </script>
 
 
@@ -224,13 +222,9 @@ export default {
       }
     }
   }
-  .box:hover{
-    // filter:grayscale(0%);
-  }
   .box {
-    cursor:pointer;
-    transition:.5s;
-    // filter:grayscale(100%);
+    cursor: pointer;
+    transition: 0.5s;
     position: relative;
     padding: 0;
     margin: 1rem auto;
@@ -320,11 +314,11 @@ export default {
       width: 11.5vw;
       height: 11.5vw;
       border-radius: 100%;
-      overflow:hidden;
+      overflow: hidden;
       & > p {
         position: absolute;
         top: 50%;
-        right:60%;
+        right: 60%;
         transform: translate(50%, -50%);
         font-weight: bold;
         font-size: 2vw;

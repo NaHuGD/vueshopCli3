@@ -37,7 +37,7 @@
         <div class="text-center mb-3" v-if="CartItem.carts == ''">您的購物車是空的</div>
         <div class="bagItem" v-for="(item,key) in CartItem.carts" :key="key">
           <div>
-            <img :src="item.product.imageUrl" width="50">
+            <img :src="item.product.imageUrl" width="50" />
             <div>
               <div class="cartItemDelete" @click.prevent="cartItemDelete(item)">
                 <i class="fa fa-times"></i>
@@ -71,7 +71,7 @@
           placeholder="一鍵搜尋所有商品"
           v-model="id"
           @keyup.enter="goProducts"
-        >
+        />
         <button @click.prevent="goProducts">
           <i class="fa fa-search"></i>
         </button>
@@ -157,8 +157,8 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.isLoading = true;
-      this.$http.get(url).then(response => {
-        console.log("取得購物車資料", response);
+      vm.$http.get(url).then(response => {
+        //接受到購物車資訊時用eventbus傳遞//
         vm.$bus.$emit("cartnum:push", response.data.data.carts.length);
         vm.$bus.$emit("cartitem:push", response.data.data);
         vm.isLoading = false;
@@ -175,10 +175,8 @@ export default {
     cartItemDelete(item) {
       const vm = this;
       vm.isLoading = true;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${
-        item.id
-      }`;
-      this.$http.delete(url).then(response => {
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`;
+      vm.$http.delete(url).then(response => {
         vm.getCart();
         vm.isLoading = false;
       });
@@ -242,18 +240,18 @@ export default {
   created() {
     const vm = this;
     vm.$bus.$on("cartnum:push", function(num) {
-      console.log("抓取購物車總長", num);
+      //接收購物車陣列總數//
       vm.getCartNum(num);
     });
     vm.$bus.$on("cartitem:push", function(item) {
-      console.log("抓取購物車資訊", item);
+      //接收購物車資訊//
       vm.getCartItem(item);
     });
     vm.$bus.$on("bagToggle:push", function(item) {
       //新增後顯示購物車
       vm.bagToggle = item;
     });
-    this.getCart();
+    vm.getCart();
   }
 };
 </script>
@@ -604,7 +602,7 @@ export default {
   height: 100vh;
   background: $color-lightYellow;
   padding: 0.5em 1.25em;
-  z-index:3;
+  z-index: 3;
   & > .logo {
     position: relative;
     margin-top: 15px;

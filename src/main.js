@@ -6,6 +6,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+// import VeeValidate from 'vee-validate';
 import 'bootstrap';
 import 'font-awesome/css/font-awesome.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper';
@@ -20,27 +21,26 @@ Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios);
 Vue.component('Loading', Loading);
+// Vue.use(VeeValidate);
 Vue.use(VueAwesomeSwiper);
 
 Vue.filter('currency', currencyFilter);
-Vue.filter('date',dateFilter);
+Vue.filter('date', dateFilter);
 
 axios.defaults.withCredentials = true;//開啟跨域
 
 new Vue({
   router,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
 
 router.beforeEach((to, from, next) => {
-  console.log('to', to);
-  console.log('from', from);
-  console.log('next', next);
+  //to到達的頁面//
+  //from從哪個頁面過去//
+  //next//
   if (to.meta.requiresAuth) { //進入的網址
-    console.log('需要驗證');
     const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;
     axios.post(api).then((response) => {
-      console.log(response.data)
       if (response.data.success) { //帳號登入成功時(true)
         next(); //登入狀態時
       } else {

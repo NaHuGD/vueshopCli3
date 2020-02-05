@@ -40,7 +40,8 @@ export default {
     }
   },
   created() {
-    this.gotopShow();
+    const vm = this;
+    vm.gotopShow();
   }
 };
 </script>
@@ -55,7 +56,7 @@ export default {
   z-index: 1;
   width: 40px;
   height: 40px;
-  box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.6);
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.6);
   border-radius: 100%;
   & > i {
     color: black;
@@ -64,27 +65,27 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation-iteration-count:infinite;
-    animation-duration:1.5s;
-    animation-timing-function:cubic-bezier(0.5, 0.5, 0.5, 0.5);
+    animation-iteration-count: infinite;
+    animation-duration: 1.5s;
+    animation-timing-function: cubic-bezier(0.5, 0.5, 0.5, 0.5);
   }
   &:hover i {
     animation-name: isfloat;
   }
   @keyframes isfloat {
-    0%{
+    0% {
       top: 50%;
     }
-    25%{
+    25% {
       top: 40%;
     }
-    50%{
+    50% {
       top: 50%;
     }
-    75%{
+    75% {
       top: 55%;
     }
-    100%{
+    100% {
       top: 50%;
     }
   }

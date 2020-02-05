@@ -51,7 +51,8 @@
   margin: 0;
   padding: 0;
   background: rgb(209, 209, 209);
-  ul,li {
+  ul,
+  li {
     list-style: none;
   }
 }

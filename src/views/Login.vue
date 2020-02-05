@@ -11,7 +11,7 @@
         required
         autofocus
         v-model="user.username"
-      >
+      />
       <label for="inputPassword" class="sr-only">Password</label>
       <input
         type="password"
@@ -20,7 +20,7 @@
         placeholder="Password"
         required
         v-model="user.password"
-      >
+      />
       <div class="checkbox mb-3 text-danger">{{isMessage}}</div>
       <button class="btn-lg btn-block" type="submit">Sign in</button>
       <button class="goBack" @click.prevent="goBack">回上一頁</button>
@@ -44,7 +44,7 @@ export default {
     signin() {
       const api = `${process.env.VUE_APP_APIPATH}/admin/signin`;
       const vm = this;
-      this.$http.post(api, vm.user).then(response => {
+      vm.$http.post(api, vm.user).then(response => {
         vm.isMessage = response.data.message;
         console.log(response.data);
         if (response.data.success) {
@@ -54,7 +54,8 @@ export default {
       });
     },
     goBack() {
-      this.$router.go(-1);
+      const vm = this;
+      vm.$router.go(-1);
     }
   }
 };

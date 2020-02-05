@@ -1,7 +1,7 @@
 <template>
   <div id="home" class>
     <div id="banner">
-      <img :src="banner" alt>
+      <img :src="banner" alt />
     </div>
     <div class="row event01">
       <div class="box1 col-12 col-md-6 p-0">
@@ -13,22 +13,22 @@
       </div>
       <div class="box2 col-12 col-md-6 p-0">
         <div class="grid1">
-          <img class="p-0" :src="e1_1" alt>
+          <img class="p-0" :src="e1_1" alt />
         </div>
         <div class="grid2">
-          <img class="p-0" :src="e1_2" alt>
+          <img class="p-0" :src="e1_2" alt />
         </div>
         <div class="grid3">
-          <img class="p-0" :src="e1_3" alt>
+          <img class="p-0" :src="e1_3" alt />
         </div>
         <div class="grid4">
-          <img class="p-0" :src="e1_4" alt>
+          <img class="p-0" :src="e1_4" alt />
         </div>
       </div>
     </div>
     <div class="row event02 m-0">
       <div class="box1 col-12 col-md-6 p-0">
-        <img class="p-0" :src="e2" alt>
+        <img class="p-0" :src="e2" alt />
       </div>
       <div class="box2 col-12 col-md-6 p-0">
         <div class="fadein">
@@ -70,22 +70,22 @@
 <script>
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
-import banner from '../../images/index/banner.jpg';
-import e1_1 from '../../images/index/e1-1.jpg';
-import e1_2 from '../../images/index/e1-2.jpg';
-import e1_3 from '../../images/index/e1-3.jpg';
-import e1_4 from '../../images/index/e1-4.jpg';
-import e2 from '../../images/index/e2.jpg';
+import banner from "@/assets/images/index/banner.jpg";
+import e1_1 from "@/assets/images/index/e1-1.jpg";
+import e1_2 from "@/assets/images/index/e1-2.jpg";
+import e1_3 from "@/assets/images/index/e1-3.jpg";
+import e1_4 from "@/assets/images/index/e1-4.jpg";
+import e2 from "@/assets/images/index/e2.jpg";
 
 export default {
   data() {
     return {
-      banner:banner,
-      e1_1:e1_1,
-      e1_2:e1_2,
-      e1_3:e1_3,
-      e1_4:e1_4,
-      e2:e2,
+      banner: banner,
+      e1_1: e1_1,
+      e1_2: e1_2,
+      e1_3: e1_3,
+      e1_4: e1_4,
+      e2: e2,
       swiperNum: [
         {
           img: "/vueshopping/static/img/01.3894a5f.jpg",
@@ -122,7 +122,7 @@ export default {
       swiperOption: {
         loop: true,
         loopFillGroupWithBlank: true,
-        autoplay:true,
+        autoplay: true,
         on: {
           init: function() {
             const vm = this;
@@ -331,7 +331,7 @@ export default {
   }
   .scroll {
     background-attachment: fixed;
-    background-image: url("../../images/index/e3.jpg");
+    background-image: url("../../assets/images/index/e3.jpg");
     background-color: #929c9a;
     background-size: cover;
     background-repeat: no-repeat;
@@ -401,7 +401,7 @@ export default {
   }
   .swiper {
     margin: 0 50px;
-    cursor:pointer;
+    cursor: pointer;
     @include mobile() {
       margin: 0 10px;
     }

@@ -11,5 +11,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./assets/all"; //載入bootstrap(node_modules下的bs.scss)
+@import "./assets/all";
 </style>
