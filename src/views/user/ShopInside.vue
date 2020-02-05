@@ -292,7 +292,6 @@ export default {
         background: #666;
         color: #fff;
         padding: 1rem;
-        border-radius: 8px;
       }
     }
     .productWrite {

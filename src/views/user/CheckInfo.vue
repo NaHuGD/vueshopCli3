@@ -167,11 +167,11 @@
                   <div class="cardFront">
                     <div class="number">{{form.user.card.number}}</div>
                     <div class="date">{{form.user.card.date.month}}/{{form.user.card.date.year}}</div>
-                    <img src="@/assets/images/checkout/card_bg.png" alt="信用卡" class="pt-3" />
+                    <img :src="card" alt="信用卡" class="pt-3" />
                   </div>
                   <div class="cardBack">
                     <div class="ccv">{{form.user.card.ccv}}</div>
-                    <img src="@/assets/images/checkout/card_back_bg.png" alt="信用卡" class="pt-3" />
+                    <img :src="card_bg" alt="信用卡" class="pt-3" />
                   </div>
                 </div>
               </div>
@@ -184,7 +184,7 @@
         </div>
         <button class="CheckOut mb-4">
           前往結帳
-          <i class="fas fa-long-arrow-alt-right"></i>
+          <i class="fa fa-arrow-right"></i>
         </button>
       </form>
     </div>
@@ -193,6 +193,8 @@
 
 <script>
 import CheckSchedule from "@/components/user/CheckSchedule";
+import card from "@/assets/images/checkout/card_bg.png";
+import card_bg from "@/assets/images/checkout/card_back_bg.png";
 
 export default {
   components: {
@@ -200,6 +202,8 @@ export default {
   },
   data() {
     return {
+      card: card,
+      card_bg: card_bg,
       isLoading: false,
       isFlipped: true,
       form: {
@@ -414,7 +418,6 @@ export default {
     position: relative;
     width: 20%;
     padding: 15px 0;
-    border-radius: 1rem;
     background: $color-green;
     color: #fff;
     letter-spacing: 0.3rem;

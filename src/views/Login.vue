@@ -22,7 +22,7 @@
         v-model="user.password"
       />
       <div class="checkbox mb-3 text-danger">{{isMessage}}</div>
-      <button class="btn-lg btn-block" type="submit">Sign in</button>
+      <button class="btn-lg btn-block" type="submit">登入</button>
       <button class="goBack" @click.prevent="goBack">回上一頁</button>
       <p class="my-3 text-muted">&copy; 2017-2019</p>
     </form>

@@ -78,7 +78,7 @@
               v-model="coupon_code"
             />
             <button class="applyCoupons col-3" @click.prevent="addCoupons()">
-              <i class="fa fa-long-arrow-alt-right"></i>
+              <i class="fa fa-arrow-right"></i>
             </button>
           </div>
           <p class="couponCode text-center px-5" v-if="couponSuccess == true">{{coupon_code}}</p>

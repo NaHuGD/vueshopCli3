@@ -56,7 +56,7 @@
             <p class="d-inline-block">NTD.</p>
             <p class="d-inline-block">{{CartItem.total | currency }}</p>
           </div>
-          <button class="d-block" @click.prevent="goCheckProduct">BEGIN CHECKOUT</button>
+          <button class="d-block" @click.prevent="goCheckProduct">開始結帳</button>
         </div>
       </div>
     </div>
@@ -510,7 +510,6 @@ export default {
       color: #fff;
       padding: 0.6rem 3.2rem;
       margin: 0;
-      border-radius: 6px;
       width: 100%;
       @include mobile() {
         letter-spacing: 1px;

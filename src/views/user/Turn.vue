@@ -5,23 +5,14 @@
       <p>活動辦法:點擊下方圖片轉動唱盤,獲取折扣碼</p>
     </div>
     <div id="turn">
-      <img
-        class="turnBg"
-        src="@/assets/images/discount/turn/turnBg.png"
-        ondragstart="return false;"
-        @click.prevent="playTurn"
-      />
-      <img
-        class="turnTable"
-        src="@/assets/images/discount/turn/turnTable.png"
-        ondragstart="return false;"
-      />
+      <img class="turnBg" :src="turnBg" ondragstart="return false;" @click.prevent="playTurn" />
+      <img class="turnTable" :src="turnTable" ondragstart="return false;" />
     </div>
     <div :class="{'rewardAlert':isAlertBg,'d-none':isAlertBg === false}">
       <div class="alertBg" @click.prevent="isAlertBg = false"></div>
       <div class="alertInfo">
         <span class="text-success">
-          <i class="far fa-laugh-squint"></i>
+          <i class="fa fa-money"></i>
         </span>
         <p class="text-center">Save up to</p>
         <p class="text-center">{{price}}</p>
@@ -34,9 +25,13 @@
 </template>
 
 <script>
+import turnBg from "@/assets/images/discount/turn/turnBg.png";
+import turnTable from "@/assets/images/discount/turn/turnTable.png";
 export default {
   data() {
     return {
+      turnBg: turnBg,
+      turnTable: turnTable,
       isPlay: true,
       isNum: "",
       isAlertBg: false,
@@ -160,14 +155,12 @@ export default {
     & > button:nth-child(5) {
       margin: 20px auto 0 auto;
       padding: 10px 0;
-      border-radius: 15px;
       width: 90%;
       background: $color-red;
     }
     & > button:nth-child(6) {
       margin: 20px auto 0 auto;
       padding: 10px 0;
-      border-radius: 15px;
       width: 90%;
       background: $color-gray;
     }
