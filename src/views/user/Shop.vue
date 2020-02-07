@@ -48,15 +48,18 @@
             class="col-6 col-md-4 col-lg-3 mb-4"
             v-for="(item,key) in filteredProducts"
             :key="key"
-            :class="{'soldOutStyle':item.in_stock === 0}"
           >
             <div class="border-0 shadow-sm shop_info" @click.prevent="goInside(item.id)">
-              <span class="sale_style" v-if="item.origin_price != 0">SALE</span>
-              <img :src="item.imageUrl" :alt="item.title" />
+              <span class="sale_style" :class="{'soldOutStyle':item.in_stock === 0}" v-if="item.origin_price != 0">SALE</span>
+              <img
+                :src="item.imageUrl"
+                :class="{'soldOutStyle':item.in_stock === 0}"
+                :alt="item.title"
+              />
             </div>
             <div class="item_info" @click.prevent="goInside(item.id)">
-              <p class="pdname">{{item.title}}</p>
-              <p class="price">
+              <p class="pdname" :class="{'soldOutStyle':item.in_stock === 0}">{{item.title}}</p>
+              <p class="price" :class="{'soldOutStyle':item.in_stock === 0}">
                 <span :class="{'saleFont':item.origin_price != 0}">{{item.price | currency}}</span>
                 <span class="old" v-if="item.origin_price != 0">{{item.origin_price | currency}}</span>
               </p>
@@ -359,7 +362,7 @@ export default {
     }
     .like {
       position: absolute;
-      z-index: 2;
+      z-index: 1;
       top: 50%;
       right: 5%;
       font-size: 1.3rem;
@@ -392,7 +395,6 @@ export default {
   .soldOut {
     display: flex;
     position: absolute;
-    z-index: 1;
     top: 0%;
     left: 0%;
     width: 100%;
@@ -408,7 +410,7 @@ export default {
     }
   }
   .soldOutStyle {
-    filter: grayscale(0.5);
+    filter: contrast(0.5);
   }
 }
 </style>

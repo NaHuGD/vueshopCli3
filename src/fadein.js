@@ -2,7 +2,7 @@ function checkSlide() {
     const fadeinDivs = document.querySelectorAll(".fadein");
     fadeinDivs.forEach(fadeinDiv => {
         // half way through the image
-        const slideInAt = (window.scrollY + window.innerHeight) - fadeinDiv.offsetHeight / 1;
+        const slideInAt = (window.scrollY + window.innerHeight) - fadeinDiv.offsetHeight / 1.4;
         // bottom of the image
         const imageBottom = fadeinDiv.offsetTop + fadeinDiv.offsetParent.offsetTop + fadeinDiv.offsetHeight / 2;
         const isHalfShown = slideInAt > (fadeinDiv.offsetParent.offsetTop);

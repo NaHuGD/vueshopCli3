@@ -8,20 +8,22 @@
       <div class="about col-sm-4 py-sm-0 py-3">
         <span>關於凱力</span>
         <div>
-          <p>隨著CSS3 的普及，過去許多看似酷炫的效果，逐漸也都能透過CSS 來實作，這篇 ... 使這些圖案分別呈現在網頁裡，這樣就能大幅減少多張圖片載入的request 數量。</p>
+          <p>隨著健身產業的新興,全民的健身意識抬頭,到健身房報到已經成了不少人每天的必須行程,凱力健人嚴選致力於打造運動夥伴們最優質的健身護具,及品質最高的乳清蛋白,讓運動夥伴們可以專心訓練,由凱力做最強大的後盾與你們一同成長.</p>
         </div>
       </div>
       <div class="follow col p-sm">
         <span>追蹤凱力</span>
-        <a href="https://twitter.com/?lang=zh-tw">
-          <i class="fa fa-twitter-square"></i>Twitter
-        </a>
-        <a href="https://zh-tw.facebook.com/">
-          <i class="fa fa-facebook-square"></i>Facebook
-        </a>
-        <a href="https://www.instagram.com/?hl=zh-tw">
-          <i class="fa fa-instagram"></i>Instagram
-        </a>
+        <div>
+          <a href="https://twitter.com/?lang=zh-tw">
+            <i class="fa fa-twitter-square"></i>Twitter
+          </a>
+          <a href="https://zh-tw.facebook.com/">
+            <i class="fa fa-facebook-square"></i>Facebook
+          </a>
+          <a href="https://www.instagram.com/?hl=zh-tw">
+            <i class="fa fa-instagram"></i>Instagram
+          </a>
+        </div>
       </div>
     </div>
     <div class="copyright text-center">
@@ -227,12 +229,12 @@ export default {
   position: relative;
   z-index: 0;
   bottom: 0;
-  padding: 1rem 5rem 0 5rem;
-  @include mobile() {
-    padding: 1rem 1rem 0 1rem;
-  }
+  padding: 2.5rem 5rem;
   @include pad() {
-    padding: 1rem 1.5rem 0 1.5rem;
+    padding: 2rem 1.5rem;
+  }
+  @include mobile() {
+    padding: 3rem 1rem;
   }
   & > .info {
     margin: 0 auto;
@@ -243,7 +245,7 @@ export default {
   }
   .contact {
     #map {
-      margin: 10px 0;
+      margin: 20px 0;
       width: 100%;
       max-width: 900px;
       height: 150px;
@@ -253,27 +255,30 @@ export default {
   .about {
     p {
       color: #d4d4d4;
-      padding: 5px 0;
-      line-height: 1.3rem;
+      margin: 20px 0;
+      line-height: 1.5rem;
       text-align: justify;
     }
   }
   .follow {
-    a {
-      display: block;
-      color: $color-gray;
-      text-decoration: none;
-      padding: 5px 0;
-      &:hover {
-        opacity: 0.7;
-      }
-      i {
-        padding-right: 0.3rem;
+    & > div {
+      margin:20px 0;
+      a {
+        display: block;
+        color: $color-gray;
+        text-decoration: none;
+        padding: 5px 0;
+        &:hover {
+          opacity: 0.7;
+        }
+        i {
+          padding-right: 0.3rem;
+        }
       }
     }
   }
   .copyright {
-    padding: 1rem 0;
+    padding-top: 1rem;
     color: $color-gray;
     font-size: 0.8rem;
     border-top: 1px solid $color-gray;

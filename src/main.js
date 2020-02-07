@@ -67,3 +67,8 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
+// 跳轉後頁面回到頂部
+router.afterEach((to, from, next) => {
+  window.scrollTo(0, 0);
+});
