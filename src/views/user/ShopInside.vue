@@ -248,6 +248,7 @@ export default {
 @import "@/assets/helpers/breakpoint.scss";
 /*shopInside*/
 #shopInside {
+  color:$color-gray;
   max-width: 80%;
   margin: 0 auto;
   img {
@@ -281,15 +282,20 @@ export default {
         color: red;
         font-weight: bold;
         text-align: right;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid $color-gray;
       }
     }
     div:nth-child(2) {
       :hover {
         opacity: 0.75;
       }
-      button {
-        background: #666;
+      &>button:nth-child(1) {
+        background: $color-gray;
+        color: #fff;
+        padding: 1rem;
+      }
+      &>button:nth-child(3) {
+        background: $color-darkRed;
         color: #fff;
         padding: 1rem;
       }
@@ -312,7 +318,7 @@ export default {
     }
     .info {
       padding: 3rem 0;
-      border-top: 1px solid black;
+      border-top: 1px solid $color-gray;
       cursor: pointer;
     }
   }

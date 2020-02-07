@@ -84,6 +84,7 @@ export default {
 }
 
 #discount {
+  color:$color-gray;
   .boxOrange {
     background: linear-gradient(
       45deg,

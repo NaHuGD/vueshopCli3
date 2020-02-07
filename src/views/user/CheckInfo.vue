@@ -7,7 +7,7 @@
           <h4 class="h4 py-4">訂購資料</h4>
           <div class="row">
             <div class="col-12 col-md-6">
-              <label for="userName" class="py-3">收件人姓名</label>
+              <label for="userName" class="py-3">收件人姓名*</label>
               <input
                 placeholder="姓名"
                 type="text"
@@ -18,13 +18,13 @@
                 v-model="form.user.name"
                 v-validate="'required'"
               />
-              <span class="text-danger mt-2 d-block" v-if="errors.has('name')">請輸入姓名</span>
+              <span class="text-danger mt-2 d-block" v-if="errors.has('name')">請輸入姓名*</span>
             </div>
             <div class="col-12 col-md-6">
-              <label for="userPhone" class="py-3">收件人手機</label>
+              <label for="userPhone" class="py-3">收件人手機*</label>
               <input
                 placeholder="號碼"
-                type="number"
+                type="tel"
                 onkeyup="value=value.replace(/[^\d]/g,'') "
                 id="userPhone"
                 name="tel"
@@ -37,7 +37,7 @@
             </div>
           </div>
           <div>
-            <label for="userEmail" class="py-3">聯絡信箱</label>
+            <label for="userEmail" class="py-3">聯絡信箱*</label>
             <input
               placeholder="Email"
               type="email"
@@ -50,7 +50,7 @@
             <span class="text-danger mt-2 d-block" v-if="errors.has('email')">請輸入正確格式Email</span>
           </div>
           <div>
-            <label class="py-3">運送方式</label>
+            <label class="py-3">運送方式*</label>
             <select class="form-control" id="ship" @change.prevent="shipValue">
               <option value="home">宅配到府</option>
               <option value="fm">全家門市取貨服務</option>
@@ -59,7 +59,7 @@
           </div>
           <div>
             <div v-if="form.user.ship==='home'">
-              <label for="address" class="py-3">收件人地址</label>
+              <label for="address" class="py-3">收件人地址*</label>
               <input
                 id="address"
                 name="address"
@@ -72,7 +72,7 @@
               />
             </div>
             <div v-if="form.user.ship==='fm'">
-              <label for="address" class="py-3">全家超商門市</label>
+              <label for="address" class="py-3">全家超商門市*</label>
               <input
                 id="address"
                 name="address"
@@ -85,7 +85,7 @@
               />
             </div>
             <div v-if="form.user.ship==='711'">
-              <label for="address" class="py-3">711超商門市</label>
+              <label for="address" class="py-3">711超商門市*</label>
               <input
                 id="address"
                 name="address"
@@ -99,10 +99,10 @@
             </div>
             <span class="text-danger mt-2 d-block" v-if="errors.has('address')">請輸入正確地址</span>
           </div>
-        </div>
-        <div class="main col-11 col-md-9">
+        <!-- </div> -->
+        <!-- <div class="main col-11 col-md-9"> -->
           <div>
-            <label class="py-3">付款方式</label>
+            <label class="py-3">付款方式*</label>
             <select class="form-control" id="payMethod" @change.prevent="payMethodValue">
               <option value="delivery">貨到付款</option>
               <option value="credit">信用卡付款</option>
@@ -297,22 +297,22 @@ export default {
 @import "@/assets/helpers/breakpoint.scss";
 
 #checkInfo {
-  color: $color-green;
+  color: $color-darkGray;
   #ship {
-    color: $color-green;
+    color: $color-darkGray;
   }
   .main {
     label,
     h4 {
       font-weight: bold;
     }
-    background: #fff;
+    background: $color-gray;
     padding: 18px;
     border-radius: 8px;
-    box-shadow: 0px 1px 2px 2px $color-green;
+    box-shadow: 0px 1px 2px 2px $color-darkGray;
     .inputBorder,
     select {
-      border: 1px solid $color-green;
+      border: 1px solid $color-darkGray;
       border-radius: 5px;
       height: 35px;
     }
@@ -418,7 +418,7 @@ export default {
     position: relative;
     width: 20%;
     padding: 15px 0;
-    background: $color-green;
+    background: $color-darkRed;
     color: #fff;
     letter-spacing: 0.3rem;
     animation-iteration-count: infinite;

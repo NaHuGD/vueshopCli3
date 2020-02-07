@@ -77,6 +77,7 @@ export default {
 @import "@/assets/helpers/breakpoint.scss";
 
 #news {
+  color:$color-gray;
   max-width: 1200px;
   margin: 0 auto 1rem auto;
   .box {

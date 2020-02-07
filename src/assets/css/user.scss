@@ -425,13 +425,13 @@ body {
   }
   .goCheckOut {
     width: 100%;
-    background: #000;
+    background: $color-darkRed;
     color: #fff;
     display: block;
     padding: 5% 0;
-    &::before {
-      content: "";
-      border: 3px dotted black;
+    transition: 0.3s;
+    &:hover {
+      opacity: 0.7;
     }
   }
   .coupons {

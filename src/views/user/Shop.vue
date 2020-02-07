@@ -50,7 +50,11 @@
             :key="key"
           >
             <div class="border-0 shadow-sm shop_info" @click.prevent="goInside(item.id)">
-              <span class="sale_style" :class="{'soldOutStyle':item.in_stock === 0}" v-if="item.origin_price != 0">SALE</span>
+              <span
+                class="sale_style"
+                :class="{'soldOutStyle':item.in_stock === 0}"
+                v-if="item.origin_price != 0"
+              >SALE</span>
               <img
                 :src="item.imageUrl"
                 :class="{'soldOutStyle':item.in_stock === 0}"
@@ -219,6 +223,7 @@ export default {
 
 /*shop*/
 #shop {
+  color: $color-gray;
   .menuList {
     @include pad() {
       display: none;
@@ -227,8 +232,8 @@ export default {
       opacity: 0.7;
     }
     & > button {
-      background: $color-green;
-      color: $color-lightYellow;
+      background: $color-gray;
+      color: $color-black;
       width: 100%;
       text-align: center;
       margin-bottom: 10px;
@@ -246,8 +251,12 @@ export default {
     }
   }
   .menuBar {
+    display: none;
+    @include pad() {
+      display: flex;
+    }
     .active {
-      filter: grayscale(0%);
+      filter: grayscale(0);
       p {
         opacity: 1;
       }
@@ -263,7 +272,7 @@ export default {
     }
     & > div {
       transition: 0.6s;
-      filter: grayscale(100%);
+      filter: grayscale(1);
       p {
         transition: 0.6s;
         opacity: 0;
@@ -286,20 +295,23 @@ export default {
       background-size: cover;
     }
     & > p {
-      padding: 5px;
       color: #fff;
+      background: $color-bgActive;
+      padding: 10px;
       font-size: 1.5rem;
+      line-height: 2rem;
+      width: 30%;
       position: absolute;
-      top: 50%;
-      left: 30%;
       font-weight: bold;
-      @include pad {
-        left: 20%;
-      }
+      top: 50%;
+      transform: translate(-50%, -50%);
       @include mobile {
-        left: 30%;
-        top: 10%;
-        width: 10px;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        width: 35%;
+      }
+      @include iphoneX{
+        width:45%;
       }
     }
   }
@@ -307,25 +319,37 @@ export default {
     clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
     background-image: url("../../assets/images/shop/m1.jpg");
     left: 0;
+    & > p{
+      left:50%;
+    }
   }
   .box2 {
     clip-path: polygon(25% 0, 100% 0%, 75% 100%, 0% 100%);
     background-image: url("../../assets/images/shop/m2.jpg");
     left: -8.4%;
+    & > p{
+      left:calc(50% + 4.2%);
+    }
   }
   .box3 {
     clip-path: polygon(25% 0, 100% 0%, 75% 100%, 0% 100%);
     background-image: url("../../assets/images/shop/m3.jpg");
     left: -16.8%;
+    & > p{
+      left:calc(50% + 8.4%);
+    }
   }
   .box4 {
     clip-path: polygon(25% 0, 100% 0%, 100% 100%, 0% 100%);
     background-image: url("../../assets/images/shop/m4.jpg");
     left: -25.2%;
+    & > p{
+      left:calc(50% + 12.6%);
+    }
   }
   .subcate {
     padding-bottom: 20px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid $color-gray;
   }
   .shop_info {
     @include fontStyle;

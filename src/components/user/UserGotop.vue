@@ -47,6 +47,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/helpers/breakpoint.scss";
+
 #gotop {
   cursor: pointer;
   position: fixed;
@@ -56,10 +58,10 @@ export default {
   z-index: 1;
   width: 40px;
   height: 40px;
-  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 1px 3px 1px rgba(255, 255, 255, 0.6);
   border-radius: 100%;
   & > i {
-    color: black;
+    color: $color-gray;
     font-size: 1.5rem;
     position: absolute;
     top: 50%;

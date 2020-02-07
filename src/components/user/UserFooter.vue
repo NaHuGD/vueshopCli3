@@ -1,7 +1,7 @@
 <template>
   <footer id="footer">
     <div class="info row">
-      <div class="contact col-sm-6">
+      <div class="contact col-sm-5">
         <span>凱力位置</span>
         <div id="map"></div>
       </div>
@@ -11,7 +11,7 @@
           <p>隨著健身產業的新興,全民的健身意識抬頭,到健身房報到已經成了不少人每天的必須行程,凱力健人嚴選致力於打造運動夥伴們最優質的健身護具,及品質最高的乳清蛋白,讓運動夥伴們可以專心訓練,由凱力做最強大的後盾與你們一同成長.</p>
         </div>
       </div>
-      <div class="follow col p-sm">
+      <div class="follow col-sm-3 p-sm">
         <span>追蹤凱力</span>
         <div>
           <a href="https://twitter.com/?lang=zh-tw">
@@ -225,7 +225,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/helpers/breakpoint.scss";
 #footer {
-  background: $color-green;
+  background: $color-black;
   position: relative;
   z-index: 0;
   bottom: 0;
@@ -250,6 +250,9 @@ export default {
       max-width: 900px;
       height: 150px;
       background: #000;
+      @include pad() {
+        height: 200px;
+      }
     }
   }
   .about {
@@ -262,7 +265,7 @@ export default {
   }
   .follow {
     & > div {
-      margin:20px 0;
+      margin: 20px 0;
       a {
         display: block;
         color: $color-gray;

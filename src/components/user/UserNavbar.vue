@@ -264,7 +264,7 @@ export default {
 }
 #header {
   position: fixed;
-  background: $color-lightYellow;
+  background: $color-black;
   width: 100%;
   max-width: 100%;
   max-height: 60px;
@@ -283,7 +283,7 @@ export default {
       font-size: 2em;
       line-height: 10px;
       h1 {
-        color: $color-green;
+        color: $color-gray;
         font-family: impact;
       }
       @include a-text;
@@ -307,15 +307,15 @@ export default {
         right: 0%;
       }
       button:hover {
-        border-bottom: 2px solid $color-green;
+        border-bottom: 2px solid $color-gray;
       }
       .menuActive {
-        border-bottom: 2px solid $color-green;
+        border-bottom: 2px solid $color-gray;
       }
       button {
         padding-bottom: 5px;
         transition: 0.5s;
-        color: $color-green;
+        color: $color-gray;
         font-weight: 500;
         margin: 0 0.75rem;
         @include fontStyle;
@@ -341,7 +341,7 @@ export default {
       }
     }
     .mobNavIcan {
-      color: $color-green;
+      color: $color-gray;
       @include a-text;
       display: none;
       @include pad() {
@@ -400,7 +400,7 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: $color-green;
+    color: $color-gray;
   }
   & span {
     font-size: 0.8rem;
@@ -427,7 +427,7 @@ export default {
   top: 6%;
   right: 5%;
   background: #fff;
-  border: 2px solid $color-green;
+  border: 2px solid $color-gray;
   border-radius: 6px;
   overflow-y: auto;
   max-height: 450px;
@@ -506,7 +506,7 @@ export default {
     }
     button {
       white-space: nowrap;
-      background: $color-green;
+      background: $color-darkRed;
       color: #fff;
       padding: 0.6rem 3.2rem;
       margin: 0;
@@ -535,7 +535,7 @@ export default {
   width: 60px;
   height: 60px;
   background: transparent;
-  color: $color-green;
+  color: $color-gray;
   font-size: 1.3rem;
   margin-right: calc(5% + 0px);
   &:hover i {
@@ -599,7 +599,7 @@ export default {
   overflow-y: auto;
   transition: 1s;
   height: 100vh;
-  background: $color-lightYellow;
+  background: $color-darkGray;
   padding: 0.5em 1.25em;
   z-index: 3;
   & > .logo {
@@ -611,8 +611,8 @@ export default {
       z-index: 1;
       top: 0%;
       left: 5%;
-      color: #235a55;
-      background: $color-lightYellow;
+      color: $color-gray;
+      background: $color-darkGray;
       font-family: impact;
       display: inline-block;
       font-weight: bold;
@@ -642,7 +642,7 @@ export default {
     color: $color-red !important;
   }
   .menuButton > button {
-    color: $color-green;
+    color: $color-gray;
     display: block;
     padding: 0.75em 0;
     width: 100%;
@@ -652,7 +652,7 @@ export default {
     @include focusNone;
   }
   .close {
-    color: $color-green;
+    color: $color-gray;
     position: absolute;
     top: 0%;
     right: 0;
@@ -667,13 +667,13 @@ export default {
     min-width: 80%;
   }
   #footer {
-    color: $color-lightYellow;
+    color: $color-darkGray;
     position: absolute;
     bottom: 10px;
     left: 0%;
     & > button {
       width: 100%;
-      color: $color-green;
+      color: $color-gray;
       font-weight: bold;
       font-size: 1.2rem;
       padding: 0.5rem 1.25rem;

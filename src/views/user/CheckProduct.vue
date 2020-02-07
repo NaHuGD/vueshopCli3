@@ -64,20 +64,20 @@
             <td class="text-right pr-0">{{CartItem.final_total + 80 | currency}}</td>
           </tr>
         </table>
-        <button class="goCheckOut" @click.prevent="goCheckOut">下一步</button>
+        <button class="goCheckOut" @click.prevent="goCheckOutFn">下一步</button>
         <div class="coupons">
           <div class="barcode mt-md-4 mt-2">
             <img :src="barcodeImg" alt="條碼" ondragstart="return false;" />
           </div>
-          <div class="row pl-2 pr-2 couponsInfo" v-if="couponSuccess == false">
+          <div class="row pl-2 couponsInfo" v-if="couponSuccess == false">
             <input
               type="text"
-              class="col-9"
+              class="col-10"
               placeholder="輸入折扣碼"
               @keyup.enter="addCoupons()"
               v-model="coupon_code"
             />
-            <button class="applyCoupons col-3" @click.prevent="addCoupons()">
+            <button class="applyCoupons col" @click.prevent="addCoupons()">
               <i class="fa fa-arrow-right"></i>
             </button>
           </div>
@@ -154,7 +154,7 @@ export default {
         vm.isLoading = false;
       });
     },
-    goCheckOut() {
+    goCheckOutFn() {
       const vm = this;
       vm.$router.push("/checkInfo");
       window.scrollTo({

@@ -64,27 +64,26 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/helpers/breakpoint.scss";
 #login {
-  background: $color-lightYellow;
+  background: $color-bg;
   height: 100vh;
 }
 .goBack {
   background: transparent;
-  color: black;
+  color: gray;
   border: 0;
-  padding-top: 5px;
+  margin-top: 15px;
   @include focusNone;
   &:hover {
     opacity: 0.7;
   }
 }
 h1 {
-  color: $color-green;
-  color: #0d423e;
+  color: $color-gray;
   font-family: impact;
 }
 button {
-  background: $color-green;
-  color: $color-lightYellow;
+  background: $color-gray;
+  color: $color-bg;
 }
 
 .form-signin {

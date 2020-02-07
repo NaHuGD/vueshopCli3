@@ -83,8 +83,8 @@
             </div>
           </router-link>
         </swiper-slide>
-        <div class="swiper-button-prev swiper-button-black" slot="button-prev"></div>
-        <div class="swiper-button-next swiper-button-black" slot="button-next"></div>
+        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
       </swiper>
     </div>
   </div>
@@ -203,6 +203,7 @@ export default {
 @import "@/assets/helpers/breakpoint.scss";
 
 #home {
+  color: $color-gray;
   img {
     vertical-align: bottom;
   }
@@ -477,7 +478,7 @@ export default {
       display: block;
       width: 10%;
       height: 3px;
-      background: #000;
+      background: $color-gray;
       @include pad() {
         width: 20%;
       }
