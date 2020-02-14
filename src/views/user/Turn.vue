@@ -1,8 +1,8 @@
 <template>
   <div class="pt150">
-    <div class="text-center my-3">
+    <div class="text-center my-3 info">
       <p class="h3">歡樂大轉盤</p>
-      <p>活動辦法:點擊下方圖片轉動唱盤,獲取折扣碼</p>
+      <p>點擊下方圖片轉動唱盤,獲取折扣碼</p>
     </div>
     <div id="turn">
       <img class="turnBg" :src="turnBg" ondragstart="return false;" @click.prevent="playTurn" />
@@ -92,7 +92,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/helpers/breakpoint.scss";
-
 #turn {
   position: relative;
   max-width: 1107px;

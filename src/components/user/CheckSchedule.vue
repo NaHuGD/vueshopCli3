@@ -61,10 +61,10 @@ export default {
     width: 3rem;
     height: 3rem;
     border-radius: 999%;
-    border: 3px solid $color-green;
+    border: 3px solid $color-darkRed;
     background: $color-bg;
     & > i {
-      color: $color-green;
+      color: $color-darkRed;
       font-size: 1.4rem;
       position: absolute;
       top: 50%;
@@ -77,7 +77,7 @@ export default {
       left: -50%;
       transform: translate(0%, 100%);
       white-space: nowrap;
-      color: $color-green;
+      color: $color-darkRed;
       font-weight: bold;
     }
   }
@@ -137,110 +137,110 @@ export default {
 }
 @keyframes scheduleInfo {
   0% {
-    background: linear-gradient(45deg, #91afaf 10%, transparent 10%),
-      linear-gradient(45deg, #235a55 20%, transparent 20%),
-      linear-gradient(45deg, #91afaf 30%, transparent 30%),
-      linear-gradient(45deg, #235a55 40%, transparent 40%),
-      linear-gradient(90deg, #91afaf 50%, transparent 50%),
+    background: linear-gradient(45deg, #dca7ae 10%, transparent 10%),
+      linear-gradient(45deg, #8d3742 20%, transparent 20%),
+      linear-gradient(45deg, #dca7ae 30%, transparent 30%),
+      linear-gradient(45deg, #8d3742 40%, transparent 40%),
+      linear-gradient(90deg, #dca7ae 50%, transparent 50%),
       linear-gradient(45deg, #d4d4d4 100%, transparent 100%);
   }
   25% {
-    background: linear-gradient(45deg, #235a55 5%, transparent 5%),
-      linear-gradient(45deg, #91afaf 15%, transparent 15%),
-      linear-gradient(45deg, #235a55 25%, transparent 25%),
-      linear-gradient(45deg, #91afaf 35%, transparent 35%),
-      linear-gradient(45deg, #235a55 45%, transparent 45%),
-      linear-gradient(90deg, #91afaf 50%, transparent 50%),
+    background: linear-gradient(45deg, #8d3742 5%, transparent 5%),
+      linear-gradient(45deg, #dca7ae 15%, transparent 15%),
+      linear-gradient(45deg, #8d3742 25%, transparent 25%),
+      linear-gradient(45deg, #dca7ae 35%, transparent 35%),
+      linear-gradient(45deg, #8d3742 45%, transparent 45%),
+      linear-gradient(90deg, #dca7ae 50%, transparent 50%),
       linear-gradient(45deg, #d4d4d4 100%, transparent 100%);
   }
   50% {
-    background: linear-gradient(45deg, #235a55 10%, transparent 10%),
-      linear-gradient(45deg, #91afaf 20%, transparent 20%),
-      linear-gradient(45deg, #235a55 30%, transparent 30%),
-      linear-gradient(45deg, #91afaf 40%, transparent 40%),
-      linear-gradient(90deg, #235a55 50%, transparent 50%),
+    background: linear-gradient(45deg, #8d3742 10%, transparent 10%),
+      linear-gradient(45deg, #dca7ae 20%, transparent 20%),
+      linear-gradient(45deg, #8d3742 30%, transparent 30%),
+      linear-gradient(45deg, #dca7ae 40%, transparent 40%),
+      linear-gradient(90deg, #8d3742 50%, transparent 50%),
       linear-gradient(45deg, #d4d4d4 100%, transparent 100%);
   }
   75% {
-    background: linear-gradient(45deg, #91afaf 5%, transparent 5%),
-      linear-gradient(45deg, #235a55 15%, transparent 15%),
-      linear-gradient(45deg, #91afaf 25%, transparent 25%),
-      linear-gradient(45deg, #235a55 35%, transparent 35%),
-      linear-gradient(45deg, #91afaf 45%, transparent 45%),
-      linear-gradient(90deg, #235a55 50%, transparent 50%),
+    background: linear-gradient(45deg, #dca7ae 5%, transparent 5%),
+      linear-gradient(45deg, #8d3742 15%, transparent 15%),
+      linear-gradient(45deg, #dca7ae 25%, transparent 25%),
+      linear-gradient(45deg, #8d3742 35%, transparent 35%),
+      linear-gradient(45deg, #dca7ae 45%, transparent 45%),
+      linear-gradient(90deg, #8d3742 50%, transparent 50%),
       linear-gradient(45deg, #d4d4d4 100%, transparent 100%);
   }
   100% {
-    background: linear-gradient(45deg, #91afaf 10%, transparent 10%),
-      linear-gradient(45deg, #235a55 20%, transparent 20%),
-      linear-gradient(45deg, #91afaf 30%, transparent 30%),
-      linear-gradient(45deg, #235a55 40%, transparent 40%),
-      linear-gradient(90deg, #91afaf 50%, transparent 50%),
+    background: linear-gradient(45deg, #dca7ae 10%, transparent 10%),
+      linear-gradient(45deg, #8d3742 20%, transparent 20%),
+      linear-gradient(45deg, #dca7ae 30%, transparent 30%),
+      linear-gradient(45deg, #8d3742 40%, transparent 40%),
+      linear-gradient(90deg, #dca7ae 50%, transparent 50%),
       linear-gradient(45deg, #d4d4d4 100%, transparent 100%);
   }
 }
 @keyframes scheduleConfirm {
   0% {
-    background: linear-gradient(45deg, #91afaf 10%, transparent 10%),
-      linear-gradient(45deg, #235a55 20%, transparent 20%),
-      linear-gradient(45deg, #91afaf 30%, transparent 30%),
-      linear-gradient(45deg, #235a55 40%, transparent 40%),
-      linear-gradient(45deg, #91afaf 50%, transparent 50%),
-      linear-gradient(45deg, #235a55 60%, transparent 60%),
-      linear-gradient(45deg, #91afaf 70%, transparent 70%),
-      linear-gradient(45deg, #235a55 80%, transparent 80%),
-      linear-gradient(45deg, #91afaf 90%, transparent 90%),
-      linear-gradient(90deg, #235a55 100%, transparent 100%);
+    background: linear-gradient(45deg, #dca7ae 10%, transparent 10%),
+      linear-gradient(45deg, #8d3742 20%, transparent 20%),
+      linear-gradient(45deg, #dca7ae 30%, transparent 30%),
+      linear-gradient(45deg, #8d3742 40%, transparent 40%),
+      linear-gradient(45deg, #dca7ae 50%, transparent 50%),
+      linear-gradient(45deg, #8d3742 60%, transparent 60%),
+      linear-gradient(45deg, #dca7ae 70%, transparent 70%),
+      linear-gradient(45deg, #8d3742 80%, transparent 80%),
+      linear-gradient(45deg, #dca7ae 90%, transparent 90%),
+      linear-gradient(90deg, #8d3742 100%, transparent 100%);
   }
   25% {
-    background: linear-gradient(90deg, #235a55 5%, transparent 5%),
-      linear-gradient(45deg, #91afaf 15%, transparent 15%),
-      linear-gradient(45deg, #235a55 25%, transparent 25%),
-      linear-gradient(45deg, #91afaf 35%, transparent 35%),
-      linear-gradient(45deg, #235a55 45%, transparent 45%),
-      linear-gradient(45deg, #91afaf 55%, transparent 55%),
-      linear-gradient(45deg, #235a55 65%, transparent 65%),
-      linear-gradient(45deg, #91afaf 75%, transparent 75%),
-      linear-gradient(45deg, #235a55 85%, transparent 85%),
-      linear-gradient(45deg, #91afaf 95%, transparent 95%),
-      linear-gradient(90deg, #235a55 100%, transparent 100%);
+    background: linear-gradient(90deg, #8d3742 5%, transparent 5%),
+      linear-gradient(45deg, #dca7ae 15%, transparent 15%),
+      linear-gradient(45deg, #8d3742 25%, transparent 25%),
+      linear-gradient(45deg, #dca7ae 35%, transparent 35%),
+      linear-gradient(45deg, #8d3742 45%, transparent 45%),
+      linear-gradient(45deg, #dca7ae 55%, transparent 55%),
+      linear-gradient(45deg, #8d3742 65%, transparent 65%),
+      linear-gradient(45deg, #dca7ae 75%, transparent 75%),
+      linear-gradient(45deg, #8d3742 85%, transparent 85%),
+      linear-gradient(45deg, #dca7ae 95%, transparent 95%),
+      linear-gradient(90deg, #8d3742 100%, transparent 100%);
   }
   50% {
-    background: linear-gradient(90deg, #235a55 10%, transparent 10%),
-      linear-gradient(45deg, #91afaf 20%, transparent 20%),
-      linear-gradient(45deg, #235a55 30%, transparent 30%),
-      linear-gradient(45deg, #91afaf 40%, transparent 40%),
-      linear-gradient(45deg, #235a55 50%, transparent 50%),
-      linear-gradient(45deg, #91afaf 60%, transparent 60%),
-      linear-gradient(45deg, #235a55 70%, transparent 70%),
-      linear-gradient(45deg, #91afaf 80%, transparent 80%),
-      linear-gradient(45deg, #235a55 90%, transparent 90%),
-      linear-gradient(45deg, #91afaf 100%, transparent 100%);
+    background: linear-gradient(90deg, #8d3742 10%, transparent 10%),
+      linear-gradient(45deg, #dca7ae 20%, transparent 20%),
+      linear-gradient(45deg, #8d3742 30%, transparent 30%),
+      linear-gradient(45deg, #dca7ae 40%, transparent 40%),
+      linear-gradient(45deg, #8d3742 50%, transparent 50%),
+      linear-gradient(45deg, #dca7ae 60%, transparent 60%),
+      linear-gradient(45deg, #8d3742 70%, transparent 70%),
+      linear-gradient(45deg, #dca7ae 80%, transparent 80%),
+      linear-gradient(45deg, #8d3742 90%, transparent 90%),
+      linear-gradient(45deg, #dca7ae 100%, transparent 100%);
   }
   75% {
-    background: linear-gradient(45deg, #91afaf 5%, transparent 5%),
-      linear-gradient(90deg, #235a55 15%, transparent 15%),
-      linear-gradient(45deg, #91afaf 25%, transparent 25%),
-      linear-gradient(45deg, #235a55 35%, transparent 35%),
-      linear-gradient(45deg, #91afaf 45%, transparent 45%),
-      linear-gradient(45deg, #235a55 55%, transparent 55%),
-      linear-gradient(45deg, #91afaf 65%, transparent 65%),
-      linear-gradient(45deg, #235a55 75%, transparent 75%),
-      linear-gradient(45deg, #91afaf 85%, transparent 85%),
-      linear-gradient(45deg, #235a55 95%, transparent 95%),
-      linear-gradient(45deg, #91afaf 100%, transparent 100%);
+    background: linear-gradient(45deg, #dca7ae 5%, transparent 5%),
+      linear-gradient(90deg, #8d3742 15%, transparent 15%),
+      linear-gradient(45deg, #dca7ae 25%, transparent 25%),
+      linear-gradient(45deg, #8d3742 35%, transparent 35%),
+      linear-gradient(45deg, #dca7ae 45%, transparent 45%),
+      linear-gradient(45deg, #8d3742 55%, transparent 55%),
+      linear-gradient(45deg, #dca7ae 65%, transparent 65%),
+      linear-gradient(45deg, #8d3742 75%, transparent 75%),
+      linear-gradient(45deg, #dca7ae 85%, transparent 85%),
+      linear-gradient(45deg, #8d3742 95%, transparent 95%),
+      linear-gradient(45deg, #dca7ae 100%, transparent 100%);
   }
   100% {
-    background: linear-gradient(45deg, #91afaf 10%, transparent 10%),
-      linear-gradient(90deg, #235a55 20%, transparent 20%),
-      linear-gradient(45deg, #91afaf 30%, transparent 30%),
-      linear-gradient(45deg, #235a55 40%, transparent 40%),
-      linear-gradient(45deg, #91afaf 50%, transparent 50%),
-      linear-gradient(45deg, #235a55 60%, transparent 60%),
-      linear-gradient(45deg, #91afaf 70%, transparent 70%),
-      linear-gradient(45deg, #235a55 80%, transparent 80%),
-      linear-gradient(45deg, #91afaf 90%, transparent 90%),
-      linear-gradient(45deg, #235a55 100%, transparent 100%);
+    background: linear-gradient(45deg, #dca7ae 10%, transparent 10%),
+      linear-gradient(90deg, #8d3742 20%, transparent 20%),
+      linear-gradient(45deg, #dca7ae 30%, transparent 30%),
+      linear-gradient(45deg, #8d3742 40%, transparent 40%),
+      linear-gradient(45deg, #dca7ae 50%, transparent 50%),
+      linear-gradient(45deg, #8d3742 60%, transparent 60%),
+      linear-gradient(45deg, #dca7ae 70%, transparent 70%),
+      linear-gradient(45deg, #8d3742 80%, transparent 80%),
+      linear-gradient(45deg, #dca7ae 90%, transparent 90%),
+      linear-gradient(45deg, #8d3742 100%, transparent 100%);
   }
 }
 </style>

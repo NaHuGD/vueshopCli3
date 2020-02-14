@@ -1,69 +1,69 @@
 <template>
-  <div id="discount" class="pt150">
-    <div class="container">
-      <div class="mb-3">優惠專區</div>
-      <div class="row">
-        <router-view></router-view>
-        <div class="box boxOrange col-8" @click.prevent="goTurn">
-          <div>
-            <P>GIFT</P>
+  <div id="discount" class="pt150 px-3">
+    <div class="pb-3 mb-3 title">
+      <p>優惠活動</p>
+      <p class="pt-3">點擊下方票卡即可進入遊戲區領取優惠碼</p>
+    </div>
+    <router-link to="/discount/turn" class="box row">
+      <div class="icon col-3">
+        <img :src="iconImg_1" alt="game_photo" ondragstart="return false" />
+      </div>
+      <div class="info col">
+        <div class="row">
+          <div class="col-7">
+            <p class="h5">歡樂大轉盤</p>
+            <p class="h6">活動辦法:</p>
+            <p class="my-2">凡於活動期間內,每日至官網登入會員,點選轉盤,立即獲得折扣優惠.</p>
+            <p class="h6">活動時間:</p>
+            <p class="my-2">隨時下架,請保握機會.</p>
           </div>
-          <div>
-            <span>COUPON</span>
-            <p calss="d-inline">VOUCHER</p>
-            <span>+0123 456 789</span>
-          </div>
-          <div>
-            <p>TurnGame</p>
-          </div>
-          <div>
-            <span></span>
-            <p>POINT ME TO REDEEM</p>
-          </div>
-        </div>
-        <div class="box boxBlue col-8">
-          <div>
-            <P>GIFT</P>
-          </div>
-          <div>
-            <span>COUPON</span>
-            <p calss="d-inline">VOUCHER</p>
-            <span>+0123 456 789</span>
-          </div>
-          <div>
-            <p>$???%</p>
-          </div>
-          <div>
-            <span></span>
-            <p>POINT ME TO REDEEM</p>
-          </div>
-        </div>
-        <div class="box boxPurple col-8">
-          <div>
-            <P>GIFT</P>
-          </div>
-          <div>
-            <span>COUPON</span>
-            <p calss="d-inline">VOUCHER</p>
-            <span>+0123 456 789</span>
-          </div>
-          <div>
-            <p>$???%</p>
-          </div>
-          <div>
-            <span></span>
-            <p>POINT ME TO REDEEM</p>
+          <div class="col">
+            <p class="h5">歡樂大轉盤</p>
+            <p>本次活動最高享有</p>
+            <p>70%</p>
+            <p>折扣</p>
           </div>
         </div>
       </div>
-    </div>
+    </router-link>
+    <router-link to="" class="box row">
+      <div class="icon col-3">
+        <img :src="iconImg_2" alt="game_photo" ondragstart="return false" />
+      </div>
+      <div class="info col">
+        <div class="row">
+          <div class="col-7">
+            <p class="h5">刮出小確幸</p>
+            <p class="h6">活動辦法:</p>
+            <p class="my-2">凡於活動期間內,每日至官網登入會員,點選轉盤,立即獲得折扣優惠.</p>
+            <p class="h6">活動時間:</p>
+            <p class="my-2">敬請期待</p>
+          </div>
+          <div class="col">
+            <p class="h5">刮出小確幸</p>
+            <p>本次活動最高享有</p>
+            <p>XX%</p>
+            <p>折扣</p>
+          </div>
+        </div>
+      </div>
+      <div class="comingSoon">
+        <p>Coming Soon</p>
+      </div>
+    </router-link>
   </div>
 </template>
 
 <script>
+import iconImg_1 from "@/assets/images/discount/turn/turnTable.png";
+import iconImg_2 from "@/assets/images/discount/scratch/pop.png";
+
 export default {
   data() {
-    return {};
+    return {
+      iconImg_1: iconImg_1,
+      iconImg_2: iconImg_2
+    };
   },
   methods: {
     goTurn() {
@@ -84,271 +84,175 @@ export default {
 }
 
 #discount {
-  color:$color-gray;
-  .boxOrange {
-    background: linear-gradient(
-      45deg,
-      #d23d1f 25%,
-      #e44621 0,
-      #e44621 50%,
-      #d23d1f 0,
-      #d23d1f 75%,
-      #e44621 0
-    );
-    & > div:nth-child(1) {
-      background: #47211e;
-      & > p {
-        color: #e03f28;
-      }
-    }
-    & > div:nth-child(2) {
-      & > span:nth-child(1) {
-        color: #fff;
-      }
-      & > p {
-        color: #fff;
-      }
-      & > span:nth-child(3) {
-        color: #fff;
-        background: #511d08;
-      }
-    }
-    & > div:nth-child(3) {
-      background: #e03f28;
-      border: 0.2rem solid #fff;
-      & > p {
-        color: #fff;
-      }
-    }
-    & > div:nth-child(4) {
-      background: #ef9a85;
-      & > span {
-        border-left: 1px solid #ca6b4d;
-      }
-      & > p {
-        color: #e03f28;
-        color: #fff;
-      }
-    }
-  }
-  .boxBlue {
-    background: linear-gradient(
-      45deg,
-      #3191c3 25%,
-      #5cb8e9 0,
-      #5cb8e9 50%,
-      #3191c3 0,
-      #3191c3 75%,
-      #5cb8e9 0
-    );
-    & > div:nth-child(1) {
-      background: #1e3944;
-      & > p {
-        color: #5cb8e9;
-      }
-    }
-    & > div:nth-child(2) {
-      & > span:nth-child(1) {
-        color: #fff;
-      }
-      & > p {
-        color: #fff;
-      }
-      & > span:nth-child(3) {
-        color: #fff;
-        background: #273d4d;
-      }
-    }
-    & > div:nth-child(3) {
-      background: #5cb8e9;
-      border: 0.2rem solid #fff;
-      & > p {
-        color: #fff;
-      }
-    }
-    & > div:nth-child(4) {
-      background: #92c6eb;
-      & > span {
-        border-left: 1px solid #7fbde1;
-      }
-      & > p {
-        color: #5cb8e9;
-        color: #fff;
-      }
-    }
-  }
-  .boxPurple {
-    background: linear-gradient(
-      45deg,
-      #463a5d 25%,
-      #8c6c86 0,
-      #8c6c86 50%,
-      #463a5d 0,
-      #463a5d 75%,
-      #8c6c86 0
-    );
-    & > div:nth-child(1) {
-      background: #171c43;
-      & > p {
-        color: #8c6c86;
-      }
-    }
-    & > div:nth-child(2) {
-      & > span:nth-child(1) {
-        color: #fff;
-      }
-      & > p {
-        color: #fff;
-      }
-      & > span:nth-child(3) {
-        color: #fff;
-        background: #273d4d;
-      }
-    }
-    & > div:nth-child(3) {
-      background: #8c6c86;
-      border: 0.2rem solid #fff;
-      & > p {
-        color: #fff;
-      }
-    }
-    & > div:nth-child(4) {
-      background: #9c7c8e;
-      & > span {
-        border-left: 1px solid #8c7484;
-      }
-      & > p {
-        color: #8c6c86;
-        color: #fff;
-      }
+  max-width: 1024px;
+  margin: 0 auto;
+  .title {
+    position: sticky;
+    z-index: 1;
+    border-bottom: 1px solid $color-black;
+    background: #fff;
+    & > p:nth-child(2) {
+      font-size: 0.9rem;
+      opacity: 0.7;
     }
   }
   .box {
-    cursor: pointer;
-    transition: 0.5s;
     position: relative;
-    padding: 0;
-    margin: 1rem auto;
+    color: black;
+    text-decoration: none;
+    background: #f3f3f3;
+    position: relative;
+    z-index: 0;
+    max-width: 800px;
     width: 100%;
     height: 200px;
-    background-size: 20px 20px;
-    overflow: hidden;
-    @include pad() {
-      height: 150px;
+    margin: 0 auto;
+    box-shadow: 0px 1px 3px 1px $color-bgActive;
+    margin-bottom: 2rem;
+    @include desktop() {
+      height: 200px;
     }
     @include mobile() {
-      height: 100px;
+      height: 150px;
     }
-    &::before {
-      content: "";
-      position: absolute;
-      z-index: 1;
-      top: 0;
-      right: -2vw;
-      transform: skew(45deg);
-      width: 4vw;
-      height: 4vw;
-      background: $color-bg;
-      box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.4);
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      z-index: 1;
-      bottom: 0;
-      left: -2vw;
-      transform: skew(45deg);
-      width: 4vw;
-      height: 4vw;
-      background: $color-bg;
-      box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.4);
-    }
-    & > div:nth-child(1) {
-      position: absolute;
-      left: 5%;
-      width: 10%;
-      height: 100%;
-      & > p {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: rotate(270deg)
-          translate(calc(50% - 1.5vw), calc(-50% - 1.5vw));
-        font-weight: bold;
-        font-size: 3vw;
+    .icon {
+      border-right: 0.5rem dotted $color-bgActive;
+      padding: 2rem;
+      @include pad() {
+        padding: 1rem;
       }
-    }
-    & > div:nth-child(2) {
-      & > span:nth-child(1) {
-        position: absolute;
-        top: 25%;
-        left: 20%;
-        font-weight: bold;
-        border-radius: 1vw;
-        letter-spacing: 0.5vw;
+      @include mobile() {
+        flex: 0 0 33.33333%;
+        max-width: 33.333333%;
       }
-      & > p {
+      &::before {
+        content: "";
         position: absolute;
-        top: 50%;
-        left: 20%;
-        transform: translate(0%, -50%);
-        font-weight: bold;
-        font-size: 5vw;
-        @include fontBold;
+        top: 0%;
+        right: 0%;
+        transform: translate(55%, -50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 999%;
+        background: #fff;
+        border-bottom: 2px solid $color-bgActive;
+        @include mobile() {
+          width: 30px;
+          height: 30px;
+        }
       }
-      & > span:nth-child(3) {
+      &::after {
+        content: "";
         position: absolute;
-        top: 67%;
-        left: 40%;
-        font-weight: bold;
-        padding: 0.5vw;
-        font-size: 1vw;
-        border-radius: 1vw;
+        bottom: 0%;
+        right: 0%;
+        transform: translate(55%, 50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 999%;
+        background: #fff;
+        border-top: 2px solid $color-bgActive;
+        @include mobile() {
+          width: 30px;
+          height: 30px;
+        }
       }
-    }
-    & > div:nth-child(3) {
-      position: absolute;
-      z-index: 1;
-      top: 50%;
-      right: 30%;
-      transform: translate(50%, -50%);
-      width: 11.5vw;
-      height: 11.5vw;
-      border-radius: 100%;
-      overflow: hidden;
-      & > p {
-        position: absolute;
-        top: 50%;
-        right: 60%;
-        transform: translate(50%, -50%);
-        font-weight: bold;
-        font-size: 2vw;
-        width: 7vw;
-        text-align: center;
-        @include fontBold;
-      }
-    }
-    & > div:nth-child(4) {
-      position: absolute;
-      right: 0;
-      width: 33%;
-      height: 100%;
-      clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
-      & > span {
-        position: absolute;
-        right: 0;
-        width: 30%;
+      img {
+        width: 100%;
         height: 100%;
       }
-      & > p {
-        position: absolute;
-        top: 50%;
-        right: 0%;
-        transform: rotate(270deg) translate(0%, calc(50% + 1.5vw));
-        font-weight: bold;
-        font-size: 1vw;
-        white-space: nowrap;
-        @include fontBold;
+    }
+    .info {
+      padding: 2rem;
+      height: 200px;
+      @include desktop() {
+        height: 200px;
+      }
+      @include pad() {
+        padding: 1rem;
+      }
+      @include mobile() {
+        height: 150px;
+      }
+      & > div {
+        align-items: center;
+        overflow: hidden;
+        div:nth-child(1) {
+          border-right: 1px dotted $color-bgActive;
+          & > p {
+            opacity: 0.9;
+            text-align: justify;
+            overflow: hidden;
+            width: 100%;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-height: 1.2rem;
+            -webkit-box-orient: vertical;
+            @include pad() {
+              -webkit-line-clamp: 2;
+            }
+            @include mobile() {
+              display: none;
+            }
+          }
+          & > p:nth-child(5) {
+            -webkit-line-clamp: 1;
+          }
+        }
+        div:nth-child(2) {
+          @include mobile() {
+            max-width: 100%;
+            flex: 0 0 100%;
+          }
+          & > p:nth-child(1) {
+            display: none;
+            @include mobile() {
+              display: block;
+            }
+          }
+          & > p:nth-child(2) {
+            font-size: 1.3rem;
+            opacity: 0.7;
+            @include mobile() {
+              font-size: 1.1rem;
+            }
+          }
+          & > p:nth-child(3) {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 2rem;
+            color: $color-red;
+            padding-right: 5px;
+          }
+          & > p:nth-child(4) {
+            display: inline;
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+  }
+  .comingSoon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    & > p {
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color:#fff;
+      font-size:3rem;
+      font-weight: bold;
+      padding:1rem;
+      border:3px solid #fff;
+      @include pad(){
+        font-size:1.5rem;
+      }
+      @include mobile(){
+        font-size: 1rem;
       }
     }
   }

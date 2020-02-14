@@ -56,7 +56,7 @@
             <p class="d-inline-block">NTD.</p>
             <p class="d-inline-block">{{CartItem.total | currency }}</p>
           </div>
-          <button class="d-block" @click.prevent="goCheckProduct">開始結帳</button>
+          <button class="d-block" @click.prevent="goCheckProduct">查看購物車</button>
         </div>
       </div>
     </div>
@@ -407,14 +407,13 @@ export default {
     line-height: 1.1rem;
     color: #fff;
     font-weight: bold;
-    transform: translateX(-50%);
     background: $color-red;
     border-radius: 999%;
     width: 18px;
     height: 18px;
     text-align: center;
     position: absolute;
-    top: calc(50% - 0px);
+    top: calc(50% - 9px);
     left: calc(50% + 9px);
     transform: translate(-50%, -50%);
   }
@@ -472,7 +471,7 @@ export default {
       & > div {
         position: relative;
         padding-left: 5%;
-        width: 170px;
+        width:180px;
         & > p {
           overflow: hidden;
           white-space: nowrap;

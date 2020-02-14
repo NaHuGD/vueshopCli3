@@ -147,8 +147,6 @@ export default {
     },
     addLike(item) {
       const vm = this;
-      let itemId = item.id;
-      let itemTitle = item.title;
       const likeArr = {
         title: item.title,
         id: item.id
@@ -223,7 +221,6 @@ export default {
 
 /*shop*/
 #shop {
-  color: $color-gray;
   .menuList {
     @include pad() {
       display: none;
@@ -232,8 +229,8 @@ export default {
       opacity: 0.7;
     }
     & > button {
-      background: $color-gray;
-      color: $color-black;
+      background: $color-black;
+      color:#fff;
       width: 100%;
       text-align: center;
       margin-bottom: 10px;
@@ -310,8 +307,8 @@ export default {
         line-height: 1.5rem;
         width: 35%;
       }
-      @include iphoneX{
-        width:45%;
+      @include iphoneX {
+        width: 45%;
       }
     }
   }
@@ -319,37 +316,37 @@ export default {
     clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
     background-image: url("../../assets/images/shop/m1.jpg");
     left: 0;
-    & > p{
-      left:50%;
+    & > p {
+      left: 50%;
     }
   }
   .box2 {
     clip-path: polygon(25% 0, 100% 0%, 75% 100%, 0% 100%);
     background-image: url("../../assets/images/shop/m2.jpg");
     left: -8.4%;
-    & > p{
-      left:calc(50% + 4.2%);
+    & > p {
+      left: calc(50% + 4.2%);
     }
   }
   .box3 {
     clip-path: polygon(25% 0, 100% 0%, 75% 100%, 0% 100%);
     background-image: url("../../assets/images/shop/m3.jpg");
     left: -16.8%;
-    & > p{
-      left:calc(50% + 8.4%);
+    & > p {
+      left: calc(50% + 8.4%);
     }
   }
   .box4 {
     clip-path: polygon(25% 0, 100% 0%, 100% 100%, 0% 100%);
     background-image: url("../../assets/images/shop/m4.jpg");
     left: -25.2%;
-    & > p{
-      left:calc(50% + 12.6%);
+    & > p {
+      left: calc(50% + 12.6%);
     }
   }
   .subcate {
     padding-bottom: 20px;
-    border-bottom: 1px solid $color-gray;
+    border-bottom: 1px solid $color-black;
   }
   .shop_info {
     @include fontStyle;

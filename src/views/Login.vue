@@ -78,11 +78,11 @@ export default {
   }
 }
 h1 {
-  color: $color-gray;
+  color: $color-darkGray;
   font-family: impact;
 }
 button {
-  background: $color-gray;
+  background: $color-darkGray;
   color: $color-bg;
 }
 

@@ -26,7 +26,7 @@
               @click="getProduct(item.id)"
             >
               <!--帶入vfor=>item的id-->
-              <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
+              <i class="fa fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
               查看更多
             </button>
             <button
@@ -34,7 +34,7 @@
               class="btn btn-outline-danger btn-sm ml-auto"
               @click="addtoCart(item.id)"
             >
-              <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
+              <i class="fa fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
               加到購物車
             </button>
           </div>
@@ -84,7 +84,7 @@
               class="btn btn-primary"
               @click="addtoCart(product.id,product.num)"
             >
-              <i class="fas fa-spinner fa-spin" v-if="product.id === status.loadingItem"></i>
+              <i class="fa fa-spinner fa-spin" v-if="product.id === status.loadingItem"></i>
               加到購物車
             </button>
           </div>
@@ -108,7 +108,7 @@
             <tr v-for="item in cart.carts" :key="item.id">
               <td>
                 <button class="btn btn-danger btn-sm" @click="deleteCart(item.id)">
-                  <i class="fas fa-trash" title="刪除"></i>
+                  <i class="fa fa-trash" title="刪除"></i>
                 </button>
               </td>
               <td>

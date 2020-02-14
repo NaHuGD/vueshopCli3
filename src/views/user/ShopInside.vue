@@ -13,8 +13,12 @@
         <div class="col-md-6">
           <img :src="product.imageUrl" :alt="product.title" />
           <span class="like">
-            <i class="fa fa-heart text-danger" v-if="getIfLocalData(product)"></i>
-            <i class="fa fa-heart-o" v-else></i>
+            <i
+              class="fa fa-heart text-danger"
+              @click.stop="removeLike(product)"
+              v-if="getIfLocalData(product)"
+            ></i>
+            <i class="fa fa-heart-o text-dark" @click.stop="addLike(product)" v-else></i>
           </span>
         </div>
         <div class="shopInside_info col-md-6 col-xl-4">
@@ -107,7 +111,7 @@ export default {
       moreLook: [],
       num: "1",
       size: "null",
-      likeData: []
+      likeData: [],
     };
   },
   methods: {
@@ -232,7 +236,24 @@ export default {
       return vm.likeData.some(function(ele) {
         return item.id === ele.id;
       });
-    }
+    },
+    addLike(item) {
+      const vm = this;
+      const likeArr = {
+        title: item.title,
+        id: item.id
+      };
+      vm.likeData.push(likeArr);
+      localStorage.setItem("likeData", JSON.stringify(vm.likeData));
+    },
+    removeLike(item) {
+      const vm = this;
+      const num = vm.likeData.findIndex((ele)=>{
+        return ele.title === item.title;
+      });
+      vm.likeData.splice(num,1);
+      localStorage.setItem("likeData",JSON.stringify(vm.likeData));
+    },
   },
   created() {
     const vm = this;
@@ -248,7 +269,7 @@ export default {
 @import "@/assets/helpers/breakpoint.scss";
 /*shopInside*/
 #shopInside {
-  color:$color-gray;
+  color: $color-gray;
   max-width: 80%;
   margin: 0 auto;
   img {
@@ -289,12 +310,12 @@ export default {
       :hover {
         opacity: 0.75;
       }
-      &>button:nth-child(1) {
+      & > button:nth-child(1) {
         background: $color-gray;
         color: #fff;
         padding: 1rem;
       }
-      &>button:nth-child(3) {
+      & > button:nth-child(3) {
         background: $color-darkRed;
         color: #fff;
         padding: 1rem;

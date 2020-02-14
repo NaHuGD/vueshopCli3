@@ -13,7 +13,7 @@
         <div class="fadein">
           <p class="h3">Kaiz Quality</p>
           <p class="font-weight-bold py-4 my-md-4">凱力品管保證</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore repudiandae in magnam officiis esse natus porro voluptate accusantium! Aliquid omnis ratione assumenda voluptas praesentium suscipit ad deleniti magni. Tempora voluptas optio, numquam natus itaque similique vitae architecto repellendus doloremque, saepe consequuntur ipsum! Laudantium amet illum sequi adipisci aspernatur? Ducimus a aliquam repellendus accusantium quidem cumque reprehenderit optio minus sapiente magnam. Harum magni iste quos, dolorum reprehenderit repudiandae perspiciatis a laborum veritatis deleniti numquam ducimus sed iure consequuntur. Repellendus perferendis possimus, ipsa deleniti suscipit culpa, rem cumque totam soluta nulla vitae, quibusdam quisquam aspernatur itaque delectus. Voluptatem nobis quod expedita fugit cum tempore. Molestias error placeat illum minima libero ducimus, incidunt omnis maxime natus quaerat deserunt! Non nobis minima voluptate omnis veritatis culpa dolor, eligendi rem soluta recusandae dolorem aspernatur animi possimus error reprehenderit provident. Ut quam dolorum deserunt. Labore vero beatae, ipsam et, rem sed architecto quas sit dignissimos reiciendis natus molestiae nam maiores accusamus pariatur deleniti aliquam blanditiis hic impedit animi dolore. Libero distinctio at, nisi labore accusamus repudiandae dignissimos dolor consequuntur, repellat error exercitationem cupiditate ad dolorum recusandae. Labore veniam nobis porro odit nulla cumque eligendi alias quidem. Aperiam quidem expedita perferendis eum sed, a possimus officiis cumque accusantium. Pariatur sunt, possimus libero delectus earum odit distinctio tempore voluptates beatae veritatis voluptas. Suscipit blanditiis hic eius voluptas aspernatur fugit voluptate earum minima, deleniti necessitatibus quo ut odit exercitationem corrupti iure, nesciunt maiores, in ea! Ratione consectetur provident harum quo fugit voluptate saepe veniam modi asperiores porro non reiciendis accusamus hic, nostrum voluptatum vel sint assumenda esse autem blanditiis, fuga, natus enim atque. Expedita distinctio voluptas eligendi ex hic, itaque animi omnis, repudiandae, velit earum odit beatae similique consequuntur ab. Error iste in placeat eos numquam quibusdam impedit laborum necessitatibus iusto mollitia magnam natus, odio magni quidem autem debitis porro assumenda. Laudantium voluptate dolor odio, tempore inventore, dolores debitis voluptas officia quae rerum vero tenetur ullam consequuntur, facilis nobis distinctio. Alias nulla fuga excepturi nesciunt. Architecto temporibus possimus excepturi velit amet accusamus deleniti natus optio distinctio ullam, provident et aliquam necessitatibus saepe laborum! Accusantium earum voluptatem alias accusamus inventore! Tempore, ut? Modi facere incidunt magnam necessitatibus corrupti temporibus mollitia perferendis sapiente molestias, excepturi accusamus reiciendis culpa, eligendi tempora ipsa placeat debitis non explicabo. Nesciunt, delectus! Laudantium, fuga? Obcaecati mollitia suscipit facilis sit, aliquid repellat quia voluptatibus dolores exercitationem maiores doloremque ad voluptas optio veritatis. Doloremque placeat eum veniam distinctio a aliquam reiciendis dolore architecto corrupti fuga neque cum rem nesciunt quia eius molestiae magnam id aperiam facilis quidem, error ea natus at? Aut accusantium alias quisquam odit aliquam praesentium neque quia porro nisi, nemo dolorum, eius, sed minus suscipit doloribus laboriosam accusamus in ab est dignissimos modi totam reiciendis amet. Eius odit iste ipsam mollitia, hic impedit, perspiciatis eaque molestias dolores, obcaecati delectus assumenda reiciendis placeat? Repudiandae et vitae ratione reprehenderit fugit? Temporibus qui veniam nostrum quod voluptatem placeat labore itaque sequi vitae consectetur aspernatur numquam, eius praesentium doloribus sit quos, possimus cupiditate maxime a modi? Excepturi, a atque?</p>
+          <p>凱力於商品生產過程時,便有超過國家安全標準的多項安全把關,對所有商品都出貨前皆會進行尺寸、瑕疵抽樣檢驗,為的就是讓喜愛我們品牌的忠實粉絲們能夠拿到完美零瑕疵的商品,也歡迎所有收到商品瑕疵的客人像凱力回報,凱力將無條件全額補償退費.</p>
         </div>
       </div>
       <div class="box2 col-12 col-md-6 p-0">
@@ -49,7 +49,7 @@
         <div class="fadein">
           <p class="h3">Kaiz Protein</p>
           <p class="font-weight-bold py-4 my-md-4">凱力高蛋白</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore repudiandae in magnam officiis esse natus porro voluptate accusantium! Aliquid omnis ratione assumenda voluptas praesentium suscipit ad deleniti magni. Tempora voluptas optio, numquam natus itaque similique vitae architecto repellendus doloremque, saepe consequuntur ipsum! Laudantium amet illum sequi adipisci aspernatur? Ducimus a aliquam repellendus accusantium quidem cumque reprehenderit optio minus sapiente magnam. Harum magni iste quos, dolorum reprehenderit repudiandae perspiciatis a laborum veritatis deleniti numquam ducimus sed iure consequuntur. Repellendus perferendis possimus, ipsa deleniti suscipit culpa, rem cumque totam soluta nulla vitae, quibusdam quisquam aspernatur itaque delectus. Voluptatem nobis quod expedita fugit cum tempore. Molestias error placeat illum minima libero ducimus, incidunt omnis maxime natus quaerat deserunt! Non nobis minima voluptate omnis veritatis culpa dolor, eligendi rem soluta recusandae dolorem aspernatur animi possimus error reprehenderit provident. Ut quam dolorum deserunt. Labore vero beatae, ipsam et, rem sed architecto quas sit dignissimos reiciendis natus molestiae nam maiores accusamus pariatur deleniti aliquam blanditiis hic impedit animi dolore. Libero distinctio at, nisi labore accusamus repudiandae dignissimos dolor consequuntur, repellat error exercitationem cupiditate ad dolorum recusandae. Labore veniam nobis porro odit nulla cumque eligendi alias quidem. Aperiam quidem expedita perferendis eum sed, a possimus officiis cumque accusantium. Pariatur sunt, possimus libero delectus earum odit distinctio tempore voluptates beatae veritatis voluptas. Suscipit blanditiis hic eius voluptas aspernatur fugit voluptate earum minima, deleniti necessitatibus quo ut odit exercitationem corrupti iure, nesciunt maiores, in ea! Ratione consectetur provident harum quo fugit voluptate saepe veniam modi asperiores porro non reiciendis accusamus hic, nostrum voluptatum vel sint assumenda esse autem blanditiis, fuga, natus enim atque. Expedita distinctio voluptas eligendi ex hic, itaque animi omnis, repudiandae, velit earum odit beatae similique consequuntur ab. Error iste in placeat eos numquam quibusdam impedit laborum necessitatibus iusto mollitia magnam natus, odio magni quidem autem debitis porro assumenda. Laudantium voluptate dolor odio, tempore inventore, dolores debitis voluptas officia quae rerum vero tenetur ullam consequuntur, facilis nobis distinctio. Alias nulla fuga excepturi nesciunt. Architecto temporibus possimus excepturi velit amet accusamus deleniti natus optio distinctio ullam, provident et aliquam necessitatibus saepe laborum! Accusantium earum voluptatem alias accusamus inventore! Tempore, ut? Modi facere incidunt magnam necessitatibus corrupti temporibus mollitia perferendis sapiente molestias, excepturi accusamus reiciendis culpa, eligendi tempora ipsa placeat debitis non explicabo. Nesciunt, delectus! Laudantium, fuga? Obcaecati mollitia suscipit facilis sit, aliquid repellat quia voluptatibus dolores exercitationem maiores doloremque ad voluptas optio veritatis. Doloremque placeat eum veniam distinctio a aliquam reiciendis dolore architecto corrupti fuga neque cum rem nesciunt quia eius molestiae magnam id aperiam facilis quidem, error ea natus at? Aut accusantium alias quisquam odit aliquam praesentium neque quia porro nisi, nemo dolorum, eius, sed minus suscipit doloribus laboriosam accusamus in ab est dignissimos modi totam reiciendis amet. Eius odit iste ipsam mollitia, hic impedit, perspiciatis eaque molestias dolores, obcaecati delectus assumenda reiciendis placeat? Repudiandae et vitae ratione reprehenderit fugit? Temporibus qui veniam nostrum quod voluptatem placeat labore itaque sequi vitae consectetur aspernatur numquam, eius praesentium doloribus sit quos, possimus cupiditate maxime a modi? Excepturi, a atque?</p>
+          <p>凱力高蛋白,蛋白質含量適中,且含有多種其他營養素,即使沒有進行重訓,平時也可當作代餐食用,讓身體在節食過程中維持正常代謝。凱力專為亞洲人體質量身打造運動補給品。完全不含大豆蛋白並且經過「減乳糖加工程序」,再加上木瓜酵素幫助身體消化蛋白質,有助減少脹氣機率。除了蛋白質之外成分中還含有維生素A、D、E與B群,提供均衡的營養攝取。</p>
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
           <p class="py-4 my-md-4 font-weight-bold">凱力理念</p>
           <p
             class="my-md-4"
-          >隨著健身產業的新興,全民的健身意識抬頭,到健身房報到已經成了不少健人每天的必須行程,凱力健人嚴選致力於打造運動夥伴們最優質的健身護具,及品質最高的乳清蛋白,讓運動夥伴們可以專心訓練,由凱力做最強大的後盾與你們一同成長.</p>
+          >隨著健身產業的新興,全民的健身意識抬頭,到健身房報到已經成了不少人每天的必須行程,凱力健人嚴選致力於提供運動夥伴們最優質的健身護具,及品質最高的乳清蛋白,讓運動夥伴們可以專心訓練,由凱力做最強大的後盾與你們一同成長.</p>
           <p>KaizBB</p>
         </div>
       </div>
@@ -120,31 +120,31 @@ export default {
           img: e4_1,
           title: "健身飲食篇",
           main:
-            "不管你是要減重、增肌或是為了健康，運動後的30分鐘到1小時內，聰明攝取一份,運動後補充一份均衡營養的輕食很重要，內容以碳水化合物與蛋白質的"
+            "不管你是要減重、增肌或是為了健康,運動後的30分鐘到1小時內,聰明攝取一份,運動後補充一份均衡營養的輕食很重要,內容以碳水化合物與蛋白質的"
         },
         {
           img: e4_2,
           title: "有氧運動迷失",
           main:
-            "提到有氧運動，相信許多人都會想到減肥（減重），因為有氧運動的確是可以，健身之前要先了解什麼是核心肌"
+            "提到有氧運動,相信許多人都會想到減肥（減重）,因為有氧運動的確是可以,健身之前要先了解什麼是核心肌"
         },
         {
           img: e4_3,
           title: "適合老人的運動有哪些？",
           main:
-            "所謂要活就要動，老了也別忘記運動。適合老人的運動類型有3種，包含可提升心肺功能的有氧運動、可強化骨頭和肌肉的肌力訓練，及幫助保"
+            "所謂要活就要動,老了也別忘記運動。適合老人的運動類型有3種,包含可提升心肺功能的有氧運動、可強化骨頭和肌肉的肌力訓練,及幫助保"
         },
         {
           img: e4_4,
           title: "吃蛋白棒前要搞清楚的5件事情",
           main:
-            "隨著食品加工業的發展，以及人們對營養食品需求的增進，熱愛健康的人群已經不再滿足於簡單的多種維生素以及乳清蛋白粉產品。各類蛋白"
+            "隨著食品加工業的發展,以及人們對營養食品需求的增進,熱愛健康的人群已經不再滿足於簡單的多種維生素以及乳清蛋白粉產品。各類蛋白"
         },
         {
           img: e4_5,
           title: "第一次健身就上手",
           main:
-            "下一站，我們即將帶領大家走入健身房，提供獨家的「攻略要點」，協助「健身房新手」不再像無頭蒼蠅於健身房裡亂竄"
+            "下一站,我們即將帶領大家走入健身房,提供獨家的「攻略要點」,協助「健身房新手」不再像無頭蒼蠅於健身房裡亂竄"
         }
       ],
       screenWidth: document.documentElement.clientWidth, //螢幕寬度
@@ -203,7 +203,6 @@ export default {
 @import "@/assets/helpers/breakpoint.scss";
 
 #home {
-  color: $color-gray;
   img {
     vertical-align: bottom;
   }
@@ -478,7 +477,7 @@ export default {
       display: block;
       width: 10%;
       height: 3px;
-      background: $color-gray;
+      background: #000;
       @include pad() {
         width: 20%;
       }

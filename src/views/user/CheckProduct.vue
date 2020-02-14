@@ -2,15 +2,12 @@
   <div>
     <CheckSchedule />
     <loading :active.sync="isLoading"></loading>
-    <div id="checkProduct" v-if="CartItem.carts != ''" class="main row col-10 col-sm-10 col-md-10">
-      <div class="col-lg-8">
+    <div id="checkProduct" v-if="CartItem.carts != ''" class="main row col-10 py-3">
+      <div class="col-md-8 p-0 pr-md-3">
         <table class="bagTitle">
           <tr class="row">
             <th>品名</th>
-            <th>
-              尺寸
-              <br />口味
-            </th>
+            <th>尺寸/口味</th>
             <th>數量</th>
             <th>單價</th>
             <th>刪除</th>
@@ -28,7 +25,9 @@
               <p class="col-12 p-0">{{item.product.title}}</p>
             </td>
             <td class="col-sm col-2 text-center">{{item.size}}</td>
-            <td class="col-sm col-2 text-center">{{item.qty}}</td>
+            <td class="col-sm col-2 text-center">
+              {{item.qty}}
+            </td>
             <td class="col-sm col-3 text-center">{{item.product.price | currency}}</td>
             <td class="col-sm col-2 text-center" @click.prevent="cartItemDelete(item)">
               <button>
@@ -38,7 +37,7 @@
           </tr>
         </table>
       </div>
-      <div class="priceInfo col-lg-4 pl-4 pt-4 pr-4">
+      <div class="priceInfo col-md-4 py-3">
         <table class="title">
           <thead>
             <th class="pb-5">Summary</th>
@@ -72,12 +71,12 @@
           <div class="row pl-2 couponsInfo" v-if="couponSuccess == false">
             <input
               type="text"
-              class="col-10"
+              class="col-11"
               placeholder="輸入折扣碼"
               @keyup.enter="addCoupons()"
               v-model="coupon_code"
             />
-            <button class="applyCoupons col" @click.prevent="addCoupons()">
+            <button class="applyCoupons col-1" @click.prevent="addCoupons()">
               <i class="fa fa-arrow-right"></i>
             </button>
           </div>
@@ -124,6 +123,7 @@ export default {
       vm.$http.get(url).then(response => {
         vm.$bus.$emit("cartitem:push", response.data.data);
         vm.isLoading = false;
+        console.log("getCart", response);
       });
     },
     getCartItem(item) {
@@ -161,15 +161,15 @@ export default {
         top: 0,
         behavior: "smooth"
       });
-    }
+    },
   },
   created() {
     const vm = this;
+    vm.getCart();
     vm.$bus.$on("cartitem:push", function(item) {
       //抓取購物車資訊//
       vm.getCartItem(item);
     });
-    vm.getCart();
   }
 };
 </script>

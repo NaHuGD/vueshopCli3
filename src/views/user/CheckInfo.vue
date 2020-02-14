@@ -1,41 +1,55 @@
 <template>
   <div>
     <CheckSchedule />
-    <div id="checkInfo">
-      <form @submit.prevent="createOrder">
-        <div class="main col-11 col-md-9">
-          <h4 class="h4 py-4">訂購資料</h4>
-          <div class="row">
-            <div class="col-12 col-md-6">
-              <label for="userName" class="py-3">收件人姓名*</label>
-              <input
-                placeholder="姓名"
-                type="text"
-                id="userName"
-                name="name"
-                class="col form-control"
-                :class="{'is-invalid':errors.has('name'),'inputBorder':!errors.has('name')}"
-                v-model="form.user.name"
-                v-validate="'required'"
-              />
-              <span class="text-danger mt-2 d-block" v-if="errors.has('name')">請輸入姓名*</span>
+    <div id="checkInfo" class="row">
+      <div class="col-12 col-md-4 pb-3">
+        <div class="mainleft">
+          <p class="h4 py-3">購物清單：</p>
+          <div class="py-2 row bagInfo" v-for="(item, key) in products.carts" :key="key">
+            <div class="d-inline-block p-0 col">
+              <p class="pb-1">{{ item.product.title }}</p>
+              <p class="pb-1">{{ item.size }}</p>
+              <p class="pb-1">價格:{{ item.product.price | currency }}</p>
+              <p class="pb-1">數量: {{ item.qty }}</p>
             </div>
-            <div class="col-12 col-md-6">
-              <label for="userPhone" class="py-3">收件人手機*</label>
-              <input
-                placeholder="號碼"
-                type="tel"
-                onkeyup="value=value.replace(/[^\d]/g,'') "
-                id="userPhone"
-                name="tel"
-                class="col form-control"
-                :class="{'is-invalid':errors.has('tel'),'inputBorder':!errors.has('tel')}"
-                v-model="form.user.tel"
-                v-validate="'required|digits:10'"
-              />
-              <span class="text-danger mt-2 d-block" v-if="errors.has('tel')">請輸入手機10碼</span>
-            </div>
+            <img :src="item.product.imageUrl" :alt="item.product.title" class="p-0 col-3" />
           </div>
+          <div class="h6 total">總價(含運):{{ products.total + 80 | currency }}</div>
+        </div>
+      </div>
+      <form @submit.prevent="createOrder" class="col-12 col-md">
+        <div class="mainInfo">
+          <h4 class="h4 py-3">訂購資料</h4>
+          <div>
+            <label for="userName" class="py-3">收件人姓名*</label>
+            <input
+              placeholder="姓名"
+              type="text"
+              id="userName"
+              name="name"
+              class="col form-control"
+              :class="{'is-invalid':errors.has('name'),'inputBorder':!errors.has('name')}"
+              v-model="form.user.name"
+              v-validate="'required'"
+            />
+            <span class="text-danger mt-2 d-block" v-if="errors.has('name')">請輸入姓名*</span>
+          </div>
+          <div>
+            <label for="userPhone" class="py-3">收件人手機*</label>
+            <input
+              placeholder="號碼"
+              type="tel"
+              onkeyup="value=value.replace(/[^\d]/g,'') "
+              id="userPhone"
+              name="tel"
+              class="col form-control"
+              :class="{'is-invalid':errors.has('tel'),'inputBorder':!errors.has('tel')}"
+              v-model="form.user.tel"
+              v-validate="'required|digits:10'"
+            />
+            <span class="text-danger mt-2 d-block" v-if="errors.has('tel')">請輸入手機10碼</span>
+          </div>
+
           <div>
             <label for="userEmail" class="py-3">聯絡信箱*</label>
             <input
@@ -99,8 +113,8 @@
             </div>
             <span class="text-danger mt-2 d-block" v-if="errors.has('address')">請輸入正確地址</span>
           </div>
-        <!-- </div> -->
-        <!-- <div class="main col-11 col-md-9"> -->
+          <!-- </div> -->
+          <!-- <div class="main col-11 col-md-9"> -->
           <div>
             <label class="py-3">付款方式*</label>
             <select class="form-control" id="payMethod" @change.prevent="payMethodValue">
@@ -110,7 +124,7 @@
           </div>
           <div v-if="form.user.payMethod === 'credit'">
             <div class="row align-items-center">
-              <div class="col-12 col-lg-4">
+              <div class="col-12">
                 <div class="py-2">
                   <label for class="pb-2 col px-0">信用卡卡號:</label>
                   <input
@@ -162,7 +176,7 @@
                   />
                 </div>
               </div>
-              <div class="col-12 col-lg">
+              <div class="col-12">
                 <div class="indexCard" :class="{'rotateBack':isFlipped === false}">
                   <div class="cardFront">
                     <div class="number">{{form.user.card.number}}</div>
@@ -178,7 +192,7 @@
             </div>
           </div>
         </div>
-        <div class="main col-11 col-md-9">
+        <div class="mainInfo my-3 col-12 col-md">
           <label for="comment" class="py-3">備註</label>
           <textarea class="col-12 mt-1" id="comment"></textarea>
         </div>
@@ -203,6 +217,7 @@ export default {
   data() {
     return {
       card: card,
+      products: {},
       card_bg: card_bg,
       isLoading: false,
       isFlipped: true,
@@ -230,6 +245,18 @@ export default {
     };
   },
   methods: {
+    getCart() {
+      //取得購物車內容
+      const vm = this;
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      vm.isLoading = true;
+      vm.$http.get(url).then(response => {
+        vm.products = response.data.data;
+        vm.$bus.$emit("cartitem:push", response.data.data);
+        vm.isLoading = false;
+        console.log("getCart", response);
+      });
+    },
     createOrder() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
@@ -281,11 +308,13 @@ export default {
       vm.form.user.card.date.year = document.querySelector("#cardYear").value;
     }
   },
-  created() {},
+  created() {
+    this.getCart();
+  },
   mounted() {
-    document.querySelector(".checkInfo").style = `border:3px solid #235a55`;
-    document.querySelector(".checkInfo>i").style = `color:#235a55`;
-    document.querySelector(".checkInfo>p").style = `color:#235a55`;
+    document.querySelector(".checkInfo").style = `border:3px solid #8d3742`;
+    document.querySelector(".checkInfo>i").style = `color:#8d3742`;
+    document.querySelector(".checkInfo>p").style = `color:#8d3742`;
     document
       .querySelector(".checkSchedule>span")
       .classList.add("scheduleInfoAnimation");
@@ -298,18 +327,42 @@ export default {
 
 #checkInfo {
   color: $color-darkGray;
-  #ship {
-    color: $color-darkGray;
+  width: 70%;
+  position: relative;
+  margin: 0 auto;
+  @include pad() {
+    width: 90%;
   }
-  .main {
+  .mainleft {
+    box-shadow: 0px 1px 3px 1px $color-bgActive;
+    background: #fff;
+    padding: 18px;
+    .bagInfo {
+      align-items: center;
+      padding: 0 18px;
+      & > div {
+        p {
+          white-space: nowrap;
+        }
+      }
+      & > img {
+        @include desktop() {
+        }
+      }
+    }
+    .total {
+      border-top: 1px solid black;
+      padding-top: 0.5rem;
+    }
+  }
+  .mainInfo {
     label,
     h4 {
       font-weight: bold;
     }
-    background: $color-gray;
+    background: #fff;
     padding: 18px;
-    border-radius: 8px;
-    box-shadow: 0px 1px 2px 2px $color-darkGray;
+    box-shadow: 0px 1px 3px 1px $color-bgActive;
     .inputBorder,
     select {
       border: 1px solid $color-darkGray;
@@ -317,7 +370,7 @@ export default {
       height: 35px;
     }
     textarea {
-      border: 1px solid $color-green;
+      border: 1px solid $color-darkGray;
       border-radius: 5px;
       height: 160px;
       padding-top: 10px;
@@ -339,7 +392,7 @@ export default {
     margin: 0 auto;
     max-width: 360px;
     overflow: hidden;
-    height: 280px;
+    height: 260px;
     @include mobile {
       max-width: 260px;
       height: 200px;
@@ -414,10 +467,9 @@ export default {
     cursor: pointer;
     font-weight: bold;
     display: block;
-    margin: 0 auto;
+    margin: 0 0 0 auto;
     position: relative;
-    width: 20%;
-    padding: 15px 0;
+    padding: 15px 10px;
     background: $color-darkRed;
     color: #fff;
     letter-spacing: 0.3rem;
@@ -428,10 +480,10 @@ export default {
       transition: 0.4s;
     }
     @include mobile() {
-      width: 40%;
+      width: 100%;
     }
     @include pad() {
-      width: 40%;
+      width: 100%;
     }
   }
   @keyframes buttonStyle {

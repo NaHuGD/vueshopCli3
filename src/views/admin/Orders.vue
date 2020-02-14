@@ -21,12 +21,12 @@
           <td>
             <ul class="list-unstyled" v-for="(product,i) in item.products" :key="i">
               <li>
-                {{product.product.title}}
+                {{product.title}}
                 <span
                   class="btn btn-sm"
                   :class="{'text-secondary':!item.is_paid}"
-                >{{product.product.num}}</span>
-                {{product.product.unit}}
+                >{{product.num}}</span>
+                {{product.unit}}
               </li>
             </ul>
           </td>
@@ -92,6 +92,7 @@ export default {
       const vm = this;
       vm.isLoading = true; //讀取資料時開起
       vm.$http.get(api).then(response => {
+      console.log(response);
         //取得訂單資料//
         vm.orders = response.data.orders;
         vm.pagination = response.data.pagination;
