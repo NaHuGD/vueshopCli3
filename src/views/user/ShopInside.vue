@@ -101,175 +101,172 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       isLoading: false,
       isSize: false,
-      itemId: "",
-      products: "", //全部商品
-      product: "", //單筆商品
+      itemId: '',
+      products: '', // 全部商品
+      product: '', // 單筆商品
       moreLook: [],
-      num: "1",
-      size: "null",
-      likeData: [],
-    };
+      num: '1',
+      size: 'null',
+      likeData: []
+    }
   },
   methods: {
-    getProduct(id) {
-      //取得指定商品資料
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      vm.isLoading = true;
+    getProduct (id) {
+      // 取得指定商品資料
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      vm.isLoading = true
       vm.$http.get(url).then(response => {
-        let newArray = response.data.products.filter(function(
+        const newArray = response.data.products.filter(function (
           item,
           index,
           arr
         ) {
-          if (item.id != id) {
-            return item;
+          if (item.id !== id) {
+            return item
           }
-        });
-        vm.products = newArray;
+        })
+        vm.products = newArray
         for (let i = 0; i < 4; i++) {
-          //隨機顯示物件中的商品//
-          let num = Math.floor(Math.random() * vm.products.length);
-          vm.moreLook.push(vm.products[num]); //將隨機的商品新增到新物件//
-          vm.products.splice(num, 1); //新增後刪除該筆資料位置,避免重複//
+          // 隨機顯示物件中的商品//
+          const num = Math.floor(Math.random() * vm.products.length)
+          vm.moreLook.push(vm.products[num]) // 將隨機的商品新增到新物件//
+          vm.products.splice(num, 1) // 新增後刪除該筆資料位置,避免重複//
         }
-      });
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
+      })
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
       vm.$http.get(api).then(response => {
-        vm.product = response.data.product;
-        vm.isLoading = false;
-      });
+        vm.product = response.data.product
+        vm.isLoading = false
+      })
     },
-    goPath(id) {
-      //透過id到指定內頁//
-      const vm = this;
-      vm.$router.push({ path: `/shop_inside/${id}` });
-      location.reload();
+    goPath (id) {
+      // 透過id到指定內頁//
+      const vm = this
+      vm.$router.push({ path: `/shop_inside/${id}` })
+      location.reload()
     },
-    back(e) {
-      const vm = this;
-      if (vm.product.category === "護具") {
-        vm.$router.push({ path: `/shop/protective` });
-      } else if (vm.product.category === "乳清") {
-        vm.$router.push({ path: `/shop/whey` });
+    back (e) {
+      const vm = this
+      if (vm.product.category === '護具') {
+        vm.$router.push({ path: '/shop/protective' })
+      } else if (vm.product.category === '乳清') {
+        vm.$router.push({ path: '/shop/whey' })
       }
     },
-    tasteValue() {
-      //選擇口味//
-      const vm = this;
-      vm.size = document.querySelector("#tasteValue").value;
-      vm.isSize = false;
+    tasteValue () {
+      // 選擇口味//
+      const vm = this
+      vm.size = document.querySelector('#tasteValue').value
+      vm.isSize = false
     },
-    protectiveValue() {
-      //選擇尺寸//
-      const vm = this;
-      vm.size = document.querySelector("#protectiveValue").value;
-      vm.isSize = false;
+    protectiveValue () {
+      // 選擇尺寸//
+      const vm = this
+      vm.size = document.querySelector('#protectiveValue').value
+      vm.isSize = false
     },
-    addtoCart(id) {
-      //qty加入的數量
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
+    addtoCart (id) {
+      // qty加入的數量
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.isLoading = true
       const cart = {
         product_id: id,
         qty: vm.num,
         size: vm.size
-      };
-      if (vm.size === "null") {
-        alert("請選擇尺寸/口味");
-        vm.isSize = true;
-        vm.isLoading = false;
-        return;
+      }
+      if (vm.size === 'null') {
+        alert('請選擇尺寸/口味')
+        vm.isSize = true
+        vm.isLoading = false
       } else {
         vm.$http.post(url, { data: cart }).then(response => {
-          //加入購物車,response=商品資料//
-          vm.getCart();
-          vm.$bus.$emit("bagToggle:push", false);
-          vm.isLoading = false;
-        });
+          // 加入購物車,response=商品資料//
+          vm.getCart()
+          vm.$bus.$emit('bagToggle:push', false)
+          vm.isLoading = false
+        })
       }
     },
-    buyNow(id) {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+    buyNow (id) {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const cart = {
         product_id: id,
         qty: vm.num,
         size: vm.size
-      };
-      if (vm.size === "null") {
-        alert("請選擇尺寸/口味");
-        vm.isSize = true;
-        vm.isLoading = false;
-        return;
+      }
+      if (vm.size === 'null') {
+        alert('請選擇尺寸/口味')
+        vm.isSize = true
+        vm.isLoading = false
       } else {
         vm.$http.post(url, { data: cart }).then(response => {
-          //直接購買,導頁並更新購物車//
-          vm.getCart();
-        });
-        vm.$router.push("/checkProduct");
+          // 直接購買,導頁並更新購物車//
+          vm.getCart()
+        })
+        vm.$router.push('/checkProduct')
       }
     },
-    getCart() {
-      //取得購物車內容
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
+    getCart () {
+      // 取得購物車內容
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.isLoading = true
       vm.$http.get(url).then(response => {
-        //將購物車資料,總數透過eventbus傳遞//
-        vm.$bus.$emit("cartnum:push", response.data.data.carts.length);
-        vm.$bus.$emit("cartitem:push", response.data.data);
-        vm.isLoading = false;
-      });
+        // 將購物車資料,總數透過eventbus傳遞//
+        vm.$bus.$emit('cartnum:push', response.data.data.carts.length)
+        vm.$bus.$emit('cartitem:push', response.data.data)
+        vm.isLoading = false
+      })
     },
-    getLocalData() {
-      const vm = this;
-      vm.likeData = JSON.parse(localStorage.getItem("likeData")) || [];
+    getLocalData () {
+      const vm = this
+      vm.likeData = JSON.parse(localStorage.getItem('likeData')) || []
     },
-    getIfLocalData(item) {
-      const vm = this;
-      return vm.likeData.some(function(ele) {
-        return item.id === ele.id;
-      });
+    getIfLocalData (item) {
+      const vm = this
+      return vm.likeData.some(function (ele) {
+        return item.id === ele.id
+      })
     },
-    addLike(item) {
-      const vm = this;
+    addLike (item) {
+      const vm = this
       const likeArr = {
         title: item.title,
         id: item.id
-      };
-      vm.likeData.push(likeArr);
-      localStorage.setItem("likeData", JSON.stringify(vm.likeData));
+      }
+      vm.likeData.push(likeArr)
+      localStorage.setItem('likeData', JSON.stringify(vm.likeData))
     },
-    removeLike(item) {
-      const vm = this;
-      const num = vm.likeData.findIndex((ele)=>{
-        return ele.title === item.title;
-      });
-      vm.likeData.splice(num,1);
-      localStorage.setItem("likeData",JSON.stringify(vm.likeData));
-    },
+    removeLike (item) {
+      const vm = this
+      const num = vm.likeData.findIndex((ele) => {
+        return ele.title === item.title
+      })
+      vm.likeData.splice(num, 1)
+      localStorage.setItem('likeData', JSON.stringify(vm.likeData))
+    }
   },
-  created() {
-    const vm = this;
-    vm.itemId = vm.$route.params.itemId;
-    vm.getProduct(vm.itemId); //將指定商品id帶入
-    vm.getCart();
-    vm.getLocalData();
+  created () {
+    const vm = this
+    vm.itemId = vm.$route.params.itemId
+    vm.getProduct(vm.itemId) // 將指定商品id帶入
+    vm.getCart()
+    vm.getLocalData()
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/helpers/breakpoint.scss";
 /*shopInside*/
 #shopInside {
-  color: $color-gray;
   max-width: 80%;
   margin: 0 auto;
   img {
@@ -279,6 +276,7 @@ export default {
   .navColumn {
     max-width: 100%;
     display: flex;
+    white-space: nowrap;
     .title::after {
       content: "/";
       font-family: cursive;
@@ -311,7 +309,7 @@ export default {
         opacity: 0.75;
       }
       & > button:nth-child(1) {
-        background: $color-gray;
+        background: $color-darkGray;
         color: #fff;
         padding: 1rem;
       }

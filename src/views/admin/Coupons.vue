@@ -160,91 +160,91 @@
 </template>
 
 <script>
-import $ from "jquery";
+import $ from 'jquery'
 
 export default {
-  data() {
+  data () {
     return {
-      pagination: "",
-      modalTitle: "",
+      pagination: '',
+      modalTitle: '',
       isLoading: false,
       coupons: {},
       tempCoupon: {
-        title: "",
-        is_enabled: "",
-        percent: "",
-        due_date: "",
-        code: ""
+        title: '',
+        is_enabled: '',
+        percent: '',
+        due_date: '',
+        code: ''
       },
       isNew: false
-    };
-  },
-  methods: {
-    openCouponModal(isNew, item) {
-      //新建編輯表單
-      const vm = this;
-      $("#couponModal").modal("show");
-      vm.isNew = isNew;
-      if (isNew) {
-        //新增時
-        vm.modalTitle = true;
-        vm.tempCoupon = {};
-      } else {
-        //編輯時
-        vm.modalTitle = false;
-        vm.tempCoupon = Object.assign({}, item);
-        console.log("編輯時", item);
-      }
-    },
-    updateCoupon() {
-      //新增優惠卷
-      const vm = this;
-      let api;
-      vm.isLoading = true;
-      if (vm.isNew) {
-        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`;
-        vm.$http.post(api, { data: vm.tempCoupon }).then(response => {
-          vm.getCoupon();
-          console.log("新增優惠", response);
-        });
-      } else {
-        //編輯時的確認
-        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
-        vm.$http.put(api, { data: vm.tempCoupon }).then(response => {
-          vm.getCoupon();
-          console.log("更新優惠", response);
-        });
-      };
-      vm.isLoading = false;
-      $("#couponModal").modal("hide");
-    },
-    removeCoupon(item) {
-      //刪除優惠卷
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${item.id}`;
-      vm.isLoading = true;
-      vm.$http.delete(url).then(response => {
-        vm.coupons = response.data.coupons;
-        vm.getCoupon();
-        vm.isLoading = false;
-      });
-    },
-    getCoupon(page = 1) {
-      //取得資料
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`;
-      vm.isLoading = true;
-      vm.$http.get(url, vm.tempProduct).then(response => {
-        //取得優惠卷//
-        vm.coupons = response.data.coupons;
-        vm.pagination = response.data.pagination;
-        vm.isLoading = false;
-      });
     }
   },
-  created() {
-    const vm = this;
-    vm.getCoupon();
+  methods: {
+    openCouponModal (isNew, item) {
+      // 新建編輯表單
+      const vm = this
+      $('#couponModal').modal('show')
+      vm.isNew = isNew
+      if (isNew) {
+        // 新增時
+        vm.modalTitle = true
+        vm.tempCoupon = {}
+      } else {
+        // 編輯時
+        vm.modalTitle = false
+        vm.tempCoupon = Object.assign({}, item)
+        // console.log('編輯時', item)
+      }
+    },
+    updateCoupon () {
+      // 新增優惠卷
+      const vm = this
+      let api
+      vm.isLoading = true
+      if (vm.isNew) {
+        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`
+        vm.$http.post(api, { data: vm.tempCoupon }).then(response => {
+          vm.getCoupon()
+          // console.log('新增優惠', response)
+        })
+      } else {
+        // 編輯時的確認
+        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`
+        vm.$http.put(api, { data: vm.tempCoupon }).then(response => {
+          vm.getCoupon()
+          // console.log('更新優惠', response)
+        })
+      };
+      vm.isLoading = false
+      $('#couponModal').modal('hide')
+    },
+    removeCoupon (item) {
+      // 刪除優惠卷
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${item.id}`
+      vm.isLoading = true
+      vm.$http.delete(url).then(response => {
+        vm.coupons = response.data.coupons
+        vm.getCoupon()
+        vm.isLoading = false
+      })
+    },
+    getCoupon (page = 1) {
+      // 取得資料
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`
+      vm.isLoading = true
+      vm.$http.get(url, vm.tempProduct).then(response => {
+        // 取得優惠卷//
+        vm.coupons = response.data.coupons
+        vm.pagination = response.data.pagination
+        vm.isLoading = false
+      })
+    }
+  },
+  created () {
+    const vm = this
+    vm.getCoupon()
   }
-};
+}
 </script>

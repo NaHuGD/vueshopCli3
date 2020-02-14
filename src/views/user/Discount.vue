@@ -6,7 +6,7 @@
     </div>
     <router-link to="/discount/turn" class="box row">
       <div class="icon col-3">
-        <img :src="iconImg_1" alt="game_photo" ondragstart="return false" />
+        <img :src="iconImg1" alt="game_photo" ondragstart="return false" />
       </div>
       <div class="info col">
         <div class="row">
@@ -29,7 +29,7 @@
     </router-link>
     <router-link to class="box row">
       <div class="icon col-3">
-        <img :src="iconImg_2" alt="game_photo" ondragstart="return false" />
+        <img :src="iconImg2" alt="game_photo" ondragstart="return false" />
       </div>
       <div class="info col">
         <div class="row">
@@ -57,28 +57,27 @@
 </template>
 
 <script>
-import iconImg_1 from "@/assets/images/discount/turn/turnTable.png";
-import iconImg_2 from "@/assets/images/discount/scratch/pop.png";
-import barcodeImg from "@/assets/images/checkout/barcode.jpg";
+import iconImg1 from '@/assets/images/discount/turn/turnTable.png'
+import iconImg2 from '@/assets/images/discount/scratch/pop.png'
+import barcodeImg from '@/assets/images/checkout/barcode.jpg'
 export default {
-  data() {
+  data () {
     return {
-      iconImg_1: iconImg_1,
-      iconImg_2: iconImg_2,
+      iconImg1: iconImg1,
+      iconImg2: iconImg2,
       barcodeImg: barcodeImg
-    };
+    }
   },
   methods: {
-    goTurn() {
-      const vm = this;
+    goTurn () {
+      const vm = this
       vm.$router.push({
-        path: `/discount/turn`
-      });
+        path: '/discount/turn'
+      })
     }
   }
-};
+}
 </script>
-
 
 <style lang="scss" second>
 @import "@/assets/helpers/breakpoint.scss";
@@ -272,4 +271,3 @@ export default {
   }
 }
 </style>
-

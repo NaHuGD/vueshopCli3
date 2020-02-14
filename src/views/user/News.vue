@@ -2,7 +2,7 @@
   <div id="news" class="pt150">
     <div class="row m-0 p-0">
       <div class="box col-12 col-md-6">
-        <img :src="newImg_1" alt />
+        <img :src="newImg1" alt />
         <div class="info">
           <h2 class="py-2 h4">健身飲食篇</h2>
           <p class="mb-2">不管你是要減重、增肌或是為了健康，運動後的30分鐘到1小時內，聰明攝取一份,運動後補充一份均衡營養的輕食很重要，內容以碳水化合物與蛋白質的</p>
@@ -10,7 +10,7 @@
         <div class="more">See More</div>
       </div>
       <div class="box col-12 col-md-6">
-        <img :src="newImg_2" alt />
+        <img :src="newImg2" alt />
         <div class="info">
           <h2 class="py-2 h4">有氧運動迷失</h2>
           <p class="mb-2">提到有氧運動，相信許多人都會想到減肥（減重），因為有氧運動的確是可以，健身之前要先了解什麼是核心肌</p>
@@ -20,7 +20,7 @@
     </div>
     <div class="row m-0 p-0">
       <div class="box col-12 col-md-6">
-        <img :src="newImg_3" alt />
+        <img :src="newImg3" alt />
         <div class="info">
           <h2 class="py-2 h4">適合老人的運動有哪些？</h2>
           <p class="mb-2">所謂要活就要動，老了也別忘記運動。適合老人的運動類型有3種，包含可提升心肺功能的有氧運動、可強化骨頭和肌肉的肌力訓練，及幫助保</p>
@@ -28,7 +28,7 @@
         <div class="more">See More</div>
       </div>
       <div class="box col-12 col-md-6">
-        <img :src="newImg_4" alt />
+        <img :src="newImg4" alt />
         <div class="info">
           <h2 class="py-2 h4">吃蛋白棒前要搞清楚的5件事情</h2>
           <p class="mb-2">隨著食品加工業的發展，以及人們對營養食品需求的增進，熱愛健康的人群已經不再滿足於簡單的多種維生素以及乳清蛋白粉產品。各類蛋白</p>
@@ -38,7 +38,7 @@
     </div>
     <div class="row m-0 p-0">
       <div class="box col-12 col-md-6">
-        <img :src="newImg_5" alt />
+        <img :src="newImg5" alt />
         <div class="info">
           <h2 class="py-2 h4">第一次健身就上手</h2>
           <p class="mb-2">下一站，我們即將帶領大家走入健身房，提供獨家的「攻略要點」，協助「健身房新手」不再像無頭蒼蠅於健身房裡亂竄</p>
@@ -50,28 +50,27 @@
 </template>
 
 <script>
-import newImg_1 from "@/assets/images/news/01.jpg";
-import newImg_2 from "@/assets/images/news/02.jpg";
-import newImg_3 from "@/assets/images/news/03.jpg";
-import newImg_4 from "@/assets/images/news/04.jpg";
-import newImg_5 from "@/assets/images/news/05.jpg";
+import newImg1 from '@/assets/images/news/01.jpg'
+import newImg2 from '@/assets/images/news/02.jpg'
+import newImg3 from '@/assets/images/news/03.jpg'
+import newImg4 from '@/assets/images/news/04.jpg'
+import newImg5 from '@/assets/images/news/05.jpg'
 
 export default {
-  data() {
+  data () {
     return {
-      newImg_1: newImg_1,
-      newImg_2: newImg_2,
-      newImg_3: newImg_3,
-      newImg_4: newImg_4,
-      newImg_5: newImg_5
-    };
+      newImg1: newImg1,
+      newImg2: newImg2,
+      newImg3: newImg3,
+      newImg4: newImg4,
+      newImg5: newImg5
+    }
   },
-  created() {
-    document.querySelector("html").classList.contains("box");
+  created () {
+    document.querySelector('html').classList.contains('box')
   }
-};
+}
 </script>
-
 
 <style lang="scss" scoped>
 @import "@/assets/helpers/breakpoint.scss";

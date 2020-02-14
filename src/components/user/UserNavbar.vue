@@ -114,8 +114,8 @@
 
 <script>
 export default {
-  name: "UserNavbar",
-  data() {
+  name: 'UserNavbar',
+  data () {
     return {
       isLoading: false,
       isMobNav: false,
@@ -123,137 +123,137 @@ export default {
       isAnimateOut: false,
       isCheckOut: false,
       isSearch: false,
-      isMenuActive: "",
-      isMenuActiveMob: "",
-      CartNumber: "",
+      isMenuActive: '',
+      isMenuActiveMob: '',
+      CartNumber: '',
       CartItem: {},
-      id: ""
-    };
+      id: ''
+    }
   },
   methods: {
-    goShop() {
-      const vm = this;
+    goShop () {
+      const vm = this
       vm.$router.push({
-        path: `/shop/all`
-      });
-      vm.isMobNav = false;
+        path: '/shop/all'
+      })
+      vm.isMobNav = false
     },
-    goDiscount() {
-      const vm = this;
+    goDiscount () {
+      const vm = this
       vm.$router.push({
-        path: `/discount`
-      });
-      vm.isMobNav = false;
+        path: '/discount'
+      })
+      vm.isMobNav = false
     },
-    goNews() {
-      const vm = this;
+    goNews () {
+      const vm = this
       vm.$router.push({
-        path: `/News`
-      });
-      vm.isMobNav = false;
+        path: '/News'
+      })
+      vm.isMobNav = false
     },
-    getCart() {
-      //取得購物車內容
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
+    getCart () {
+      // 取得購物車內容
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.isLoading = true
       vm.$http.get(url).then(response => {
-        //接受到購物車資訊時用eventbus傳遞//
-        vm.$bus.$emit("cartnum:push", response.data.data.carts.length);
-        vm.$bus.$emit("cartitem:push", response.data.data);
-        vm.isLoading = false;
-      });
+        // 接受到購物車資訊時用eventbus傳遞//
+        vm.$bus.$emit('cartnum:push', response.data.data.carts.length)
+        vm.$bus.$emit('cartitem:push', response.data.data)
+        vm.isLoading = false
+      })
     },
-    getCartNum(num) {
-      const vm = this;
-      vm.CartNumber = num;
+    getCartNum (num) {
+      const vm = this
+      vm.CartNumber = num
     },
-    getCartItem(item) {
-      const vm = this;
-      vm.CartItem = item;
+    getCartItem (item) {
+      const vm = this
+      vm.CartItem = item
     },
-    cartItemDelete(item) {
-      const vm = this;
-      vm.isLoading = true;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`;
+    cartItemDelete (item) {
+      const vm = this
+      vm.isLoading = true
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`
       vm.$http.delete(url).then(response => {
-        vm.getCart();
-        vm.isLoading = false;
-      });
+        vm.getCart()
+        vm.isLoading = false
+      })
     },
-    mobNavFn() {
-      const vm = this;
-      vm.isMobNav = false;
+    mobNavFn () {
+      const vm = this
+      vm.isMobNav = false
     },
-    goProducts() {
-      //搜尋商品頁
-      const vm = this;
-      vm.$bus.$emit("searchId:push", vm.id);
+    goProducts () {
+      // 搜尋商品頁
+      const vm = this
+      vm.$bus.$emit('searchId:push', vm.id)
       vm.$router.push({
         path: `/search/${vm.id}`
-      });
-      vm.isSearch = false;
+      })
+      vm.isSearch = false
     },
-    goCheckProduct() {
-      const vm = this;
-      vm.bagToggle = true;
+    goCheckProduct () {
+      const vm = this
+      vm.bagToggle = true
       vm.$router.push({
-        path: `/checkProduct`
-      });
+        path: '/checkProduct'
+      })
       window.scrollTo({
         top: 0,
-        behavior: "smooth"
-      });
+        behavior: 'smooth'
+      })
     }
   },
   computed: {
-    menuActiveFn() {
-      const vm = this;
-      let routeName = vm.$route.name;
+    menuActiveFn () {
+      const vm = this
+      const routeName = vm.$route.name
       if (
-        routeName === "All" ||
-        routeName === "Protective" ||
-        routeName === "Whey" ||
-        routeName === "Like" ||
-        routeName === "ShopSearch" ||
-        routeName === "ShopInside"
+        routeName === 'All' ||
+        routeName === 'Protective' ||
+        routeName === 'Whey' ||
+        routeName === 'Like' ||
+        routeName === 'ShopSearch' ||
+        routeName === 'ShopInside'
       ) {
-        return (vm.isMenuActive = "商品列表");
-      } else if (routeName === "Discount" || routeName === "Turn") {
-        return (vm.isMenuActive = "優惠活動");
-      } else if (routeName === "News") {
-        return (vm.isMenuActive = "健康資訊");
+        return (vm.isMenuActive = '商品列表')
+      } else if (routeName === 'Discount' || routeName === 'Turn') {
+        return (vm.isMenuActive = '優惠活動')
+      } else if (routeName === 'News') {
+        return (vm.isMenuActive = '健康資訊')
       } else {
-        return (vm.isMenuActive = "");
+        return (vm.isMenuActive = '')
       }
     },
-    menuBgFn() {
-      const vm = this;
-      let routeName = vm.$route.name;
-      if (routeName === "Home") {
-        return true;
+    menuBgFn () {
+      const vm = this
+      const routeName = vm.$route.name
+      if (routeName === 'Home') {
+        return true
       } else {
-        return false;
+        return false
       }
     }
   },
-  created() {
-    const vm = this;
-    vm.$bus.$on("cartnum:push", function(num) {
-      //接收購物車陣列總數//
-      vm.getCartNum(num);
-    });
-    vm.$bus.$on("cartitem:push", function(item) {
-      //接收購物車資訊//
-      vm.getCartItem(item);
-    });
-    vm.$bus.$on("bagToggle:push", function(item) {
-      //新增後顯示購物車
-      vm.bagToggle = item;
-    });
-    vm.getCart();
+  created () {
+    const vm = this
+    vm.$bus.$on('cartnum:push', function (num) {
+      // 接收購物車陣列總數//
+      vm.getCartNum(num)
+    })
+    vm.$bus.$on('cartitem:push', function (item) {
+      // 接收購物車資訊//
+      vm.getCartItem(item)
+    })
+    vm.$bus.$on('bagToggle:push', function (item) {
+      // 新增後顯示購物車
+      vm.bagToggle = item
+    })
+    vm.getCart()
   }
-};
+}
 </script>
 
 <style lang="scss">

@@ -17,10 +17,10 @@ import Sidebar from '@/components/admin/Sidebar'
 import Navbar from '@/components/admin/Navbar'
 import Alert from '@/components/admin/AlertMessage'
 export default {
-    components:{
-        Sidebar,
-        Navbar,
-        Alert,
-    }
+  components: {
+    Sidebar,
+    Navbar,
+    Alert
+  }
 }
 </script>

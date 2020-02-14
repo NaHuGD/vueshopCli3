@@ -6,44 +6,43 @@
 
 <script>
 export default {
-  data() {
-    return {};
+  data () {
+    return {}
   },
   methods: {
-    gotopFn() {
-      cancelAnimationFrame(timer);
-      //獲取當前毫秒數
-      let startTime = new Date();
-      //獲取當前頁面滾動高度
-      let b = document.body.scrollTop || document.documentElement.scrollTop;
-      let d = 500;
-      let c = b;
-      let timer = requestAnimationFrame(function func() {
-        let t = d - Math.max(0, startTime - +new Date() + d);
+    gotopFn () {
+      // 獲取當前毫秒數
+      const startTime = new Date()
+      // 獲取當前頁面滾動高度
+      const b = document.body.scrollTop || document.documentElement.scrollTop
+      const d = 500
+      const c = b
+      let timer = requestAnimationFrame(function func () {
+        const t = d - Math.max(0, startTime - +new Date() + d)
         document.documentElement.scrollTop = document.body.scrollTop =
-          (t * -c) / d + b;
-        timer = requestAnimationFrame(func);
-        if (t == d) {
-          cancelAnimationFrame(timer);
+          (t * -c) / d + b
+        timer = requestAnimationFrame(func)
+        if (t === d) {
+          cancelAnimationFrame(timer)
         }
-      });
+      })
     },
-    gotopShow() {
-      window.addEventListener("scroll", function() {
-        let gotop = document.querySelector("#gotop");
+    gotopShow () {
+      window.addEventListener('scroll', function () {
+        const gotop = document.querySelector('#gotop')
         if (document.documentElement.scrollTop > 100) {
-          gotop.style.display = "block";
+          gotop.style.display = 'block'
         } else {
-          gotop.style.display = "none";
+          gotop.style.display = 'none'
         }
-      });
+      })
     }
   },
-  created() {
-    const vm = this;
-    vm.gotopShow();
+  created () {
+    const vm = this
+    vm.gotopShow()
   }
-};
+}
 </script>
 
 <style lang="scss">

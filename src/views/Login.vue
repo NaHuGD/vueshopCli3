@@ -31,34 +31,34 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      isMessage: "",
+      isMessage: '',
       user: {
-        username: "",
-        password: ""
+        username: '',
+        password: ''
       }
-    };
+    }
   },
   methods: {
-    signin() {
-      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`;
-      const vm = this;
+    signin () {
+      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
+      const vm = this
       vm.$http.post(api, vm.user).then(response => {
-        vm.isMessage = response.data.message;
-        console.log(response.data);
+        vm.isMessage = response.data.message
+        // console.log(response.data)
         if (response.data.success) {
-          //帳號登入成功時(true)
-          vm.$router.push("admin/Products"); //將路由導致首頁
+          // 帳號登入成功時(true)
+          vm.$router.push('admin/Products') // 將路由導致首頁
         }
-      });
+      })
     },
-    goBack() {
-      const vm = this;
-      vm.$router.go(-1);
+    goBack () {
+      const vm = this
+      vm.$router.go(-1)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -185,7 +185,7 @@
                   </div>
                   <div class="cardBack">
                     <div class="ccv">{{form.user.card.ccv}}</div>
-                    <img :src="card_bg" alt="信用卡" class="pt-3" />
+                    <img :src="cardBg" alt="信用卡" class="pt-3" />
                   </div>
                 </div>
               </div>
@@ -206,120 +206,120 @@
 </template>
 
 <script>
-import CheckSchedule from "@/components/user/CheckSchedule";
-import card from "@/assets/images/checkout/card_bg.png";
-import card_bg from "@/assets/images/checkout/card_back_bg.png";
+import CheckSchedule from '@/components/user/CheckSchedule'
+import card from '@/assets/images/checkout/card_bg.png'
+import cardBg from '@/assets/images/checkout/card_back_bg.png'
 
 export default {
   components: {
     CheckSchedule
   },
-  data() {
+  data () {
     return {
       card: card,
       products: {},
-      card_bg: card_bg,
+      cardBg: cardBg,
       isLoading: false,
       isFlipped: true,
       form: {
-        //建立對應資料結購
+        // 建立對應資料結購
         user: {
-          name: "",
-          tel: "",
-          email: "",
-          ship: "home",
-          address: "",
-          payMethod: "delivery",
+          name: '',
+          tel: '',
+          email: '',
+          ship: 'home',
+          address: '',
+          payMethod: 'delivery',
           card: {
-            number: "1234-5678-9012-3456",
+            number: '1234-5678-9012-3456',
             date: {
-              month: "",
-              year: ""
+              month: '',
+              year: ''
             },
-            ccv: "556"
+            ccv: '556'
           },
-          nowDate: ""
+          nowDate: ''
         },
-        message: ""
+        message: ''
       }
-    };
+    }
   },
   methods: {
-    getCart() {
-      //取得購物車內容
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
+    getCart () {
+      // 取得購物車內容
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.isLoading = true
       vm.$http.get(url).then(response => {
-        vm.products = response.data.data;
-        vm.$bus.$emit("cartitem:push", response.data.data);
-        vm.isLoading = false;
-        console.log("getCart", response);
-      });
+        vm.products = response.data.data
+        vm.$bus.$emit('cartitem:push', response.data.data)
+        vm.isLoading = false
+        // console.log('getCart', response)
+      })
     },
-    createOrder() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
-      const order = vm.form;
-      let date = new Date();
-      let y = date.getFullYear();
-      let m = date.getMonth();
-      let d = date.getDate();
-      vm.form.user.nowDate = `${y}/${m + 1}/${d}`;
-      vm.isLoading = true;
+    createOrder () {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
+      const order = vm.form
+      const date = new Date()
+      const y = date.getFullYear()
+      const m = date.getMonth()
+      const d = date.getDate()
+      vm.form.user.nowDate = `${y}/${m + 1}/${d}`
+      vm.isLoading = true
       vm.$validator.validate().then(result => {
         if (result) {
-          //email格式正確時發送訂單
+          // email格式正確時發送訂單
           vm.$http.post(url, { data: order }).then(response => {
-            console.log("訂單", response);
+            // console.log('訂單', response)
             if (response.data.success) {
-              console.log("訂單確認建立 導頁至結帳畫面");
-              vm.$router.push(`/confirm/${response.data.orderId}`);
+              // console.log('訂單確認建立 導頁至結帳畫面')
+              vm.$router.push(`/confirm/${response.data.orderId}`)
             } else {
-              alert(response.data.message);
+              alert(response.data.message)
             }
-            vm.isLoading = false;
-          });
+            vm.isLoading = false
+          })
         } else {
           window.scrollTo({
             top: 0,
-            behavior: "smooth"
-          });
-          console.log("欄位不完整");
+            behavior: 'smooth'
+          })
+          // console.log('欄位不完整')
         }
-      });
+      })
     },
-    shipValue() {
-      const vm = this;
-      vm.form.user.ship = document.querySelector("#ship").value;
+    shipValue () {
+      const vm = this
+      vm.form.user.ship = document.querySelector('#ship').value
     },
-    payMethodValue() {
-      const vm = this;
-      vm.form.user.payMethod = document.querySelector("#payMethod").value;
+    payMethodValue () {
+      const vm = this
+      vm.form.user.payMethod = document.querySelector('#payMethod').value
     },
-    cardMonth() {
-      const vm = this;
-      vm.isFlipped = true;
-      vm.form.user.card.date.month = document.querySelector("#cardMonth").value;
+    cardMonth () {
+      const vm = this
+      vm.isFlipped = true
+      vm.form.user.card.date.month = document.querySelector('#cardMonth').value
     },
-    cardYear() {
-      const vm = this;
-      vm.isFlipped = true;
-      vm.form.user.card.date.year = document.querySelector("#cardYear").value;
+    cardYear () {
+      const vm = this
+      vm.isFlipped = true
+      vm.form.user.card.date.year = document.querySelector('#cardYear').value
     }
   },
-  created() {
-    this.getCart();
+  created () {
+    this.getCart()
   },
-  mounted() {
-    document.querySelector(".checkInfo").style = `border:3px solid #8d3742`;
-    document.querySelector(".checkInfo>i").style = `color:#8d3742`;
-    document.querySelector(".checkInfo>p").style = `color:#8d3742`;
+  mounted () {
+    document.querySelector('.checkInfo').style = 'border:3px solid #8d3742'
+    document.querySelector('.checkInfo>i').style = 'color:#8d3742'
+    document.querySelector('.checkInfo>p').style = 'color:#8d3742'
     document
-      .querySelector(".checkSchedule>span")
-      .classList.add("scheduleInfoAnimation");
+      .querySelector('.checkSchedule>span')
+      .classList.add('scheduleInfoAnimation')
   }
-};
+}
 </script>
 
 <style lang="scss" secoped>

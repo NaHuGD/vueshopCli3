@@ -97,81 +97,81 @@
   </div>
 </template>
 <script>
-import CheckSchedule from "@/components/user/CheckSchedule";
-import barcodeImg from "@/assets/images/checkout/barcode.jpg";
+import CheckSchedule from '@/components/user/CheckSchedule'
+import barcodeImg from '@/assets/images/checkout/barcode.jpg'
 
 export default {
   components: {
     CheckSchedule
   },
-  data() {
+  data () {
     return {
       barcodeImg: barcodeImg,
       isLoading: false,
       CartItem: {},
-      coupon_code: "",
-      couponSuccess: "",
-      couponMessage: ""
-    };
+      coupon_code: '',
+      couponSuccess: '',
+      couponMessage: ''
+    }
   },
   methods: {
-    getCart() {
-      //取得購物車內容
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
+    getCart () {
+      // 取得購物車內容
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.isLoading = true
       vm.$http.get(url).then(response => {
-        vm.$bus.$emit("cartitem:push", response.data.data);
-        vm.isLoading = false;
-        console.log("getCart", response);
-      });
+        vm.$bus.$emit('cartitem:push', response.data.data)
+        vm.isLoading = false
+        // console.log('getCart', response)
+      })
     },
-    getCartItem(item) {
-      const vm = this;
-      vm.CartItem = item;
+    getCartItem (item) {
+      const vm = this
+      vm.CartItem = item
     },
-    cartItemDelete(item) {
-      const vm = this;
-      vm.isLoading = true;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`;
+    cartItemDelete (item) {
+      const vm = this
+      vm.isLoading = true
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`
       vm.$http.delete(url).then(response => {
-        vm.getCart();
-        vm.isLoading = false;
-      });
+        vm.getCart()
+        vm.isLoading = false
+      })
     },
-    addCoupons() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
+    addCoupons () {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
       const coupon = {
         code: vm.coupon_code
-      };
-      vm.isLoading = true;
+      }
+      vm.isLoading = true
       vm.$http.post(url, { data: coupon }).then(response => {
-        //套用優惠卷//
-        vm.couponSuccess = response.data.success;
-        vm.couponMessage = response.data.message;
-        vm.getCart();
-        vm.isLoading = false;
-      });
+        // 套用優惠卷//
+        vm.couponSuccess = response.data.success
+        vm.couponMessage = response.data.message
+        vm.getCart()
+        vm.isLoading = false
+      })
     },
-    goCheckOutFn() {
-      const vm = this;
-      vm.$router.push("/checkInfo");
+    goCheckOutFn () {
+      const vm = this
+      vm.$router.push('/checkInfo')
       window.scrollTo({
         top: 0,
-        behavior: "smooth"
-      });
-    },
+        behavior: 'smooth'
+      })
+    }
   },
-  created() {
-    const vm = this;
-    vm.getCart();
-    vm.$bus.$on("cartitem:push", function(item) {
-      //抓取購物車資訊//
-      vm.getCartItem(item);
-    });
+  created () {
+    const vm = this
+    vm.getCart()
+    vm.$bus.$on('cartitem:push', function (item) {
+      // 抓取購物車資訊//
+      vm.getCartItem(item)
+    })
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

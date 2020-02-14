@@ -25,70 +25,69 @@
 </template>
 
 <script>
-import turnBg from "@/assets/images/discount/turn/turnBg.png";
-import turnTable from "@/assets/images/discount/turn/turnTable.png";
+import turnBg from '@/assets/images/discount/turn/turnBg.png'
+import turnTable from '@/assets/images/discount/turn/turnTable.png'
 export default {
-  data() {
+  data () {
     return {
       turnBg: turnBg,
       turnTable: turnTable,
       isPlay: true,
-      isNum: "",
+      isNum: '',
       isAlertBg: false,
-      price: ""
-    };
+      price: ''
+    }
   },
   methods: {
-    playTurn() {
-      const vm = this;
-      let turnTable = document.querySelector(".turnTable");
-      let num = Math.floor(Math.random() * 360);
-      vm.isNum = num + 360;
-      //旋轉角度＋360,至少轉一圈//
+    playTurn () {
+      const vm = this
+      const turnTable = document.querySelector('.turnTable')
+      const num = Math.floor(Math.random() * 360)
+      vm.isNum = num + 360
+      // 旋轉角度＋360,至少轉一圈//
       if (vm.isPlay === true) {
-        turnTable.style.transform = `rotate(${vm.isNum}deg)`;
-        turnTable.style.transition = `5s`;
+        turnTable.style.transform = `rotate(${vm.isNum}deg)`
+        turnTable.style.transition = '5s'
         if (
           (vm.isNum >= 344 && vm.isNum <= 377) ||
           (vm.isNum >= 703 && vm.isNum <= 720)
         ) {
-          vm.price = "70%";
+          vm.price = '70%'
         } else if (
           (vm.isNum >= 378 && vm.isNum <= 489) ||
           (vm.isNum >= 738 && vm.isNum <= 849)
         ) {
-          vm.price = "80%";
+          vm.price = '80%'
         } else if (
           (vm.isNum >= 490 && vm.isNum <= 567) ||
           (vm.isNum >= 850 && vm.isNum <= 927)
         ) {
-          vm.price = "85%";
+          vm.price = '85%'
         } else if (
           (vm.isNum >= 568 && vm.isNum <= 635) ||
           (vm.isNum >= 928 && vm.isNum <= 995)
         ) {
-          vm.price = "90%";
+          vm.price = '90%'
         } else {
-          vm.price = "95%";
+          vm.price = '95%'
         }
         setTimeout(() => {
-          vm.isAlertBg = true;
-        }, 5000);
+          vm.isAlertBg = true
+        }, 5000)
       }
-      vm.isPlay = false;
+      vm.isPlay = false
     },
-    playAgain() {
-      const vm = this;
-      let turnTable = document.querySelector(".turnTable");
-      vm.isPlay = true;
-      turnTable.style.transform = `rotate(0deg)`;
-      turnTable.style.transition = `0s`;
-      vm.isAlertBg = false;
+    playAgain () {
+      const vm = this
+      const turnTable = document.querySelector('.turnTable')
+      vm.isPlay = true
+      turnTable.style.transform = 'rotate(0deg)'
+      turnTable.style.transition = '0s'
+      vm.isAlertBg = false
     }
   }
-};
+}
 </script>
-
 
 <style lang="scss" scoped>
 @import "@/assets/helpers/breakpoint.scss";

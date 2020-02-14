@@ -224,139 +224,139 @@
 </template>
 
 <script>
-import $ from "jquery";
+import $ from 'jquery'
 
 export default {
-  data() {
+  data () {
     return {
       products: [],
-      product: {}, //單一資料存放
+      product: {}, // 單一資料存放
       status: {
-        //判斷畫面哪個元素正在讀取中
-        loadingItem: "" //存放值為產品id
+        // 判斷畫面哪個元素正在讀取中
+        loadingItem: '' // 存放值為產品id
       },
       form: {
-        //建立對應資料結購
+        // 建立對應資料結購
         user: {
-          name: "",
-          email: "",
-          tel: "",
-          address: ""
+          name: '',
+          email: '',
+          tel: '',
+          address: ''
         },
-        message: ""
+        message: ''
       },
       isLoading: false,
-      cart: {}, //存放購物車資料
-      coupon_code: "", //折扣碼
-      couponMessage: "" //優惠碼有無正確資訊
-    };
+      cart: {}, // 存放購物車資料
+      coupon_code: '', // 折扣碼
+      couponMessage: '' // 優惠碼有無正確資訊
+    }
   },
   methods: {
-    getProducts() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=:page`;
-      console.log(url);
-      vm.isLoading = true;
+    getProducts () {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=:page`
+      // console.log(url)
+      vm.isLoading = true
       vm.$http.get(url).then(response => {
-        vm.products = response.data.products;
-        console.log(response);
-        vm.isLoading = false;
-      });
+        vm.products = response.data.products
+        // console.log(response)
+        vm.isLoading = false
+      })
     },
-    getProduct(id) {
-      //查看更多
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
-      vm.status.loadingItem = id;
+    getProduct (id) {
+      // 查看更多
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
+      vm.status.loadingItem = id
       vm.$http.get(url).then(response => {
-        vm.product = response.data.product;
-        $("#productModal").modal("show");
-        console.log("查看更多", response);
-        vm.status.loadingItem = "";
-      });
+        vm.product = response.data.product
+        $('#productModal').modal('show')
+        // console.log('查看更多', response)
+        vm.status.loadingItem = ''
+      })
     },
-    addtoCart(id, qty = 1) {
-      //加入購物車，傳入值預設為1
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.status.loadingItem = id;
+    addtoCart (id, qty = 1) {
+      // 加入購物車，傳入值預設為1
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.status.loadingItem = id
       const cart = {
-        //定義資料結購
+        // 定義資料結購
         product_id: id,
         qty
-      };
+      }
       vm.$http.post(url, { data: cart }).then(response => {
-        console.log("加到購物車", response);
-        vm.status.loadingItem = "";
-        vm.getCart(); //加入後取得購物車資料
-        $("#productModal").modal("hide");
-      });
+        // console.log('加到購物車', response)
+        vm.status.loadingItem = ''
+        vm.getCart() // 加入後取得購物車資料
+        $('#productModal').modal('hide')
+      })
     },
-    getCart() {
-      //取得購物車內容
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      console.log(url);
-      vm.isLoading = true;
+    getCart () {
+      // 取得購物車內容
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      // console.log(url)
+      vm.isLoading = true
       vm.$http.get(url).then(response => {
-        vm.cart = response.data.data;
-        console.log(response);
-        vm.isLoading = false;
-      });
+        vm.cart = response.data.data
+        // console.log(response)
+        vm.isLoading = false
+      })
     },
-    deleteCart(id) {
-      console.log(id);
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-      vm.isLoading = true;
+    deleteCart (id) {
+      // console.log(id)
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
+      vm.isLoading = true
       vm.$http.delete(url).then(response => {
-        console.log("刪除", response.data.message);
-        vm.getCart(); //刪除後取得購物車內容
-        vm.isLoading = false;
-      });
+        // console.log('刪除', response.data.message)
+        vm.getCart() // 刪除後取得購物車內容
+        vm.isLoading = false
+      })
     },
-    addCoupon() {
-      //新增優惠代碼
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
+    addCoupon () {
+      // 新增優惠代碼
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
       const coupon = {
-        code: vm.coupon_code //剛剛宣告的變數
-      };
-      vm.isLoading = true;
+        code: vm.coupon_code // 剛剛宣告的變數
+      }
+      vm.isLoading = true
       vm.$http.post(url, { data: coupon }).then(response => {
-        console.log("優惠卷", response.data);
-        vm.couponMessage = response.data.message;
-        vm.getCart(); //取得購物車內容
-        vm.isLoading = false;
-      });
+        // console.log('優惠卷', response.data)
+        vm.couponMessage = response.data.message
+        vm.getCart() // 取得購物車內容
+        vm.isLoading = false
+      })
     },
-    createOrder() {
-      //創建訂單
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
-      const order = vm.form;
+    createOrder () {
+      // 創建訂單
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
+      const order = vm.form
       // vm.isLoading = true;
       vm.$validator.validate().then(result => {
         if (result) {
-          //email格式正確時發送訂單
+          // email格式正確時發送訂單
           vm.$http.post(url, { data: order }).then(response => {
-            console.log("訂單", response);
+            // console.log('訂單', response)
             if (response.data.success) {
-              //訂單確認建立 導頁至結帳畫面
-              vm.$router.push(`/customer_checkout/${response.data.orderId}`);
+              // 訂單確認建立 導頁至結帳畫面
+              vm.$router.push(`/customer_checkout/${response.data.orderId}`)
             }
-            vm.isLoading = false;
-          });
+            vm.isLoading = false
+          })
         } else {
-          console.log("欄位不完整");
+          // console.log('欄位不完整')
         }
-      });
+      })
     }
   },
-  created() {
-    const vm = this;
-    vm.getProducts();
-    vm.getCart(); //取得購物車
+  created () {
+    const vm = this
+    vm.getProducts()
+    vm.getCart() // 取得購物車
   }
-};
+}
 </script>

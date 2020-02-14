@@ -38,15 +38,14 @@
 
 <script>
 export default {
-  name: "Pagination",
-  props: ["pagination"],
+  name: 'Pagination',
+  props: ['pagination'],
   methods: {
-    getProducts(page) {
-      const vm = this;
-      this.$emit("emitPage", page);
+    getProducts (page) {
+      const vm = this
+      vm.$emit('emitPage', page)
     }
   }
-};
+}
 </script>
 <!--分頁頁數-->
-

@@ -35,26 +35,26 @@
 <script>
 export default {
   // name: "Restaurants",
-  data() {
+  data () {
     return {
       map: null,
       // 預設經緯度在信義區附近
       lat: 25.063891,
       lng: 121.642334
-    };
+    }
   },
   methods: {
     // 建立地圖
-    initMap() {
-      const vm = this;
+    initMap () {
+      const vm = this
       // 透過 Map 物件建構子建立新地圖 map 物件實例，並將地圖呈現在 id 為 map 的元素中
-      vm.map = new google.maps.Map(document.getElementById("map"), {
+      vm.map = new google.maps.Map(document.getElementById('map'), {
         styles: [
           {
-            elementType: "geometry",
+            elementType: 'geometry',
             stylers: [
               {
-                hue: "#ff4400"
+                hue: '#ff4400'
               },
               {
                 saturation: -68
@@ -68,15 +68,15 @@ export default {
             ]
           },
           {
-            featureType: "road",
-            elementType: "labels.icon"
+            featureType: 'road',
+            elementType: 'labels.icon'
           },
           {
-            featureType: "landscape.man_made",
-            elementType: "geometry",
+            featureType: 'landscape.man_made',
+            elementType: 'geometry',
             stylers: [
               {
-                hue: "#0077ff"
+                hue: '#0077ff'
               },
               {
                 gamma: 3.1
@@ -84,10 +84,10 @@ export default {
             ]
           },
           {
-            featureType: "water",
+            featureType: 'water',
             stylers: [
               {
-                hue: "#00ccff"
+                hue: '#00ccff'
               },
               {
                 gamma: 0.44
@@ -98,10 +98,10 @@ export default {
             ]
           },
           {
-            featureType: "poi.park",
+            featureType: 'poi.park',
             stylers: [
               {
-                hue: "#44ff00"
+                hue: '#44ff00'
               },
               {
                 saturation: -23
@@ -109,11 +109,11 @@ export default {
             ]
           },
           {
-            featureType: "water",
-            elementType: "labels.text.fill",
+            featureType: 'water',
+            elementType: 'labels.text.fill',
             stylers: [
               {
-                hue: "#007fff"
+                hue: '#007fff'
               },
               {
                 gamma: 0.77
@@ -127,8 +127,8 @@ export default {
             ]
           },
           {
-            featureType: "water",
-            elementType: "labels.text.stroke",
+            featureType: 'water',
+            elementType: 'labels.text.stroke',
             stylers: [
               {
                 gamma: 0.11
@@ -140,7 +140,7 @@ export default {
                 saturation: 99
               },
               {
-                hue: "#0091ff"
+                hue: '#0091ff'
               },
               {
                 lightness: -86
@@ -148,14 +148,14 @@ export default {
             ]
           },
           {
-            featureType: "transit.line",
-            elementType: "geometry",
+            featureType: 'transit.line',
+            elementType: 'geometry',
             stylers: [
               {
                 lightness: -48
               },
               {
-                hue: "#ff5e00"
+                hue: '#ff5e00'
               },
               {
                 gamma: 1.2
@@ -166,14 +166,14 @@ export default {
             ]
           },
           {
-            featureType: "transit",
-            elementType: "labels.text.stroke",
+            featureType: 'transit',
+            elementType: 'labels.text.stroke',
             stylers: [
               {
                 saturation: -64
               },
               {
-                hue: "#ff9100"
+                hue: '#ff9100'
               },
               {
                 lightness: 16
@@ -199,28 +199,27 @@ export default {
         streetViewControl: false,
         // 設定是否讓使用者可以切換地圖樣式：一般、衛星圖等
         mapTypeControl: false
-      });
+      })
     },
     // 建立地標
-    setMarker() {
-      const vm = this;
+    setMarker () {
+      const vm = this
       // 建立一個新地標
       const marker = new google.maps.Marker({
         // 設定地標的座標
         position: { lat: vm.lat, lng: vm.lng },
         // 設定地標要放在哪一個地圖
         map: vm.map
-      });
+      })
     }
   },
-  mounted() {
-    const vm = this;
-    vm.initMap();
-    vm.setMarker();
+  mounted () {
+    const vm = this
+    vm.initMap()
+    vm.setMarker()
   }
-};
+}
 </script>
-
 
 <style lang="scss" scoped>
 @import "@/assets/helpers/breakpoint.scss";
@@ -288,4 +287,3 @@ export default {
   }
 }
 </style>
-

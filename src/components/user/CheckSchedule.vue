@@ -24,11 +24,11 @@
 
 <script>
 export default {
-  name: "CheckSchedule",
-  data() {
-    return {};
+  name: 'CheckSchedule',
+  data () {
+    return {}
   }
-};
+}
 </script>
 
 <style lang="scss">

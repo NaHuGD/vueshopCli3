@@ -102,12 +102,12 @@
 </template>
 
 <script>
-import CheckSchedule from "@/components/user/CheckSchedule";
+import CheckSchedule from '@/components/user/CheckSchedule'
 export default {
   components: {
     CheckSchedule
   },
-  data() {
+  data () {
     return {
       isLoading: false,
       payingCheck: true,
@@ -117,87 +117,87 @@ export default {
       order: {
         user: {}
       },
-      orderId: "" //取得orderId
-    };
+      orderId: '' // 取得orderId
+    }
   },
   methods: {
-    getOrder() {
-      //取得訂單資料
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
-      console.log(url);
-      vm.isLoading = true;
+    getOrder () {
+      // 取得訂單資料
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`
+      // console.log(url)
+      vm.isLoading = true
       vm.$http.get(url).then(response => {
-        console.log("order", response);
-        vm.order = response.data.order;
-        vm.isLoading = false;
-        vm.payingCheck = !vm.order.is_paid;
-      });
+        // console.log('order', response)
+        vm.order = response.data.order
+        vm.isLoading = false
+        vm.payingCheck = !vm.order.is_paid
+      })
     },
-    paying() {
-      const vm = this;
+    paying () {
+      const vm = this
       if (vm.payingCheck) {
-        const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
-        console.log(url);
-        vm.isLoading = true;
+        const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`
+        // console.log(url)
+        vm.isLoading = true
         vm.$http.post(url).then(response => {
-          console.log("pay", response);
+          // console.log('pay', response)
           if (response.data.success) {
-            //付款完成時
-            vm.getOrder(); //重新取得訂單資料，
+            // 付款完成時
+            vm.getOrder() // 重新取得訂單資料，
           }
-        });
-        document.querySelector(".paying").classList.add("active");
-        vm.isLoading = false;
-        vm.payingCheck = false;
+        })
+        document.querySelector('.paying').classList.add('active')
+        vm.isLoading = false
+        vm.payingCheck = false
       }
       setTimeout(() => {
-        vm.isAlert = true;
-        vm.countFn();
-      }, 1000);
+        vm.isAlert = true
+        vm.countFn()
+      }, 1000)
     },
-    countFn() {
-      const vm = this;
+    countFn () {
+      const vm = this
       if (vm.num === 100) {
-        return false;
+        return false
       } else {
-        let i = setInterval(function(e) {
-          let count = document.querySelector(".count");
+        const i = setInterval(function (e) {
+          const count = document.querySelector('.count')
           if (vm.isAlert === true) {
-            count.innerHTML = `${vm.num + 1}` + `%`;
-            vm.num++;
+            count.innerHTML = `${vm.num + 1}` + '%'
+            vm.num++
             if (vm.num === 100) {
-              clearInterval(i);
-              setTimeout(function() {
-                count.classList.add("countStyle");
-                vm.isIcon = true;
-              }, 600);
+              clearInterval(i)
+              setTimeout(function () {
+                count.classList.add('countStyle')
+                vm.isIcon = true
+              }, 600)
             }
           } else {
-            vm.isIcon = false;
-            clearInterval(i);
+            vm.isIcon = false
+            clearInterval(i)
           }
-        }, 10);
+        }, 10)
       }
     }
   },
-  created() {
-    const vm = this;
-    vm.orderId = this.$route.params.orderId;
-    vm.getOrder();
+  created () {
+    const vm = this
+    vm.orderId = this.$route.params.orderId
+    vm.getOrder()
   },
-  mounted() {
-    document.querySelector(".checkOut").style = `border:3px solid #8d3742;`;
-    document.querySelector(".checkOut>i").style = `color:#8d3742;`;
-    document.querySelector(".checkOut>p").style = `color:#8d3742;`;
-    document.querySelector(".checkInfo").style = `border:3px solid #8d3742;`;
-    document.querySelector(".checkInfo>i").style = `color:#8d3742;`;
-    document.querySelector(".checkInfo>p").style = `color:#8d3742;`;
+  mounted () {
+    document.querySelector('.checkOut').style = 'border:3px solid #8d3742;'
+    document.querySelector('.checkOut>i').style = 'color:#8d3742;'
+    document.querySelector('.checkOut>p').style = 'color:#8d3742;'
+    document.querySelector('.checkInfo').style = 'border:3px solid #8d3742;'
+    document.querySelector('.checkInfo>i').style = 'color:#8d3742;'
+    document.querySelector('.checkInfo>p').style = 'color:#8d3742;'
     document
-      .querySelector(".checkSchedule>span")
-      .classList.add("scheduleConfirmAnimation");
+      .querySelector('.checkSchedule>span')
+      .classList.add('scheduleConfirmAnimation')
   }
-};
+}
 </script>
 
 <style lang="scss" secoped>

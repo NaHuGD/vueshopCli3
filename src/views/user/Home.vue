@@ -26,22 +26,22 @@
       <div class="box2 col-12 col-md-6 p-0">
         <div class="grid1">
           <router-link to="/shop/protective">
-            <img class="p-0" :src="e1_1" alt />
+            <img class="p-0" :src="e1Img01" alt />
           </router-link>
         </div>
         <div class="grid2">
           <router-link to="/shop/protective">
-            <img class="p-0" :src="e1_2" alt />
+            <img class="p-0" :src="e1Img02" alt />
           </router-link>
         </div>
         <div class="grid3">
           <router-link to="/shop/whey">
-            <img class="p-0" :src="e1_3" alt />
+            <img class="p-0" :src="e1Img03" alt />
           </router-link>
         </div>
         <div class="grid4">
           <router-link to="/shop/whey">
-            <img class="p-0" :src="e1_4" alt />
+            <img class="p-0" :src="e1Img04" alt />
           </router-link>
         </div>
       </div>
@@ -98,90 +98,90 @@
 </template>
 
 <script>
-import $ from "jquery";
-import "swiper/dist/css/swiper.css";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
-import banner from "@/assets/images/index/banner.jpg";
-import e1_1 from "@/assets/images/index/e1-1.jpg";
-import e1_2 from "@/assets/images/index/e1-2.jpg";
-import e1_3 from "@/assets/images/index/e1-3.jpg";
-import e1_4 from "@/assets/images/index/e1-4.jpg";
-import e2 from "@/assets/images/index/e2.jpg";
-import e4_1 from "@/assets/images/news/01.jpg";
-import e4_2 from "@/assets/images/news/02.jpg";
-import e4_3 from "@/assets/images/news/03.jpg";
-import e4_4 from "@/assets/images/news/04.jpg";
-import e4_5 from "@/assets/images/news/05.jpg";
+import $ from 'jquery'
+import 'swiper/dist/css/swiper.css'
+// import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import banner from '@/assets/images/index/banner.jpg'
+import e1Img01 from '@/assets/images/index/e1-1.jpg'
+import e1Img02 from '@/assets/images/index/e1-2.jpg'
+import e1Img03 from '@/assets/images/index/e1-3.jpg'
+import e1Img04 from '@/assets/images/index/e1-4.jpg'
+import e2 from '@/assets/images/index/e2.jpg'
+import e4Img01 from '@/assets/images/news/01.jpg'
+import e4Img02 from '@/assets/images/news/02.jpg'
+import e4Img03 from '@/assets/images/news/03.jpg'
+import e4Img04 from '@/assets/images/news/04.jpg'
+import e4Img05 from '@/assets/images/news/05.jpg'
 
 export default {
-  data() {
+  data () {
     return {
       banner: banner,
-      e1_1: e1_1,
-      e1_2: e1_2,
-      e1_3: e1_3,
-      e1_4: e1_4,
+      e1Img01: e1Img01,
+      e1Img02: e1Img02,
+      e1Img03: e1Img03,
+      e1Img04: e1Img04,
       e2: e2,
       swiperNum: [
         {
-          img: e4_1,
-          title: "健身飲食篇",
+          img: e4Img01,
+          title: '健身飲食篇',
           main:
-            "不管你是要減重、增肌或是為了健康,運動後的30分鐘到1小時內,聰明攝取一份,運動後補充一份均衡營養的輕食很重要,內容以碳水化合物與蛋白質的"
+            '不管你是要減重、增肌或是為了健康,運動後的30分鐘到1小時內,聰明攝取一份,運動後補充一份均衡營養的輕食很重要,內容以碳水化合物與蛋白質的'
         },
         {
-          img: e4_2,
-          title: "有氧運動迷失",
+          img: e4Img02,
+          title: '有氧運動迷失',
           main:
-            "提到有氧運動,相信許多人都會想到減肥（減重）,因為有氧運動的確是可以,健身之前要先了解什麼是核心肌"
+            '提到有氧運動,相信許多人都會想到減肥（減重）,因為有氧運動的確是可以,健身之前要先了解什麼是核心肌'
         },
         {
-          img: e4_3,
-          title: "適合老人的運動有哪些？",
+          img: e4Img03,
+          title: '適合老人的運動有哪些？',
           main:
-            "所謂要活就要動,老了也別忘記運動。適合老人的運動類型有3種,包含可提升心肺功能的有氧運動、可強化骨頭和肌肉的肌力訓練,及幫助保"
+            '所謂要活就要動,老了也別忘記運動。適合老人的運動類型有3種,包含可提升心肺功能的有氧運動、可強化骨頭和肌肉的肌力訓練,及幫助保'
         },
         {
-          img: e4_4,
-          title: "吃蛋白棒前要搞清楚的5件事情",
+          img: e4Img04,
+          title: '吃蛋白棒前要搞清楚的5件事情',
           main:
-            "隨著食品加工業的發展,以及人們對營養食品需求的增進,熱愛健康的人群已經不再滿足於簡單的多種維生素以及乳清蛋白粉產品。各類蛋白"
+            '隨著食品加工業的發展,以及人們對營養食品需求的增進,熱愛健康的人群已經不再滿足於簡單的多種維生素以及乳清蛋白粉產品。各類蛋白'
         },
         {
-          img: e4_5,
-          title: "第一次健身就上手",
+          img: e4Img05,
+          title: '第一次健身就上手',
           main:
-            "下一站,我們即將帶領大家走入健身房,提供獨家的「攻略要點」,協助「健身房新手」不再像無頭蒼蠅於健身房裡亂竄"
+            '下一站,我們即將帶領大家走入健身房,提供獨家的「攻略要點」,協助「健身房新手」不再像無頭蒼蠅於健身房裡亂竄'
         }
       ],
-      screenWidth: document.documentElement.clientWidth, //螢幕寬度
+      screenWidth: document.documentElement.clientWidth, // 螢幕寬度
       swiperOption: {
         loop: true,
         loopFillGroupWithBlank: true,
         autoplay: true,
         on: {
-          init: function() {
-            const vm = this;
-            let screenWidth = document.documentElement.clientWidth;
+          init: function () {
+            const vm = this
+            const screenWidth = document.documentElement.clientWidth
             if (screenWidth < 769) {
-              vm.params.slidesPerView = 1;
+              vm.params.slidesPerView = 1
             } else {
-              vm.params.slidesPerView = 3;
+              vm.params.slidesPerView = 3
             }
           },
-          resize: function() {
-            const vm = this;
-            let screenWidth = document.documentElement.clientWidth;
+          resize: function () {
+            const vm = this
+            const screenWidth = document.documentElement.clientWidth
             if (screenWidth < 769) {
-              vm.params.slidesPerView = 1;
+              vm.params.slidesPerView = 1
             } else {
-              vm.params.slidesPerView = 3;
+              vm.params.slidesPerView = 3
             }
           }
         },
         navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
         },
         slidesPerView: 3,
         spaceBetween: 10,
@@ -190,20 +190,19 @@ export default {
         observeParents: true
       },
       isOpacityActive: false
-    };
+    }
   },
   methods: {
-    nextStepFn() {
-      let bannerHeight = document.querySelector("#banner").clientHeight;
-      $("html, body").animate(
+    nextStepFn () {
+      $('html, body').animate(
         {
-          scrollTop: $(".event01").offset().top
+          scrollTop: $('.event01').offset().top
         },
         1000
-      );
+      )
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

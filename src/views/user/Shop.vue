@@ -87,133 +87,133 @@
 </template>
 
 <script>
-import $ from "jquery";
+// import $ from 'jquery'
 
 export default {
-  data() {
+  data () {
     return {
       isLoading: false,
       isLike: false,
       products: [],
-      isMenuActive: "全部商品",
-      searchId: "",
+      isMenuActive: '全部商品',
+      searchId: '',
       likeData: []
-    };
+    }
   },
   methods: {
-    getProducts(page = 1) {
-      //取得api資料
-      const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      vm.isLoading = true; //讀取資料時開起
+    getProducts (page = 1) {
+      // 取得api資料
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      vm.isLoading = true // 讀取資料時開起
       vm.$http.get(api).then(response => {
-        vm.products = response.data.products;
-        vm.isLoading = false; //完成後關閉loading功能
-      });
+        vm.products = response.data.products
+        vm.isLoading = false // 完成後關閉loading功能
+      })
     },
-    getAll() {
-      const vm = this;
-      vm.$router.push(`/shop/all`);
+    getAll () {
+      const vm = this
+      vm.$router.push('/shop/all')
     },
-    getProtective() {
-      const vm = this;
-      vm.$router.push(`/shop/protective`);
+    getProtective () {
+      const vm = this
+      vm.$router.push('/shop/protective')
     },
-    getWhey() {
-      const vm = this;
-      vm.$router.push(`/shop/whey`);
+    getWhey () {
+      const vm = this
+      vm.$router.push('/shop/whey')
     },
-    getLike() {
-      const vm = this;
-      vm.$router.push(`/shop/like`);
+    getLike () {
+      const vm = this
+      vm.$router.push('/shop/like')
     },
-    goInside(id) {
-      const vm = this;
-      vm.$router.push(`/shop_inside/${id}`);
+    goInside (id) {
+      const vm = this
+      vm.$router.push(`/shop_inside/${id}`)
       window.scrollTo({
         top: 0,
-        behavior: "smooth"
-      });
+        behavior: 'smooth'
+      })
     },
-    getLocalData() {
-      const vm = this;
-      vm.likeData = JSON.parse(localStorage.getItem("likeData")) || [];
+    getLocalData () {
+      const vm = this
+      vm.likeData = JSON.parse(localStorage.getItem('likeData')) || []
     },
-    getIfLocalData(item) {
-      const vm = this;
-      return vm.likeData.some(function(ele) {
-        return item.id === ele.id;
-      });
+    getIfLocalData (item) {
+      const vm = this
+      return vm.likeData.some(function (ele) {
+        return item.id === ele.id
+      })
     },
-    addLike(item) {
-      const vm = this;
+    addLike (item) {
+      const vm = this
       const likeArr = {
         title: item.title,
         id: item.id
-      };
-      vm.likeData.push(likeArr);
-      localStorage.setItem("likeData", JSON.stringify(vm.likeData));
+      }
+      vm.likeData.push(likeArr)
+      localStorage.setItem('likeData', JSON.stringify(vm.likeData))
     },
-    removeLike(item) {
-      const vm = this;
-      const num = vm.likeData.findIndex(function(ele) {
-        return ele.id === item.id;
-      });
-      vm.likeData.splice(num, 1);
-      localStorage.setItem("likeData", JSON.stringify(vm.likeData));
-      //更新localstrage資料//
+    removeLike (item) {
+      const vm = this
+      const num = vm.likeData.findIndex(function (ele) {
+        return ele.id === item.id
+      })
+      vm.likeData.splice(num, 1)
+      localStorage.setItem('likeData', JSON.stringify(vm.likeData))
+      // 更新localstrage資料//
     }
   },
   computed: {
-    filteredProducts() {
-      const vm = this;
-      const routeName = vm.$route.name;
-      let filtered = "";
-      //判斷網頁顯示內容//
-      if (routeName === "All") {
-        vm.isMenuActive = "全部商品";
-        return vm.products;
-      } else if (routeName === "Protective") {
-        vm.isMenuActive = "健身護具";
-        filtered = vm.products.filter(function(item) {
-          return item.category === "護具";
-        });
-        return filtered;
-      } else if (routeName === "Whey") {
-        vm.isMenuActive = "優質乳清";
-        filtered = vm.products.filter(function(item) {
-          return item.category === "乳清";
-        });
-        return filtered;
-      } else if (routeName === "Like") {
-        const vm = this;
-        vm.isMenuActive = "最愛商品";
-        filtered = vm.products.filter(function(item, index, arr) {
-          return vm.likeData.some(function(ele) {
-            return item.id === ele.id;
-          });
-        });
-        return filtered;
+    filteredProducts () {
+      const vm = this
+      const routeName = vm.$route.name
+      let filtered = ''
+      // 判斷網頁顯示內容//
+      if (routeName === 'All') {
+        vm.isMenuActive = '全部商品'
+        return vm.products
+      } else if (routeName === 'Protective') {
+        vm.isMenuActive = '健身護具'
+        filtered = vm.products.filter(function (item) {
+          return item.category === '護具'
+        })
+        return filtered
+      } else if (routeName === 'Whey') {
+        vm.isMenuActive = '優質乳清'
+        filtered = vm.products.filter(function (item) {
+          return item.category === '乳清'
+        })
+        return filtered
+      } else if (routeName === 'Like') {
+        const vm = this
+        vm.isMenuActive = '最愛商品'
+        filtered = vm.products.filter(function (item, index, arr) {
+          return vm.likeData.some(function (ele) {
+            return item.id === ele.id
+          })
+        })
+        return filtered
       } else {
-        //搜尋//
-        filtered = vm.products.filter(function(item) {
-          return item.title.includes(vm.searchId);
-        });
-        vm.isMenuActive = `查詢有關"${vm.searchId}"的結果`;
-        return filtered;
+        // 搜尋//
+        filtered = vm.products.filter(function (item) {
+          return item.title.includes(vm.searchId)
+        })
+        vm.isMenuActive = `查詢有關"${vm.searchId}"的結果`
+        return filtered
       }
     }
   },
-  created() {
-    const vm = this;
-    vm.searchId = vm.$route.params.id;
-    vm.getProducts();
-    vm.getLocalData();
-    vm.$bus.$on("searchId:push", value => {
-      vm.searchId = value;
-    });
+  created () {
+    const vm = this
+    vm.searchId = vm.$route.params.id
+    vm.getProducts()
+    vm.getLocalData()
+    vm.$bus.$on('searchId:push', value => {
+      vm.searchId = value
+    })
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -387,8 +387,10 @@ export default {
       top: 50%;
       right: 5%;
       font-size: 1.3rem;
-      @include mobile() {
-        top: 70%;
+      @include iphoneX() {
+        position: sticky;
+        float: left;
+        margin-top: 0.8rem;
       }
     }
     .pdname {
@@ -428,6 +430,9 @@ export default {
       text-align: center;
       padding: 15px;
       border: 2px solid #fff;
+      @include iphone5(){
+        padding:10px;
+      }
     }
   }
   .soldOutStyle {

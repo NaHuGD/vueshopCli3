@@ -58,47 +58,47 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       order: {
         user: {}
       },
-      orderId: "" //取得orderId
-    };
-  },
-  methods: {
-    getOrder() {
-      //取得訂單資料
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
-      console.log(url);
-      vm.isLoading = true;
-      vm.$http.get(url).then(response => {
-        vm.order = response.data.order;
-        console.log(response);
-        vm.isLoading = false;
-      });
-    },
-    payOrder() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
-      console.log(url);
-      vm.isLoading = true;
-      vm.$http.post(url).then(response => {
-        console.log(response);
-        if (response.data.success) {
-          //付款完成時
-          vm.getOrder(); //重新取得訂單資料，
-        }
-        vm.isLoading = false;
-      });
+      orderId: '' // 取得orderId
     }
   },
-  created() {
-    const vm = this;
-    vm.orderId = vm.$route.params.orderId; //取得網址參數
-    vm.getOrder();
-    console.log("取得網址ID", vm.orderId);
+  methods: {
+    getOrder () {
+      // 取得訂單資料
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`
+      // console.log(url)
+      vm.isLoading = true
+      vm.$http.get(url).then(response => {
+        vm.order = response.data.order
+        // console.log(response)
+        vm.isLoading = false
+      })
+    },
+    payOrder () {
+      const vm = this
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`
+      // console.log(url)
+      vm.isLoading = true
+      vm.$http.post(url).then(response => {
+        // console.log(response)
+        if (response.data.success) {
+          // 付款完成時
+          vm.getOrder() // 重新取得訂單資料，
+        }
+        vm.isLoading = false
+      })
+    }
+  },
+  created () {
+    const vm = this
+    vm.orderId = vm.$route.params.orderId // 取得網址參數
+    vm.getOrder()
+    // console.log('取得網址ID', vm.orderId)
   }
-};
+}
 </script>
