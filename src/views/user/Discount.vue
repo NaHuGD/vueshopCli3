@@ -22,11 +22,12 @@
             <p>本次活動最高享有</p>
             <p>70%</p>
             <p>折扣</p>
+            <img :src="barcodeImg" alt />
           </div>
         </div>
       </div>
     </router-link>
-    <router-link to="" class="box row">
+    <router-link to class="box row">
       <div class="icon col-3">
         <img :src="iconImg_2" alt="game_photo" ondragstart="return false" />
       </div>
@@ -44,6 +45,7 @@
             <p>本次活動最高享有</p>
             <p>XX%</p>
             <p>折扣</p>
+            <img :src="barcodeImg" alt />
           </div>
         </div>
       </div>
@@ -57,12 +59,13 @@
 <script>
 import iconImg_1 from "@/assets/images/discount/turn/turnTable.png";
 import iconImg_2 from "@/assets/images/discount/scratch/pop.png";
-
+import barcodeImg from "@/assets/images/checkout/barcode.jpg";
 export default {
   data() {
     return {
       iconImg_1: iconImg_1,
-      iconImg_2: iconImg_2
+      iconImg_2: iconImg_2,
+      barcodeImg: barcodeImg
     };
   },
   methods: {
@@ -200,6 +203,7 @@ export default {
           }
         }
         div:nth-child(2) {
+          text-align: center;
           @include mobile() {
             max-width: 100%;
             flex: 0 0 100%;
@@ -228,6 +232,16 @@ export default {
             display: inline;
             opacity: 0.7;
           }
+          & > img {
+            display: block;
+            padding-top: 0.5rem;
+            width: 90%;
+            height: auto;
+            margin: 0 auto;
+            @include mobile() {
+              width: 60%;
+            }
+          }
         }
       }
     }
@@ -243,15 +257,15 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color:#fff;
-      font-size:3rem;
+      color: #fff;
+      font-size: 3rem;
       font-weight: bold;
-      padding:1rem;
-      border:3px solid #fff;
-      @include pad(){
-        font-size:1.5rem;
+      padding: 1rem;
+      border: 3px solid #fff;
+      @include pad() {
+        font-size: 1.5rem;
       }
-      @include mobile(){
+      @include mobile() {
         font-size: 1rem;
       }
     }

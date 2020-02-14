@@ -143,8 +143,6 @@ export default {
       text-align: center;
       display: block;
     }
-    & > p:nth-child(2) {
-    }
     & > p:nth-child(3) {
       color: $color-red;
       font-size: 4rem;

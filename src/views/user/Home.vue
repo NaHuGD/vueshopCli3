@@ -4,6 +4,13 @@
       <router-link to="shop/protective">
         <img :src="banner" alt="健人嚴選" />
       </router-link>
+      <div class="info">
+        <div>
+          <p>凱力健人嚴選Kaiz</p>
+          <p>致力於打造最好的健身產品</p>
+          <router-link to="/discount">點擊領取優惠序號</router-link>
+        </div>
+      </div>
       <span class="nextStep" @click.prevent="nextStepFn">
         <i class="fa fa-angle-double-down" aria-hidden="true"></i>
       </span>
@@ -215,120 +222,175 @@ export default {
       width: 100%;
       height: 100%;
     }
-    .nextStep {
-      cursor: pointer;
-      display: inline-block;
+    .info {
       position: absolute;
-      bottom: 10px;
+      top: 50%;
       left: 50%;
-      transform: translatex(-50%);
-      color: #fff;
-      font-size: 2.5rem;
-      animation-name: nextStep;
-      animation-duration: 2s;
-      animation-iteration-count: infinite;
-      animation-timing-function: cubic-bezier(0.5, 0.5, 0.5, 0.5);
-    }
-  }
-  @keyframes nextStep {
-    0% {
-      bottom: 10px;
-    }
-    25% {
-      bottom: 5px;
-    }
-    50% {
-      bottom: 10px;
-    }
-    75% {
-      bottom: 15px;
-    }
-    100% {
-      bottom: 10px;
-    }
-  }
-  .event01 {
-    padding: 0;
-    margin: 0;
-    vertical-align: top;
-    align-items: center;
-    img {
-      width: 100%;
-      height: 100%;
-    }
-    .box1 {
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      padding: 100px;
-      @include desktop() {
-        padding: 50px;
-      }
-      @include pad() {
-        height: 375px;
-      }
-      @include md() {
-        padding: 20px;
-      }
-      & > div:nth-child(1) {
-        @include pad {
-          transform: translateY(25%);
-        }
-        .h3 {
-          font-family: "Dancing Script";
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      & > div {
+        background: rgba(255, 255, 255, 0.8);
+        margin: 10px;
+        padding: 10px;
+        animation-name: bannerAnimate;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(0.5, 0.5, 0.5, 0.5);
+        & > p {
           font-weight: bold;
-          transform: skewY(-10deg);
+          &:nth-child(1) {
+            white-space: nowrap;
+            font-size: 2rem;
+            padding: 8px 0;
+            @include pad() {
+              font-size: 1.5rem;
+            }
+          }
+          &:nth-child(2) {
+            font-size: 1.5rem;
+            @include pad() {
+              font-size: 1rem;
+            }
+          }
         }
-        & > p:nth-child(3) {
-          line-height: 1.5rem;
-          text-align: justify;
-          overflow: hidden;
-          width: 100%;
-          display: -webkit-box;
-          -webkit-line-clamp: 7;
-          -webkit-box-orient: vertical;
-          @include pad {
-            -webkit-line-clamp: 5;
+        & > a {
+          display: block;
+          font-weight: bold;
+          text-decoration: none;
+          color: black;
+          text-align: center;
+          padding: 8px 0;
+          &:hover {
+            opacity: 0.7;
           }
         }
       }
     }
-    .box2 {
-      display: grid;
-      .grid1 {
-        filter: brightness(0.7);
-        grid-column: 1;
-        grid-column-end: 2;
-        grid-row-start: 1;
-        grid-row-end: 2;
+  }
+  .nextStep {
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translatex(-50%);
+    color: #fff;
+    font-size: 2.5rem;
+    animation-name: nextStep;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.5, 0.5, 0.5, 0.5);
+  }
+}
+@keyframes nextStep {
+  0% {
+    bottom: 10px;
+  }
+  25% {
+    bottom: 5px;
+  }
+  50% {
+    bottom: 10px;
+  }
+  75% {
+    bottom: 15px;
+  }
+  100% {
+    bottom: 10px;
+  }
+}
+@keyframes bannerAnimate {
+  0% {
+    margin: 10px;
+  }
+  50% {
+    margin: 15px;
+  }
+  100% {
+    margin: 10px;
+  }
+}
+.event01 {
+  padding: 0;
+  margin: 0;
+  vertical-align: top;
+  align-items: center;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  .box1 {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 100px;
+    @include desktop() {
+      padding: 50px;
+    }
+    @include pad() {
+      height: 375px;
+    }
+    @include md() {
+      padding: 20px;
+    }
+    & > div:nth-child(1) {
+      @include pad {
+        transform: translateY(25%);
       }
-      .grid2 {
-        grid-column-start: 2;
-        grid-column-end: 3;
-        grid-row-start: 1;
-        grid-row-end: 2;
+      .h3 {
+        font-family: "Dancing Script";
+        font-weight: bold;
+        transform: skewY(-10deg);
       }
-      .grid3 {
-        grid-column-start: 1;
-        grid-column-end: 2;
-        grid-row-start: 2;
-        grid-row-end: 3;
-      }
-      .grid4 {
-        filter: brightness(0.7);
-        grid-column-start: 2;
-        grid-column-end: 3;
-        grid-row-start: 2;
-        grid-row-end: 3;
-      }
-      & > div[class^="grid"] {
+      & > p:nth-child(3) {
+        line-height: 1.5rem;
+        text-align: justify;
         overflow: hidden;
-        & > a {
-          & > img {
-            transition: 1s ease;
-            &:hover {
-              transform: scale(1.05);
-            }
+        width: 100%;
+        display: -webkit-box;
+        -webkit-line-clamp: 7;
+        -webkit-box-orient: vertical;
+        @include pad {
+          -webkit-line-clamp: 5;
+        }
+      }
+    }
+  }
+  .box2 {
+    display: grid;
+    .grid1 {
+      filter: brightness(0.7);
+      grid-column: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+    .grid2 {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+    .grid3 {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+    .grid4 {
+      filter: brightness(0.7);
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+    & > div[class^="grid"] {
+      overflow: hidden;
+      & > a {
+        & > img {
+          transition: 1s ease;
+          &:hover {
+            transform: scale(1.05);
           }
         }
       }
