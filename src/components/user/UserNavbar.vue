@@ -512,7 +512,6 @@ export default {
       width: 100%;
       @include mobile() {
         letter-spacing: 1px;
-        font-size: 0.5rem;
       }
     }
   }

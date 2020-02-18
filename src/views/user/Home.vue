@@ -79,10 +79,7 @@
           <router-link to="/news">
             <div
               class="bgImg"
-              :class="{'opacityActive': isOpacityActive}"
               :style="{backgroundImage:`url(${slide.img})`}"
-              @mouseover.prevent="isOpacityActive = true"
-              @mouseout="isOpacityActive = false"
             ></div>
             <div class="info">
               <p class="font-weight-bold h5">{{slide.title}}</p>
@@ -100,7 +97,6 @@
 <script>
 import $ from 'jquery'
 import 'swiper/dist/css/swiper.css'
-// import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import banner from '@/assets/images/index/banner.jpg'
 import e1Img01 from '@/assets/images/index/e1-1.jpg'
 import e1Img02 from '@/assets/images/index/e1-2.jpg'
@@ -163,7 +159,7 @@ export default {
           init: function () {
             const vm = this
             const screenWidth = document.documentElement.clientWidth
-            if (screenWidth < 769) {
+            if (screenWidth <= 769) {
               vm.params.slidesPerView = 1
             } else {
               vm.params.slidesPerView = 3
@@ -172,7 +168,7 @@ export default {
           resize: function () {
             const vm = this
             const screenWidth = document.documentElement.clientWidth
-            if (screenWidth < 769) {
+            if (screenWidth <= 769) {
               vm.params.slidesPerView = 1
             } else {
               vm.params.slidesPerView = 3
@@ -188,8 +184,7 @@ export default {
         slidesPerGroup: 1,
         observer: true,
         observeParents: true
-      },
-      isOpacityActive: false
+      }
     }
   },
   methods: {
@@ -554,6 +549,9 @@ export default {
       height: 100%;
       width: 100%;
       background: $color-bg;
+      &:hover{
+        opacity: 0.5;
+      }
       .bgImg {
         background-repeat: no-repeat;
         height: 400px;
@@ -585,9 +583,6 @@ export default {
         }
       }
     }
-  }
-  .opacityActive {
-    opacity: 0.5;
   }
   .swiper-button-prev,
   .swiper-button-next {

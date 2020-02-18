@@ -13,6 +13,7 @@ import 'bootstrap'
 import 'font-awesome/css/font-awesome.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
+import 'eslint-loader/index'
 
 import './bus'
 import './fadein'
