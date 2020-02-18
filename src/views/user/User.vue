@@ -13,6 +13,7 @@
 import UserNavbar from '@/components/user/UserNavbar'
 import UserGotop from '@/components/user/UserGotop'
 import UserFooter from '@/components/user/UserFooter'
+
 export default {
   components: {
     UserNavbar,
