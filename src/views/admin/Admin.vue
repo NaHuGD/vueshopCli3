@@ -15,12 +15,12 @@
 <script>
 import Sidebar from '@/components/admin/Sidebar'
 import Navbar from '@/components/admin/Navbar'
-import Alert from '@/components/admin/AlertMessage'
+// import Alert from '@/components/admin/AlertMessage'
 export default {
   components: {
     Sidebar,
-    Navbar,
-    Alert
+    Navbar
+    // Alert
   }
 }
 </script>

@@ -1,9 +1,9 @@
 <template>
-  <footer id="footer">
+  <footer class="footer">
     <div class="info row">
       <div class="contact col-sm-5">
         <span>凱力位置</span>
-        <div id="map"></div>
+        <div class="map"></div>
       </div>
       <div class="about col-sm-4 py-sm-0 py-3">
         <span>關於凱力</span>
@@ -49,7 +49,7 @@ export default {
       const vm = this
       // 透過 Map 物件建構子建立新地圖 map 物件實例，並將地圖呈現在 id 為 map 的元素中
       // eslint-disable-next-line no-undef
-      vm.map = new google.maps.Map(document.getElementById('map'), {
+      vm.map = new google.maps.Map(document.querySelector('.map'), {
         styles: [
           {
             elementType: 'geometry',
@@ -224,8 +224,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/helpers/breakpoint.scss";
-#footer {
+@import "@/assets/scss/helpers/breakpoint.scss";
+.footer {
   background: $color-black;
   position: relative;
   z-index: 0;
@@ -245,7 +245,7 @@ export default {
     }
   }
   .contact {
-    #map {
+    .map {
       margin: 20px 0;
       width: 100%;
       max-width: 900px;

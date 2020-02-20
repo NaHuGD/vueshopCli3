@@ -377,7 +377,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/helpers/breakpoint.scss";
+@import "@/assets/scss/helpers/breakpoint.scss";
 .modal-content {
   background: $color-bg;
 }

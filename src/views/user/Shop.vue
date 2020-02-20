@@ -1,5 +1,5 @@
 <template>
-  <div id="shop" class="pt150">
+  <div class="shop pt150">
     <loading :active.sync="isLoading"></loading>
     <div class="row container m-auto">
       <div class="menuList col-md">
@@ -207,10 +207,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/helpers/breakpoint.scss";
+@import "@/assets/scss/helpers/breakpoint.scss";
 
 /*shop*/
-#shop {
+.shop {
   .menuList {
     @include pad() {
       display: none;

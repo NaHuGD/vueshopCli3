@@ -1,12 +1,12 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
-    <header id="header" :class="{'bgTransparent':menuBgFn}">
+    <header class="header" :class="{'bgTransparent':menuBgFn}">
       <div class="inner">
         <router-link to="/home" class="logo" alt="首頁">
           <h1>Kai ZBB</h1>
         </router-link>
-        <nav id="nav">
+        <nav class="nav">
           <button
             @click.prevent="goShop"
             :class="{'menuActive':isMenuActive === '商品列表',menuActiveFn}"
@@ -32,7 +32,7 @@
         <i :class="{'iconActive':!bagToggle}" class="fa fa-shopping-cart"></i>
         <span>{{ cart.carts.length }}</span>
       </a>
-      <div id="headerBagInfo" :class="{'bagActive':bagToggle}">
+      <div class="headerBagInfo" :class="{'bagActive':bagToggle}">
         <div class="bagBgActive"></div>
         <div class="text-center mb-3" v-if="cart.carts === ''">您的購物車是空的</div>
         <div v-if="cart.carts">
@@ -66,7 +66,7 @@
       <label for="inSearch" @click="isSearch = !isSearch" class="headerSearch">
         <i :class="{'iconActive':isSearch}" class="fa fa-search"></i>
       </label>
-      <div id="search" v-if="isSearch">
+      <div class="search" v-if="isSearch">
         <input
           id="inSearch"
           type="text"
@@ -81,7 +81,7 @@
       <div :class="{'bgActive':isSearch,}" @click.prevent="isSearch = !isSearch"></div>
     </div>
     <div :class="{'navMobBg':isMobNav,}" @click.prevent="mobNavFn"></div>
-    <nav id="navMob" :class="{'active':isMobNav}">
+    <nav class="navMob" :class="{'active':isMobNav}">
       <div class="logo">
         <span>KizZ BB</span>
         <span></span>
@@ -105,7 +105,7 @@
       <button class="close" @click.prevent="mobNavFn">
         <i class="fa fa-times"></i>
       </button>
-      <div id="footer">
+      <div class="footer">
         <button>About</button>
         <button>Event</button>
         <button>FAQs</button>
@@ -236,12 +236,12 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/helpers/breakpoint.scss";
+@import "@/assets/scss/helpers/breakpoint.scss";
 
 .bgTransparent {
   background: transparent !important;
 }
-#header {
+.header {
   position: fixed;
   background: $color-black;
   width: 100%;
@@ -274,7 +274,7 @@ export default {
         font-size: 1.5em;
       }
     }
-    #nav {
+    .nav {
       position: absolute;
       top: 0;
       right: 50%;
@@ -337,7 +337,7 @@ export default {
   .headerBag {
     z-index: 511;
   }
-  #headerBagInfo {
+  .headerBagInfo {
     z-index: 511;
   }
 }
@@ -399,7 +399,7 @@ export default {
 .bagActive {
   display: none;
 }
-#headerBagInfo {
+.headerBagInfo {
   position: fixed;
   top: 6%;
   right: 5%;
@@ -498,7 +498,7 @@ export default {
   .headerSearch {
     z-index: 511;
   }
-  #search {
+  .search {
     z-index: 511;
   }
 }
@@ -530,7 +530,7 @@ export default {
     margin-right: 0;
   }
 }
-#search {
+.search {
   white-space: nowrap;
   position: fixed;
   top: 50%;
@@ -563,7 +563,7 @@ export default {
     }
   }
 }
-#navMob {
+.navMob {
   &.active {
     transform: translateX(0%);
   }
@@ -642,7 +642,7 @@ export default {
   @include mobile() {
     min-width: 80%;
   }
-  #footer {
+  .footer {
     color: $color-darkGray;
     position: absolute;
     bottom: 10px;

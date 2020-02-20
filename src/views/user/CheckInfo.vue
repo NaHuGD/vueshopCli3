@@ -1,7 +1,7 @@
 <template>
   <div>
     <CheckSchedule />
-    <div id="checkInfo" class="row">
+    <div class="checkInfoMain row">
       <div class="col-12 col-md-4 pb-3">
         <div class="mainleft">
           <p class="h4 py-3">購物清單：</p>
@@ -305,9 +305,9 @@ export default {
 </script>
 
 <style lang="scss" secoped>
-@import "@/assets/helpers/breakpoint.scss";
+@import "@/assets/scss/helpers/breakpoint.scss";
 
-#checkInfo {
+.checkInfoMain {
   color: $color-darkGray;
   width: 70%;
   position: relative;

@@ -30,7 +30,7 @@ export default {
           message: '訊息內容',
           // 樣式
           status: 'danger',
-          // id
+          // 資訊
           timestamp: '123'
         }
       ]

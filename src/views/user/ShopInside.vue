@@ -1,5 +1,5 @@
 <template>
-  <div id="shopInside" class="pt150">
+  <div class="shopInside pt150">
     <loading :active.sync="isLoading"></loading>
     <div>
       <div>
@@ -263,9 +263,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/helpers/breakpoint.scss";
+@import "@/assets/scss/helpers/breakpoint.scss";
 /*shopInside*/
-#shopInside {
+.shopInside {
   max-width: 80%;
   margin: 0 auto;
   img {

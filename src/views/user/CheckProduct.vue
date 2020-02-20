@@ -2,7 +2,7 @@
   <div>
     <CheckSchedule />
     <loading :active.sync="isLoading"></loading>
-    <div id="checkProduct" v-if="cart.carts != ''" class="main row col-10 py-3">
+    <div class="checkProduct main row col-10 py-3" v-if="cart.carts != ''">
       <div class="col-md-8 p-0 pr-md-3">
         <table class="bagTitle">
           <tr class="row">
@@ -159,5 +159,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/helpers/breakpoint.scss";
+@import "@/assets/scss/helpers/breakpoint.scss";
 </style>

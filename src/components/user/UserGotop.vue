@@ -1,5 +1,5 @@
 <template>
-  <div id="gotop" @click.prevent="gotopFn">
+  <div class="gotop" @click.prevent="gotopFn">
     <i class="fa fa-arrow-up"></i>
   </div>
 </template>
@@ -29,7 +29,7 @@ export default {
     },
     gotopShow () {
       window.addEventListener('scroll', function () {
-        const gotop = document.querySelector('#gotop')
+        const gotop = document.querySelector('.gotop')
         if (document.documentElement.scrollTop > 100) {
           gotop.style.display = 'block'
         } else {
@@ -46,9 +46,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/helpers/breakpoint.scss";
+@import "@/assets/scss/helpers/breakpoint.scss";
 
-#gotop {
+.gotop {
   cursor: pointer;
   position: fixed;
   bottom: 0;

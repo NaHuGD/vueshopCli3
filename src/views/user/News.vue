@@ -1,5 +1,5 @@
 <template>
-  <div id="news" class="pt150">
+  <div class="news pt150">
     <div class="row m-0 p-0">
       <div class="box col-12 col-md-6">
         <img :src="newImg1" alt />
@@ -73,9 +73,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/helpers/breakpoint.scss";
+@import "@/assets/scss/helpers/breakpoint.scss";
 
-#news {
+.news {
   max-width: 1200px;
   margin: 0 auto 1rem auto;
   .box {

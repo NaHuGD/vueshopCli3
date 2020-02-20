@@ -1,5 +1,5 @@
 <template>
-  <div id="discount" class="pt150 px-3">
+  <div class="discount pt150 px-3">
     <div class="pb-3 mb-3 title">
       <p>優惠活動</p>
       <p class="pt-3">點擊下方票卡即可進入遊戲區領取優惠碼</p>
@@ -80,12 +80,12 @@ export default {
 </script>
 
 <style lang="scss" second>
-@import "@/assets/helpers/breakpoint.scss";
+@import "@/assets/scss/helpers/breakpoint.scss";
 @mixin fontBold {
   font-family: impact;
 }
 
-#discount {
+.discount {
   max-width: 1024px;
   margin: 0 auto;
   .title {

@@ -1,6 +1,6 @@
 <template>
-  <div id="home" class>
-    <div id="banner">
+  <div class="home">
+    <div class="banner">
       <router-link to="shop/protective">
         <img :src="banner" alt="健人嚴選" />
       </router-link>
@@ -202,13 +202,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/helpers/breakpoint.scss";
+@import "@/assets/scss/helpers/breakpoint.scss";
 
-#home {
+.home {
   img {
     vertical-align: bottom;
   }
-  #banner {
+  .banner {
     width: 100%;
     height: 100%;
     vertical-align: bottom;

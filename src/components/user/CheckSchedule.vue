@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/helpers/breakpoint.scss";
+@import "@/assets/scss/helpers/breakpoint.scss";
 .scheduleInfoAnimation {
   animation-name: scheduleInfo;
   animation-iteration-count: infinite;

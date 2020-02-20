@@ -4,7 +4,7 @@
       <p class="h3">歡樂大轉盤</p>
       <p>點擊下方圖片轉動唱盤,獲取折扣碼</p>
     </div>
-    <div id="turn">
+    <div class="turn">
       <img class="turnBg" :src="turnBg" ondragstart="return false;" @click.prevent="playTurn" />
       <img class="turnTable" :src="turnTable" ondragstart="return false;" />
     </div>
@@ -90,8 +90,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/helpers/breakpoint.scss";
-#turn {
+@import "@/assets/scss/helpers/breakpoint.scss";
+.turn {
   position: relative;
   max-width: 1107px;
   width: 100%;

@@ -4,7 +4,7 @@
     <CheckSchedule />
     <form @submit.prevent="paying">
       <div class="mx-auto mb-4 col col-sm-8">
-        <div id="Confirm">
+        <div class="Confirm">
           <div class="row p-2 py-md-4">
             <span class="col-12 col-md-6 pb-2 pb-md-0">
               <p>訂購人:{{order.user.name}}</p>
@@ -86,7 +86,7 @@
         </div>
       </div>
     </form>
-    <div id="checkOutAlert" v-if="isAlert === true" @click.prevent="isAlert = false">
+    <div class="checkOutAlert" v-if="isAlert === true" @click.prevent="isAlert = false">
       <div class="info">
         <span class="text-success">
           <i class="fa fa-check-circle-o" v-if="isIcon"></i>
@@ -198,9 +198,9 @@ export default {
 </script>
 
 <style lang="scss" secoped>
-@import "@/assets/helpers/breakpoint.scss";
+@import "@/assets/scss/helpers/breakpoint.scss";
 
-#Confirm {
+.Confirm {
   box-shadow: 0px 1px 3px 1px $color-bgActive;
   padding: 15px;
   border-radius: 8px 8px 0 0;
@@ -280,7 +280,7 @@ export default {
     }
   }
 }
-#checkOutAlert {
+.checkOutAlert {
   z-index: 510;
   position: fixed;
   top: 0;

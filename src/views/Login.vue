@@ -1,5 +1,5 @@
 <template>
-  <div id="login">
+  <div class="login">
     <form class="form-signin" @submit.prevent="signin">
       <h1 class="h3 mb-3 font-weight-normal">KaizBB會員登入</h1>
       <label for="inputEmail" class="sr-only">Email address</label>
@@ -61,8 +61,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/helpers/breakpoint.scss";
-#login {
+@import "@/assets/scss/helpers/breakpoint.scss";
+.login {
   background: $color-bg;
   height: 100vh;
 }
