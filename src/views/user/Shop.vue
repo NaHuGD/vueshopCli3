@@ -160,37 +160,37 @@ export default {
       const routeName = vm.$route.name
       let filtered = ''
       // 判斷網頁顯示內容
-      if (routeName === 'All') {
-        vm.isMenuActive = '全部商品'
-        return vm.products
-      } else if (routeName === 'Protective') {
-        vm.isMenuActive = '健身護具'
-        filtered = vm.products.filter(function (item) {
-          return item.category === '護具'
-        })
-        return filtered
-      } else if (routeName === 'Whey') {
-        vm.isMenuActive = '優質乳清'
-        filtered = vm.products.filter(function (item) {
-          return item.category === '乳清'
-        })
-        return filtered
-      } else if (routeName === 'Like') {
-        const vm = this
-        vm.isMenuActive = '最愛商品'
-        filtered = vm.products.filter(function (item, index, arr) {
-          return vm.likeData.some(function (ele) {
-            return item.id === ele.id
+      switch (routeName) {
+        case 'All':
+          vm.isMenuActive = '全部商品'
+          return vm.products
+        case 'Protective':
+          vm.isMenuActive = '健身護具'
+          filtered = vm.products.filter(function (item) {
+            return item.category === '護具'
           })
-        })
-        return filtered
-      } else {
-        // 搜尋
-        filtered = vm.products.filter(function (item) {
-          return item.title.includes(vm.searchId)
-        })
-        vm.isMenuActive = `查詢有關"${vm.searchId}"的結果`
-        return filtered
+          return filtered
+        case 'Whey':
+          vm.isMenuActive = '優質乳清'
+          filtered = vm.products.filter(function (item) {
+            return item.category === '乳清'
+          })
+          return filtered
+        case 'Like' :
+          vm.isMenuActive = '最愛商品'
+          filtered = vm.products.filter(function (item, index, arr) {
+            return vm.likeData.some(function (ele) {
+              return item.id === ele.id
+            })
+          })
+          return filtered
+        default:
+          // 搜尋
+          filtered = vm.products.filter(function (item) {
+            return item.title.includes(vm.searchId)
+          })
+          vm.isMenuActive = `查詢有關"${vm.searchId}"的結果`
+          return filtered
       }
     }
   },

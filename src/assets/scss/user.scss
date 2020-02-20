@@ -166,6 +166,12 @@ body {
     padding-top: 100px !important;
   }
 }
+.pt100 {
+  padding-top: 100px !important;
+  @include pad() {
+    padding-top: 75px !important;
+  }
+}
 .pointer {
   cursor: pointer !important;
 }
@@ -229,11 +235,16 @@ body {
     filter: blur(1px);
   }
 }
-/*checkout*/
+/*checkProduct*/
+.checkProduct {
+  width: 80%;
+  margin: 0 auto;
+  @include mobile() {
+    width: 100%;
+  }
+}
 .main {
-  margin: 0 auto 3rem auto;
-  width: 100%;
-  position: relative;
+  // position: relative;
   box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.4);
   @include lg() {
   }
@@ -387,7 +398,7 @@ body {
     color: #fff;
     display: block;
     padding: 5% 0;
-    transition: 0.3s;
+    transition: 0.4s;
     &:hover {
       opacity: 0.7;
     }

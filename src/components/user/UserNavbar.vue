@@ -30,11 +30,11 @@
       <div :class="{'bagBg':bagToggle === false}" @click.prevent="bagToggle = true"></div>
       <a class="headerBag" @click.prevent="bagToggle = !bagToggle">
         <i :class="{'iconActive':!bagToggle}" class="fa fa-shopping-cart"></i>
-        <span>{{ cart.carts.length }}</span>
+        <span v-if="cart.carts.length >= 1">{{ cart.carts.length }}</span>
       </a>
       <div class="headerBagInfo" :class="{'bagActive':bagToggle}">
         <div class="bagBgActive"></div>
-        <div class="text-center mb-3" v-if="cart.carts === ''">您的購物車是空的</div>
+        <div class="text-center mb-3" v-if="cart.carts.length < 1">您的購物車是空的</div>
         <div v-if="cart.carts">
           <div class="bagItem" v-for="item in cart.carts" :key="item.id">
             <div>
@@ -54,11 +54,12 @@
           </div>
         </div>
         <div class="bagPrice">
-          <div>
+          <div v-if="cart.carts.length >= 1">
             <p class="d-inline-block">NTD.</p>
             <p class="d-inline-block">{{cart.total | currency }}</p>
           </div>
-          <button class="d-block" @click.prevent="goCheckProduct">查看購物車</button>
+          <button class="d-block" @click.prevent="goCheckProduct" v-if="cart.carts.length < 1">前往去購物</button>
+          <button class="d-block" @click.prevent="goCheckProduct" v-else>查看購物車</button>
         </div>
       </div>
     </div>
@@ -106,9 +107,9 @@
         <i class="fa fa-times"></i>
       </button>
       <div class="footer">
-        <button>About</button>
-        <button>Event</button>
-        <button>FAQs</button>
+        <button>關於我們</button>
+        <button>最新訊息</button>
+        <button>常見QA</button>
       </div>
     </nav>
   </div>
@@ -182,14 +183,17 @@ export default {
     },
     goCheckProduct () {
       const vm = this
-      vm.bagToggle = true
-      vm.$router.push({
-        path: '/checkProduct'
-      })
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      })
+      if (vm.$store.state.cart.carts.length >= 1) {
+        vm.bagToggle = true
+        vm.$router.push({
+          path: '/checkProduct'
+        })
+      } else {
+        vm.bagToggle = true
+        vm.$router.push({
+          path: '/shop/all'
+        })
+      }
     }
   },
   computed: {
@@ -408,23 +412,9 @@ export default {
   border-radius: 6px;
   overflow-y: auto;
   max-height: 450px;
-  padding: 15px 1rem 10px 1rem;
+  padding: 1.2rem;
   @include mobile() {
     top: 7%;
-  }
-  &::before {
-    content: "";
-    width: 0;
-    position: absolute;
-    border-bottom: 20px solid #fff;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    top: 1%;
-    transform: translateY(-100%);
-    right: 5%;
-    @include mobile() {
-      right: 0%;
-    }
   }
   .animateOut {
     transform: translateX(-100px);
@@ -433,8 +423,8 @@ export default {
   .bagItem {
     padding: 5px;
     margin-bottom: 5%;
-    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.4);
     transition: 2s ease;
+    border-bottom: 1px solid $color-gray;
     .cartItemDelete {
       cursor: pointer;
       position: absolute;
@@ -449,7 +439,7 @@ export default {
       & > div {
         position: relative;
         padding-left: 5%;
-        width:180px;
+        width: 180px;
         & > p {
           overflow: hidden;
           white-space: nowrap;
@@ -474,8 +464,7 @@ export default {
   }
   .bagPrice {
     div {
-      border-top: 1px solid rgba(0, 0, 0, 0.2);
-      padding: 1rem 0 0.5rem 0;
+      padding-bottom: 5%;
       p:nth-child(2) {
         float: right;
         font-weight: bold;

@@ -1,14 +1,14 @@
 <template>
   <footer class="footer">
     <div class="info row">
-      <div class="contact col-sm-5">
+      <div class="contact col-sm">
         <span>凱力位置</span>
         <div class="map"></div>
       </div>
-      <div class="about col-sm-4 py-sm-0 py-3">
+      <div class="about col-sm py-sm-0 py-3">
         <span>關於凱力</span>
         <div>
-          <p>隨著健身產業的新興,全民的健身意識抬頭,到健身房報到已經成了不少人每天的必須行程,凱力健人嚴選致力於打造運動夥伴們最優質的健身護具,及品質最高的乳清蛋白,讓運動夥伴們可以專心訓練,由凱力做最強大的後盾與你們一同成長.</p>
+          <p>凱力健人嚴選致力於打造最優質的健身護具，及品質最高的乳清蛋白，讓運動夥伴們可以專心訓練，由凱力做最強的後盾。 </p>
         </div>
       </div>
       <div class="follow col-sm-3 p-sm">

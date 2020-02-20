@@ -1,208 +1,209 @@
 <template>
   <div>
     <CheckSchedule />
-    <div class="checkInfoMain row">
-      <div class="col-12 col-md-4 pb-3">
-        <div class="mainleft">
-          <p class="h4 py-3">購物清單：</p>
-          <div class="py-2 row bagInfo" v-for="(item, key) in products.carts" :key="key">
-            <div class="d-inline-block p-0 col">
-              <p class="pb-1">{{ item.product.title }}</p>
-              <p class="pb-1">{{ item.size }}</p>
-              <p class="pb-1">價格:{{ item.product.price | currency }}</p>
-              <p class="pb-1">數量: {{ item.qty }}</p>
+    <div class="container">
+      <div class="checkInfoMain row">
+        <div class="col-12 col-md-5 pb-3">
+          <div class="mainleft">
+            <p class="h4 py-3">購物清單：</p>
+            <div class="py-2 row bagInfo" v-for="(item, key) in products.carts" :key="key">
+              <img :src="item.product.imageUrl" :alt="item.product.title" class="pr-md-0 col-5" />
+              <div class="d-inline col pr-md-0">
+                <p class="pb-1">{{ item.product.title }}</p>
+                <p class="pb-1">{{ item.size }}</p>
+                <p class="pb-1">價格:{{ item.product.price | currency }}</p>
+                <p class="pb-1">數量: {{ item.qty }}</p>
+              </div>
             </div>
-            <img :src="item.product.imageUrl" :alt="item.product.title" class="p-0 col-3" />
+            <div class="h6 total">總價(含運):{{ products.total + 80 | currency }}</div>
           </div>
-          <div class="h6 total">總價(含運):{{ products.total + 80 | currency }}</div>
         </div>
-      </div>
-      <form @submit.prevent="createOrder" class="col-12 col-md">
-        <div class="mainInfo">
-          <h4 class="h4 py-3">訂購資料</h4>
-          <div>
-            <label for="userName" class="py-3">收件人姓名*</label>
-            <input
-              placeholder="姓名"
-              type="text"
-              id="userName"
-              name="name"
-              class="col form-control"
-              :class="{'is-invalid':errors.has('name'),'inputBorder':!errors.has('name')}"
-              v-model="form.user.name"
-              v-validate="'required'"
-            />
-            <span class="text-danger mt-2 d-block" v-if="errors.has('name')">請輸入姓名*</span>
-          </div>
-          <div>
-            <label for="userPhone" class="py-3">收件人手機*</label>
-            <input
-              placeholder="號碼"
-              type="tel"
-              onkeyup="value=value.replace(/[^\d]/g,'') "
-              id="userPhone"
-              name="tel"
-              class="col form-control"
-              :class="{'is-invalid':errors.has('tel'),'inputBorder':!errors.has('tel')}"
-              v-model="form.user.tel"
-              v-validate="'required|digits:10'"
-            />
-            <span class="text-danger mt-2 d-block" v-if="errors.has('tel')">請輸入手機10碼</span>
-          </div>
+        <form @submit.prevent="createOrder" class="col-12 col-md">
+          <div class="mainInfo">
+            <h4 class="h4 py-3">訂購資料</h4>
+            <div>
+              <label for="userName" class="py-3">收件人姓名*</label>
+              <input
+                placeholder="姓名"
+                type="text"
+                id="userName"
+                name="name"
+                class="col form-control"
+                :class="{'is-invalid':errors.has('name'),'inputBorder':!errors.has('name')}"
+                v-model="form.user.name"
+                v-validate="'required'"
+              />
+              <span class="text-danger mt-2 d-block" v-if="errors.has('name')">請輸入姓名*</span>
+            </div>
+            <div>
+              <label for="userPhone" class="py-3">收件人手機*</label>
+              <input
+                placeholder="號碼"
+                type="tel"
+                onkeyup="value=value.replace(/[^\d]/g,'') "
+                id="userPhone"
+                name="tel"
+                class="col form-control"
+                :class="{'is-invalid':errors.has('tel'),'inputBorder':!errors.has('tel')}"
+                v-model="form.user.tel"
+                v-validate="'required|digits:10'"
+              />
+              <span class="text-danger mt-2 d-block" v-if="errors.has('tel')">請輸入手機10碼</span>
+            </div>
 
-          <div>
-            <label for="userEmail" class="py-3">聯絡信箱*</label>
-            <input
-              placeholder="Email"
-              type="email"
-              id="userEmail"
-              name="email"
-              class="form-control"
-              :class="{'is-invalid':errors.has('email'),'inputBorder':!errors.has('email')}"
-              v-validate="'required|email'"
-            />
-            <span class="text-danger mt-2 d-block" v-if="errors.has('email')">請輸入正確格式Email</span>
-          </div>
-          <div>
-            <label class="py-3">運送方式*</label>
-            <select class="form-control" id="ship" v-model="form.user.ship">
-              <option value="home">宅配到府</option>
-              <option value="fm">全家門市取貨服務</option>
-              <option value="711">7-11門市取貨服務</option>
-            </select>
-          </div>
-          <div>
-            <div v-if="form.user.ship==='home'">
-              <label for="address" class="py-3">收件人地址*</label>
+            <div>
+              <label for="userEmail" class="py-3">聯絡信箱*</label>
               <input
-                id="address"
-                name="address"
-                type="text"
+                placeholder="Email"
+                type="email"
+                id="userEmail"
+                name="email"
                 class="form-control"
-                :class="{'is-invalid':errors.has('address'),'inputBorder':!errors.has('address')}"
-                placeholder="請輸入收件人地址"
-                v-validate="'required'"
-                v-model="form.user.address"
+                :class="{'is-invalid':errors.has('email'),'inputBorder':!errors.has('email')}"
+                v-validate="'required|email'"
               />
+              <span class="text-danger mt-2 d-block" v-if="errors.has('email')">請輸入正確格式Email</span>
             </div>
-            <div v-if="form.user.ship==='fm'">
-              <label for="address" class="py-3">全家超商門市*</label>
-              <input
-                id="address"
-                name="address"
-                type="text"
-                class="form-control"
-                :class="{'is-invalid':errors.has('address'),'inputBorder':!errors.has('address')}"
-                placeholder="全家門市地址"
-                v-validate="'required'"
-                v-model="form.user.address"
-              />
+            <div>
+              <label class="py-3">運送方式*</label>
+              <select class="form-control" id="ship" v-model="form.user.ship">
+                <option value="home">宅配到府</option>
+                <option value="fm">全家門市取貨服務</option>
+                <option value="711">7-11門市取貨服務</option>
+              </select>
             </div>
-            <div v-if="form.user.ship==='711'">
-              <label for="address" class="py-3">711超商門市*</label>
-              <input
-                id="address"
-                name="address"
-                type="text"
-                class="form-control"
-                :class="{'is-invalid':errors.has('address'),'inputBorder':!errors.has('address')}"
-                placeholder="711門市地址"
-                v-validate="'required'"
-                v-model="form.user.address"
-              />
+            <div>
+              <div v-if="form.user.ship==='home'">
+                <label for="address" class="py-3">收件人地址*</label>
+                <input
+                  id="address"
+                  name="address"
+                  type="text"
+                  class="form-control"
+                  :class="{'is-invalid':errors.has('address'),'inputBorder':!errors.has('address')}"
+                  placeholder="請輸入收件人地址"
+                  v-validate="'required'"
+                  v-model="form.user.address"
+                />
+              </div>
+              <div v-if="form.user.ship==='fm'">
+                <label for="address" class="py-3">全家超商門市*</label>
+                <input
+                  id="address"
+                  name="address"
+                  type="text"
+                  class="form-control"
+                  :class="{'is-invalid':errors.has('address'),'inputBorder':!errors.has('address')}"
+                  placeholder="全家門市地址"
+                  v-validate="'required'"
+                  v-model="form.user.address"
+                />
+              </div>
+              <div v-if="form.user.ship==='711'">
+                <label for="address" class="py-3">711超商門市*</label>
+                <input
+                  id="address"
+                  name="address"
+                  type="text"
+                  class="form-control"
+                  :class="{'is-invalid':errors.has('address'),'inputBorder':!errors.has('address')}"
+                  placeholder="711門市地址"
+                  v-validate="'required'"
+                  v-model="form.user.address"
+                />
+              </div>
+              <span class="text-danger mt-2 d-block" v-if="errors.has('address')">請輸入正確地址</span>
             </div>
-            <span class="text-danger mt-2 d-block" v-if="errors.has('address')">請輸入正確地址</span>
-          </div>
-          <div>
-            <label class="py-3">付款方式*</label>
-            <select class="form-control" id="payMethod" v-model="form.user.payMethod">
-              <option value="delivery">貨到付款</option>
-              <option value="credit">信用卡付款</option>
-            </select>
-          </div>
-          <div v-if="form.user.payMethod === 'credit'">
-            <div class="row align-items-center">
-              <div class="col-12">
-                <div class="py-2">
-                  <label for class="pb-2 col px-0">信用卡卡號:</label>
-                  <input
-                    type="text"
-                    class="inputBorder col"
-                    placeholder="請輸入十六位數值之信用卡卡號"
-                    name
-                    v-model="form.user.card.number"
-                    @focus.prevent="isFlipped = true"
-                  />
-                </div>
-                <div class="py-2">
-                  <label for class="pb-2 col px-0">卡片到期日:</label>
-                  <div class="row px-3">
-                    <select
-                      class="form-control col mr-1"
-                      id="cardMonth"
-                      v-model="form.user.card.date.month"
+            <div>
+              <label class="py-3">付款方式*</label>
+              <select class="form-control" id="payMethod" v-model="form.user.payMethod">
+                <option value="delivery">貨到付款</option>
+                <option value="credit">信用卡付款</option>
+              </select>
+            </div>
+            <div v-if="form.user.payMethod === 'credit'">
+              <div class="row align-items-center">
+                <div class="col-12">
+                  <div class="py-2">
+                    <label for class="pb-2 col px-0">信用卡卡號*</label>
+                    <input
+                      type="text"
+                      class="inputBorder col"
+                      placeholder="請輸入十六位數值之信用卡卡號"
+                      name
+                      v-model="form.user.card.number"
                       @focus.prevent="isFlipped = true"
-                    >
-                      <option value selected disabled>月份</option>
-                      <option value="01">一月</option>
-                      <option value="02">二月</option>
-                      <option value="03">三月</option>
-                      <option value="04">四月</option>
-                      <option value="05">五月</option>
-                      <option value="06">六月</option>
-                      <option value="07">七月</option>
-                      <option value="08">八月</option>
-                      <option value="09">九月</option>
-                      <option value="10">十月</option>
-                      <option value="11">十一月</option>
-                      <option value="12">十二月</option>
-                    </select>
-                    <select class="form-control col" id="cardYear"
-                      v-model="form.user.card.date.year"
-                      @focus.prevent="isFlipped = true"
-                    >
-                      <option value selected disabled>年分</option>
-                      <option :value="2018+item" v-for="(item,key) in 15" :key="key">{{2018+item}}</option>
-                    </select>
+                    />
+                  </div>
+                  <div class="py-2">
+                    <label for class="pb-2 col px-0">卡片到期日*</label>
+                    <div class="row px-3">
+                      <select
+                        class="form-control col mr-1"
+                        id="cardMonth"
+                        v-model="form.user.card.date.month"
+                        @focus.prevent="isFlipped = true"
+                      >
+                        <option value selected disabled>月份</option>
+                        <option value="01">一月</option>
+                        <option value="02">二月</option>
+                        <option value="03">三月</option>
+                        <option value="04">四月</option>
+                        <option value="05">五月</option>
+                        <option value="06">六月</option>
+                        <option value="07">七月</option>
+                        <option value="08">八月</option>
+                        <option value="09">九月</option>
+                        <option value="10">十月</option>
+                        <option value="11">十一月</option>
+                        <option value="12">十二月</option>
+                      </select>
+                      <select
+                        class="form-control col"
+                        id="cardYear"
+                        v-model="form.user.card.date.year"
+                        @focus.prevent="isFlipped = true"
+                      >
+                        <option value selected disabled>年分</option>
+                        <option :value="2018+item" v-for="(item,key) in 15" :key="key">{{2018+item}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="py-2">
+                    <label for class="pb-2 col px-0">卡片檢查碼*</label>
+                    <input
+                      type="text"
+                      class="inputBorder col"
+                      placeholder="卡片背面後三碼"
+                      maxlength="3"
+                      v-model="form.user.card.ccv"
+                      @focus.prevent="isFlipped = false"
+                    />
                   </div>
                 </div>
-                <div class="py-2">
-                  <label for class="pb-2 col px-0">卡片檢查碼:</label>
-                  <input
-                    type="text"
-                    class="inputBorder col"
-                    placeholder="卡片背面後三碼"
-                    maxlength="3"
-                    v-model="form.user.card.ccv"
-                    @focus.prevent="isFlipped = false"
-                  />
+                <div class="col-12">
+                  <div class="indexCard" :class="{'rotateBack':isFlipped === false}">
+                    <div class="cardFront">
+                      <div class="number">{{form.user.card.number}}</div>
+                      <div class="date">{{form.user.card.date.month}}/{{form.user.card.date.year}}</div>
+                      <img :src="card" alt="信用卡" class="pt-3" />
+                    </div>
+                    <div class="cardBack">
+                      <div class="ccv">{{form.user.card.ccv}}</div>
+                      <img :src="cardBg" alt="信用卡" class="pt-3" />
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-12">
-                <div class="indexCard" :class="{'rotateBack':isFlipped === false}">
-                  <div class="cardFront">
-                    <div class="number">{{form.user.card.number}}</div>
-                    <div class="date">{{form.user.card.date.month}}/{{form.user.card.date.year}}</div>
-                    <img :src="card" alt="信用卡" class="pt-3" />
-                  </div>
-                  <div class="cardBack">
-                    <div class="ccv">{{form.user.card.ccv}}</div>
-                    <img :src="cardBg" alt="信用卡" class="pt-3" />
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
-        </div>
-        <div class="mainInfo my-3 col-12 col-md">
-          <label for="comment" class="py-3">備註</label>
-          <textarea class="col-12 mt-1" id="comment"></textarea>
-        </div>
-        <button class="CheckOut mb-4">
-          前往結帳
-          <i class="fa fa-arrow-right"></i>
-        </button>
-      </form>
+          <div class="mainInfo my-3 col-12 col-md">
+            <label for="comment" class="py-3">備註</label>
+            <textarea class="col-12 mt-1" id="comment"></textarea>
+          </div>
+          <button class="CheckOut mb-4">前往結帳</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -309,19 +310,17 @@ export default {
 
 .checkInfoMain {
   color: $color-darkGray;
-  width: 70%;
   position: relative;
+  width: 80%;
   margin: 0 auto;
-  @include pad() {
-    width: 90%;
+  @include mobile() {
+    width: 100%;
   }
   .mainleft {
-    box-shadow: 0px 1px 3px 1px $color-bgActive;
-    background: #fff;
-    padding: 18px;
+    background: #f3f3f3;
+    padding: 15px;
     .bagInfo {
       align-items: center;
-      padding: 0 18px;
       & > div {
         p {
           white-space: nowrap;
@@ -342,9 +341,8 @@ export default {
     h4 {
       font-weight: bold;
     }
-    background: #fff;
+    background: #f3f3f3;
     padding: 18px;
-    box-shadow: 0px 1px 3px 1px $color-bgActive;
     .inputBorder,
     select {
       border: 1px solid $color-darkGray;
@@ -446,6 +444,8 @@ export default {
     }
   }
   .CheckOut {
+    width: 100%;
+    max-width: 205px;
     cursor: pointer;
     font-weight: bold;
     display: block;
@@ -458,14 +458,8 @@ export default {
     animation-iteration-count: infinite;
     animation-duration: 1.5s;
     transition: 0.4s;
-    i {
-      transition: 0.4s;
-    }
-    @include mobile() {
-      width: 100%;
-    }
-    @include pad() {
-      width: 100%;
+    &:hover {
+      opacity: 0.7;
     }
   }
   @keyframes buttonStyle {
@@ -523,11 +517,6 @@ export default {
         #235a55 70%,
         #235a558c 0
       );
-    }
-  }
-  .CheckOut:hover {
-    i {
-      transform: translateX(10px);
     }
   }
 }

@@ -7,7 +7,7 @@
       <div class="info">
         <div>
           <p>凱力健人嚴選Kaiz</p>
-          <p>致力於打造最好的健身產品</p>
+          <p class="py-2">致力於打造最好的健身產品</p>
           <router-link to="/discount">點擊領取優惠序號</router-link>
         </div>
       </div>
@@ -20,7 +20,7 @@
         <div class="fadein">
           <p class="h3">Kaiz Quality</p>
           <p class="font-weight-bold py-4 my-md-4">凱力品管保證</p>
-          <p>凱力於商品生產過程時,便有超過國家安全標準的多項安全把關,對所有商品都出貨前皆會進行尺寸、瑕疵抽樣檢驗,為的就是讓喜愛我們品牌的忠實粉絲們能夠拿到完美零瑕疵的商品,也歡迎所有收到商品瑕疵的客人像凱力回報,凱力將無條件全額補償退費.</p>
+          <p>凱力於商品生產過程時，便有超過國家安全標準的多項安全把關，對所有商品都出貨前皆會進行尺寸、瑕疵抽樣檢驗，為的就是讓喜愛我們品牌的忠實粉絲們能夠拿到完美零瑕疵的商品，也歡迎所有收到商品瑕疵的客人像凱力回報，凱力將無條件全額補償退費。</p>
         </div>
       </div>
       <div class="box2 col-12 col-md-6 p-0">
@@ -56,7 +56,7 @@
         <div class="fadein">
           <p class="h3">Kaiz Protein</p>
           <p class="font-weight-bold py-4 my-md-4">凱力高蛋白</p>
-          <p>凱力高蛋白,蛋白質含量適中,且含有多種其他營養素,即使沒有進行重訓,平時也可當作代餐食用,讓身體在節食過程中維持正常代謝。凱力專為亞洲人體質量身打造運動補給品。完全不含大豆蛋白並且經過「減乳糖加工程序」,再加上木瓜酵素幫助身體消化蛋白質,有助減少脹氣機率。除了蛋白質之外成分中還含有維生素A、D、E與B群,提供均衡的營養攝取。</p>
+          <p>凱力高蛋白，蛋白質含量適中，且含有多種其他營養素，即使沒有進行重訓，平時也可當作代餐食用，讓身體在節食過程中維持正常代謝。凱力專為亞洲人體質量身打造運動補給品。完全不含大豆蛋白並且經過「減乳糖加工程序」，再加上木瓜酵素幫助身體消化蛋白質，有助減少脹氣機率。除了蛋白質之外成分中還含有維生素A、D、E與B群，提供均衡的營養攝取。</p>
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@
           <p class="py-4 my-md-4 font-weight-bold">凱力理念</p>
           <p
             class="my-md-4"
-          >隨著健身產業的新興,全民的健身意識抬頭,到健身房報到已經成了不少人每天的必須行程,凱力健人嚴選致力於提供運動夥伴們最優質的健身護具,及品質最高的乳清蛋白,讓運動夥伴們可以專心訓練,由凱力做最強大的後盾與你們一同成長.</p>
+          >隨著健身產業的新興，全民的健身意識抬頭，到健身房報到已經成了不少人每天的必須行程，凱力健人嚴選致力於提供運動夥伴們最優質的健身護具，及品質最高的乳清蛋白，讓運動夥伴們可以專心訓練，由凱力做最強大的後盾與你們一同成長.</p>
           <p>KaizBB</p>
         </div>
       </div>
@@ -77,10 +77,7 @@
       <swiper :options="swiperOption" class="swiper">
         <swiper-slide class="box" v-for="(slide,index) in swiperNum" :key="index">
           <router-link to="/news">
-            <div
-              class="bgImg"
-              :style="{backgroundImage:`url(${slide.img})`}"
-            ></div>
+            <div class="bgImg" :style="{backgroundImage:`url(${slide.img})`}"></div>
             <div class="info">
               <p class="font-weight-bold h5">{{slide.title}}</p>
               <p>{{slide.main}}</p>
@@ -216,6 +213,7 @@ export default {
     img {
       width: 100%;
       height: 100%;
+      max-height: 610px;
     }
     .info {
       position: absolute;
@@ -226,11 +224,17 @@ export default {
       & > div {
         background: rgba(255, 255, 255, 0.8);
         margin: 10px;
-        padding: 10px;
+        padding: 40px;
         animation-name: bannerAnimate;
         animation-duration: 2s;
         animation-iteration-count: infinite;
         animation-timing-function: cubic-bezier(0.5, 0.5, 0.5, 0.5);
+        @include pad() {
+          padding: 30px;
+        }
+        @include mobile() {
+          padding: 10px;
+        }
         & > p {
           font-weight: bold;
           &:nth-child(1) {
@@ -252,7 +256,7 @@ export default {
           display: block;
           font-weight: bold;
           text-decoration: none;
-          color: black;
+          color: #8d3742;
           text-align: center;
           padding: 8px 0;
           &:hover {
@@ -320,7 +324,7 @@ export default {
     text-align: center;
     padding: 100px;
     @include desktop() {
-      padding: 50px;
+      padding: 0 50px;
     }
     @include pad() {
       height: 375px;
@@ -409,7 +413,7 @@ export default {
     text-align: center;
     padding: 100px;
     @include desktop() {
-      padding: 50px;
+      padding: 0 50px;
     }
     @include pad() {
       height: 375px;
@@ -487,7 +491,7 @@ export default {
       overflow: hidden;
       padding: 100px;
       @include desktop() {
-        padding: 50px;
+        padding: 0 50px;
       }
       @include md() {
         height: 50%;
@@ -541,7 +545,7 @@ export default {
     }
   }
   .swiper {
-    margin: 0 50px;
+    margin: 0;
     cursor: pointer;
     @include mobile() {
       margin: 0 10px;
@@ -550,7 +554,7 @@ export default {
       height: 100%;
       width: 100%;
       background: $color-bg;
-      &:hover{
+      &:hover {
         opacity: 0.5;
       }
       .bgImg {

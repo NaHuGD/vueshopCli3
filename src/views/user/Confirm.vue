@@ -3,7 +3,7 @@
     <loading :active.sync="isLoading"></loading>
     <CheckSchedule />
     <form @submit.prevent="paying">
-      <div class="mx-auto mb-4 col col-sm-8">
+      <div class="mx-auto mb-4 container">
         <div class="Confirm">
           <div class="row p-2 py-md-4">
             <span class="col-12 col-md-6 pb-2 pb-md-0">
@@ -201,9 +201,15 @@ export default {
 @import "@/assets/scss/helpers/breakpoint.scss";
 
 .Confirm {
+  position: relative;
   box-shadow: 0px 1px 3px 1px $color-bgActive;
   padding: 15px;
   border-radius: 8px 8px 0 0;
+  width: 80%;
+  margin: 0 auto;
+  @include mobile() {
+    width: 100%;
+  }
   .product,
   .info,
   .total {
@@ -299,6 +305,9 @@ export default {
     width: 100%;
     padding: 15px 0;
     background: #fff;
+    @include mobile() {
+      max-width: 300px;
+    }
     & > span:nth-child(1) {
       padding: 10px 30px;
       font-size: 5rem;
@@ -312,7 +321,7 @@ export default {
     & > .count {
       display: block;
       text-align: center;
-      color: $color-red;
+      color: $color-darkRed;
       font-size: 3rem;
       padding: 5px 0;
       font-family: impact;
@@ -321,13 +330,15 @@ export default {
       margin: 20px auto 0 auto;
       padding: 10px 0;
       width: 90%;
-      background: $color-red;
+      background: $color-darkRed;
+      color: white;
     }
     & > button:nth-child(5) {
       margin: 20px auto 0 auto;
       padding: 10px 0;
       width: 90%;
-      background: $color-gray;
+      background: $color-darkGray;
+      color: white;
     }
   }
 }

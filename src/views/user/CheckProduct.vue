@@ -2,96 +2,98 @@
   <div>
     <CheckSchedule />
     <loading :active.sync="isLoading"></loading>
-    <div class="checkProduct main row col-10 py-3" v-if="cart.carts != ''">
-      <div class="col-md-8 p-0 pr-md-3">
-        <table class="bagTitle">
-          <tr class="row">
-            <th>品名</th>
-            <th>尺寸/口味</th>
-            <th>數量</th>
-            <th>單價</th>
-            <th>刪除</th>
-          </tr>
-        </table>
-        <table
-          class="bagInfo"
-          :class="{'sale':couponSuccess}"
-          v-for="(item,key) in cart.carts"
-          :key="key"
-        >
-          <tr class="row">
-            <td class="col-sm-2 col-3 w-100 pr-0">
-              <img class="col-12 p-0" :src="item.product.imageUrl" :alt="item.product.title" />
-              <p class="col-12 p-0">{{item.product.title}}</p>
-            </td>
-            <td class="col-sm col-2 text-center">{{item.size}}</td>
-            <td class="col-sm col-2 text-center">
-              {{item.qty}}
-            </td>
-            <td class="col-sm col-3 text-center">{{item.product.price | currency}}</td>
-            <td class="col-sm col-2 text-center" @click.prevent="cartItemDelete(item)">
-              <button>
-                <i class="fa fa-times"></i>
+    <div class="container">
+      <div class="checkProduct main row p-3 mb-3" v-if="cart.carts != ''">
+        <div class="col-md-8 p-0 pr-md-3">
+          <table class="bagTitle">
+            <tr class="row">
+              <th>品名</th>
+              <th>尺寸/口味</th>
+              <th>數量</th>
+              <th>單價</th>
+              <th>刪除</th>
+            </tr>
+          </table>
+          <table
+            class="bagInfo"
+            :class="{'sale':couponSuccess}"
+            v-for="(item,key) in cart.carts"
+            :key="key"
+          >
+            <tr class="row">
+              <td class="col-sm-2 col-3 w-100 pr-0">
+                <img class="col-12 p-0" :src="item.product.imageUrl" :alt="item.product.title" />
+                <p class="col-12 p-0">{{item.product.title}}</p>
+              </td>
+              <td class="col-sm col-2 text-center">{{item.size}}</td>
+              <td class="col-sm col-2 text-center">
+                {{item.qty}}
+              </td>
+              <td class="col-sm col-3 text-center">{{item.product.price | currency}}</td>
+              <td class="col-sm col-2 text-center" @click.prevent="cartItemDelete(item)">
+                <button>
+                  <i class="fa fa-times"></i>
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="priceInfo col-md-4 py-3">
+          <table class="title">
+            <thead>
+              <th class="pb-5">訂單明細</th>
+            </thead>
+          </table>
+          <table class="w-100">
+            <tr>
+              <th class="pb-4">小計</th>
+              <td class="text-right">{{cart.total | currency}}</td>
+            </tr>
+            <tr v-if="couponSuccess" class="text-success">
+              <th class="pb-4">折扣價</th>
+              <td class="text-right">{{cart.final_total | currency}}</td>
+            </tr>
+            <tr>
+              <th class="pb-4">運費</th>
+              <td class="text-right">$80</td>
+            </tr>
+          </table>
+          <table class="table">
+            <tr class="pt-4">
+              <th class="pl-0">總計</th>
+              <td class="text-right pr-0">{{cart.final_total + 80 | currency}}</td>
+            </tr>
+          </table>
+          <button class="goCheckOut" @click.prevent="goCheckOutFn">下一步</button>
+          <div class="coupons">
+            <div class="barcode mt-md-4 mt-2">
+              <img :src="barcodeImg" alt="條碼" ondragstart="return false;" />
+            </div>
+            <div class="row pl-2 couponsInfo" v-if="couponSuccess == false">
+              <input
+                type="text"
+                class="col-11"
+                placeholder="輸入折扣碼"
+                @keyup.enter="addCoupons()"
+                v-model="coupon_code"
+              />
+              <button class="applyCoupons col-1" @click.prevent="addCoupons()">
+                <i class="fa fa-arrow-right"></i>
               </button>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="priceInfo col-md-4 py-3">
-        <table class="title">
-          <thead>
-            <th class="pb-5">Summary</th>
-          </thead>
-        </table>
-        <table class="w-100">
-          <tr>
-            <th class="pb-4">小計</th>
-            <td class="text-right">{{cart.total | currency}}</td>
-          </tr>
-          <tr v-if="couponSuccess" class="text-success">
-            <th class="pb-4">折扣價</th>
-            <td class="text-right">{{cart.final_total | currency}}</td>
-          </tr>
-          <tr>
-            <th class="pb-4">運費</th>
-            <td class="text-right">$80</td>
-          </tr>
-        </table>
-        <table class="table">
-          <tr class="pt-4">
-            <th class="pl-0">總計</th>
-            <td class="text-right pr-0">{{cart.final_total + 80 | currency}}</td>
-          </tr>
-        </table>
-        <button class="goCheckOut" @click.prevent="goCheckOutFn">下一步</button>
-        <div class="coupons">
-          <div class="barcode mt-md-4 mt-2">
-            <img :src="barcodeImg" alt="條碼" ondragstart="return false;" />
+            </div>
+            <p class="couponCode text-center px-5" v-if="couponSuccess == true">{{coupon_code}}</p>
+            <span>
+              <p v-if="couponSuccess == true" class="text-success text-center pt-2">已套用優惠券!</p>
+              <p
+                v-if="couponMessage == '找不到優惠券!' | couponMessage == '優惠券無法使用'"
+                class="text-danger text-center pt-2"
+              >優惠券輸入錯誤</p>
+            </span>
           </div>
-          <div class="row pl-2 couponsInfo" v-if="couponSuccess == false">
-            <input
-              type="text"
-              class="col-11"
-              placeholder="輸入折扣碼"
-              @keyup.enter="addCoupons()"
-              v-model="coupon_code"
-            />
-            <button class="applyCoupons col-1" @click.prevent="addCoupons()">
-              <i class="fa fa-arrow-right"></i>
-            </button>
-          </div>
-          <p class="couponCode text-center px-5" v-if="couponSuccess == true">{{coupon_code}}</p>
-          <span>
-            <p v-if="couponSuccess == true" class="text-success text-center pt-2">已套用優惠券!</p>
-            <p
-              v-if="couponMessage == '找不到優惠券!' | couponMessage == '優惠券無法使用'"
-              class="text-danger text-center pt-2"
-            >優惠券輸入錯誤</p>
-          </span>
         </div>
       </div>
     </div>
-    <div class="main pb-2 col-10" v-else>
+    <div class="main pb-2 col-10" v-if="cart.carts.length < 1">
       <p class="text-center h5">您的購物車目前是空的!!</p>
     </div>
   </div>

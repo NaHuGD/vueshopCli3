@@ -42,40 +42,37 @@ export default {
     playTurn () {
       const vm = this
       const turnTable = document.querySelector('.turnTable')
-      const num = Math.floor(Math.random() * 360)
-      vm.isNum = num + 360
-      // 旋轉角度＋360,至少轉一圈
+      const num = Math.floor(Math.random() * 5)
       if (vm.isPlay === true) {
+        switch (num) {
+          case 0:
+            vm.price = '70%'
+            vm.isNum = 360
+            break
+          case 1:
+            vm.price = '80%'
+            vm.isNum = 450
+            break
+          case 2:
+            vm.price = '85%'
+            vm.isNum = 550
+            break
+          case 3:
+            vm.price = '90%'
+            vm.isNum = 600
+            break
+          default:
+            vm.price = '95%'
+            vm.isNum = 650
+            break
+        }
         turnTable.style.transform = `rotate(${vm.isNum}deg)`
         turnTable.style.transition = '5s'
-        if (
-          (vm.isNum >= 344 && vm.isNum <= 377) ||
-          (vm.isNum >= 703 && vm.isNum <= 720)
-        ) {
-          vm.price = '70%'
-        } else if (
-          (vm.isNum >= 378 && vm.isNum <= 489) ||
-          (vm.isNum >= 738 && vm.isNum <= 849)
-        ) {
-          vm.price = '80%'
-        } else if (
-          (vm.isNum >= 490 && vm.isNum <= 567) ||
-          (vm.isNum >= 850 && vm.isNum <= 927)
-        ) {
-          vm.price = '85%'
-        } else if (
-          (vm.isNum >= 568 && vm.isNum <= 635) ||
-          (vm.isNum >= 928 && vm.isNum <= 995)
-        ) {
-          vm.price = '90%'
-        } else {
-          vm.price = '95%'
-        }
+        vm.isPlay = false
         setTimeout(() => {
           vm.isAlertBg = true
         }, 5000)
       }
-      vm.isPlay = false
     },
     playAgain () {
       const vm = this
@@ -136,6 +133,9 @@ export default {
     background: #fff;
     border-radius: 20px;
     font-weight: bold;
+    @include mobile() {
+      max-width: 300px;
+    }
     & > span:nth-child(1) {
       padding: 30px;
       font-size: 5rem;
@@ -143,7 +143,7 @@ export default {
       display: block;
     }
     & > p:nth-child(3) {
-      color: $color-red;
+      color: $color-darkRed;
       font-size: 4rem;
       padding: 5px 0;
       font-family: impact;
@@ -152,13 +152,15 @@ export default {
       margin: 20px auto 0 auto;
       padding: 10px 0;
       width: 90%;
-      background: $color-red;
+      background: $color-darkRed;
+      color: white;
     }
     & > button:nth-child(6) {
       margin: 20px auto 0 auto;
       padding: 10px 0;
       width: 90%;
-      background: $color-gray;
+      background: $color-darkGray;
+      color: white;
     }
   }
 }

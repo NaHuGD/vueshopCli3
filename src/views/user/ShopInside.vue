@@ -1,5 +1,5 @@
 <template>
-  <div class="shopInside pt150">
+  <div class="shopInside pt100">
     <loading :active.sync="isLoading"></loading>
     <div>
       <div>
@@ -67,7 +67,7 @@
             <span class="col"></span>
             <button class="col-5" @click.prevent="buyNow(product.id)">直接購買</button>
           </div>
-          <h6 class="h5 mt-4">商品描述:</h6>
+          <h6 class="h5 pt-4">商品描述:</h6>
           <ul class="ml-2">
             <li class="productWrite mb-3">{{product.description}}</li>
           </ul>
@@ -166,13 +166,17 @@ export default {
     tasteValue () {
       // 選擇口味
       const vm = this
-      vm.$store.state.cart.carts.size = document.querySelector('#tasteValue').value
+      vm.$store.state.cart.carts.size = document.querySelector(
+        '#tasteValue'
+      ).value
       vm.isSize = false
     },
     protectiveValue () {
       // 選擇尺寸
       const vm = this
-      vm.$store.state.cart.carts.size = document.querySelector('#protectiveValue').value
+      vm.$store.state.cart.carts.size = document.querySelector(
+        '#protectiveValue'
+      ).value
       vm.isSize = false
     },
     addtoCart (id) {
@@ -242,15 +246,14 @@ export default {
     },
     removeLike (item) {
       const vm = this
-      const num = vm.likeData.findIndex((ele) => {
+      const num = vm.likeData.findIndex(ele => {
         return ele.title === item.title
       })
       vm.likeData.splice(num, 1)
       localStorage.setItem('likeData', JSON.stringify(vm.likeData))
     }
   },
-  computed: {
-  },
+  computed: {},
   created () {
     const vm = this
     vm.itemId = vm.$route.params.itemId
@@ -311,11 +314,13 @@ export default {
         background: $color-darkGray;
         color: #fff;
         padding: 1rem;
+        float: left;
       }
       & > button:nth-child(3) {
         background: $color-darkRed;
         color: #fff;
         padding: 1rem;
+        float: right;
       }
     }
     .productWrite {
@@ -323,6 +328,9 @@ export default {
       letter-spacing: 0.1rem;
       text-align: justify;
     }
+  }
+  h6{
+    clear: both;
   }
   .aboutLike {
     h2 {
