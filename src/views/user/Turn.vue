@@ -30,8 +30,8 @@ import turnTable from '@/assets/images/discount/turn/turnTable.png'
 export default {
   data () {
     return {
-      turnBg: turnBg,
-      turnTable: turnTable,
+      turnBg,
+      turnTable,
       isPlay: true,
       isNum: '',
       isAlertBg: false,
@@ -44,7 +44,7 @@ export default {
       const turnTable = document.querySelector('.turnTable')
       const num = Math.floor(Math.random() * 360)
       vm.isNum = num + 360
-      // 旋轉角度＋360,至少轉一圈//
+      // 旋轉角度＋360,至少轉一圈
       if (vm.isPlay === true) {
         turnTable.style.transform = `rotate(${vm.isNum}deg)`
         turnTable.style.transition = '5s'

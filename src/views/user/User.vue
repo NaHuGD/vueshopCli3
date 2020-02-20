@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Header -->
-    <UserNavbar />
+    <!-- <UserNavbar /> -->
     <main>
       <router-view></router-view>
     </main>
@@ -10,22 +10,18 @@
   </div>
 </template>
 <script>
-import UserNavbar from '@/components/user/UserNavbar'
+// import UserNavbar from '@/components/user/UserNavbar'
 import UserGotop from '@/components/user/UserGotop'
 import UserFooter from '@/components/user/UserFooter'
-import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    UserNavbar,
+    // UserNavbar,
     UserGotop,
     UserFooter
   },
   data () {
     return {}
-  },
-  computed: {
-    ...mapGetters(['cart'])
   }
 }
 </script>

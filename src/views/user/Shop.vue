@@ -149,8 +149,8 @@ export default {
         return ele.id === item.id
       })
       vm.likeData.splice(num, 1)
+      // 更新localstrage資料
       localStorage.setItem('likeData', JSON.stringify(vm.likeData))
-      // 更新localstrage資料//
     }
   },
   computed: {
@@ -159,7 +159,7 @@ export default {
       const vm = this
       const routeName = vm.$route.name
       let filtered = ''
-      // 判斷網頁顯示內容//
+      // 判斷網頁顯示內容
       if (routeName === 'All') {
         vm.isMenuActive = '全部商品'
         return vm.products
@@ -185,7 +185,7 @@ export default {
         })
         return filtered
       } else {
-        // 搜尋//
+        // 搜尋
         filtered = vm.products.filter(function (item) {
           return item.title.includes(vm.searchId)
         })

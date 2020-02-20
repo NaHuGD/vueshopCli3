@@ -251,7 +251,6 @@ export default {
   z-index: 2;
   .inner {
     transition: 1s;
-    // border-bottom: 2px solid rgba(0, 0, 0, 0.7);
     max-width: 90%;
     position: relative;
     margin: 0 auto;

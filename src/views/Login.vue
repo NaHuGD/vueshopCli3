@@ -46,10 +46,9 @@ export default {
       const vm = this
       vm.$http.post(api, vm.user).then(response => {
         vm.isMessage = response.data.message
-        // console.log(response.data)
         if (response.data.success) {
-          // 帳號登入成功時(true)
-          vm.$router.push('admin/Products') // 將路由導致首頁
+          // 帳號登入成功時(true),將路由導致首頁
+          vm.$router.push('admin/Products')
         }
       })
     },

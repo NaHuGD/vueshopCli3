@@ -107,7 +107,7 @@ export default {
   },
   data () {
     return {
-      barcodeImg: barcodeImg,
+      barcodeImg,
       coupon_code: '',
       couponSuccess: '',
       couponMessage: ''

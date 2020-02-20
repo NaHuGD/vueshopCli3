@@ -31,11 +31,11 @@ export default new Vuex.Store({
       })
     },
     getCart (context) {
-      // 取得購物車內容//
+      // 取得購物車內容
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       context.commit('LOADING', true)
       axios.get(url).then(response => {
-        // 接受到購物車資訊時用eventbus傳遞//
+        // 接受到購物車資訊時用eventbus傳遞
         context.commit('CART', response.data.data)
         context.commit('LOADING', false)
       })

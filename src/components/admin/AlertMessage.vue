@@ -25,11 +25,14 @@ export default {
   data () {
     return {
       messages: [
-        // {
-        // message:'訊息內容',//文字內容
-        // status:'danger',//樣式
-        // timestamp:'123',//id
-        // }
+        {
+          // 文字內容
+          message: '訊息內容',
+          // 樣式
+          status: 'danger',
+          // id
+          timestamp: '123'
+        }
       ]
     }
   },
@@ -59,7 +62,6 @@ export default {
   },
   created () {
     const vm = this
-
     // 自定義名稱 'messsage:push'
     // message: 傳入參數
     // status: 樣式，預設值為 warning

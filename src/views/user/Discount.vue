@@ -63,9 +63,9 @@ import barcodeImg from '@/assets/images/checkout/barcode.jpg'
 export default {
   data () {
     return {
-      iconImg1: iconImg1,
-      iconImg2: iconImg2,
-      barcodeImg: barcodeImg
+      iconImg1,
+      iconImg2,
+      barcodeImg
     }
   },
   methods: {

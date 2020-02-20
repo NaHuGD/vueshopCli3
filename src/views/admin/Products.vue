@@ -242,10 +242,12 @@ export default {
   data () {
     return {
       products: {},
-      pagination: {}, // 分頁效果
+      // 分頁效果
+      pagination: {},
       tempProduct: {
+        // 送出欄位內容
         in_stock: 0
-      }, // 送出欄位內容
+      },
       isNew: false,
       isLoading: false,
       status: {
@@ -257,12 +259,13 @@ export default {
   methods: {
     getProducts (page = 1) {
       // 取得api資料
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}` // 'https://vue-course-api.hexschool.io/api/lovfee/products'取得api路徑//
+      // 'https://vue-course-api.hexschool.io/api/lovfee/products'取得api路徑
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`
       const vm = this
-      vm.isLoading = true // 讀取資料時開起
+      vm.isLoading = true
       vm.$http.get(api).then(response => {
         // 取得每筆商品資料//
-        vm.isLoading = false // 完成後關閉loading功能
+        vm.isLoading = false
         vm.products = response.data.products
         vm.pagination = response.data.pagination
       })
@@ -272,10 +275,13 @@ export default {
       const vm = this
       if (isNew) {
         vm.tempProduct = {}
-        vm.isNew = true // true=>新增的
+        // true=>新增的
+        vm.isNew = true
       } else {
-        vm.tempProduct = Object.assign({}, item) // 因為物件傳參考特性，用object.assign淺層複製
-        vm.isNew = false // false=>編輯
+        // 因為物件傳參考特性，用object.assign淺層複製
+        vm.tempProduct = Object.assign({}, item)
+        // false=>編輯
+        vm.isNew = false
       }
       $('#productModal').modal('show')
     },
@@ -297,7 +303,7 @@ export default {
         } else {
           $('#delProductModal').modal('hide')
           vm.getProducts()
-          // console.log('資料刪除失敗')
+          // 資料刪除失敗
         }
       })
     },
@@ -309,41 +315,49 @@ export default {
       if (!vm.isNew) {
         // 不是新的資料時(編輯時)
         api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}` // 修改資料api
-        httpMethod = 'put' // 編輯資料時修改http方式
+        // 編輯資料時修改http方式
+        httpMethod = 'put'
       }
       vm.$http[httpMethod](api, { data: vm.tempProduct }).then(response => {
         if (response.data.success) {
           // 商品建立時
-          $('#productModal').modal('hide') // 隱藏建立表單
-          vm.getProducts() // 重新取得購物車資料
+          // 隱藏建立表單
+          $('#productModal').modal('hide')
+          // 重新取得購物車資料
+          vm.getProducts()
         } else {
           // 驗證失敗時
           $('#productModal').modal('hide')
           vm.getProducts()
-          // console.log('新增失敗')
         }
       })
     },
     uploadFile () {
       const vm = this
-      const uploadedFile = vm.$refs.files.files[0] // 透過this找到裡面的圖片位置為物件
-      const formData = new FormData() // 宣告formDate物件，送出資料
-      formData.append('file-to-upload', uploadedFile) // 用append的方式將欄位新增進去(格式,上傳檔案)
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload` // 定義路徑
-      vm.status.fileUploading = true // fa載入樣式
+      // 透過this找到裡面的圖片位置為物件
+      const uploadedFile = vm.$refs.files.files[0]
+      // 宣告formDate物件，送出資料
+      const formData = new FormData()
+      // 用append的方式將欄位新增進去(格式,上傳檔案)
+      formData.append('file-to-upload', uploadedFile)
+      // 定義路徑
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`
+      // fontawesome載入樣式開啟
+      vm.status.fileUploading = true
       vm.$http
         .post(url, formData, {
           headers: {
-            'Content-Type': 'multipart/form-data' // 修改表單形式為form-data
+            // 修改表單形式為form-data
+            'Content-Type': 'multipart/form-data'
           }
         })
         .then(response => {
-          // console.log(response.data)
           if (response.data.success) {
             // 上傳成功時
             // 強制寫入set,(位置,'欄位名',路徑)
             vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl)
-            vm.status.fileUploading = false // 上傳成功時關閉loading樣式
+            // 關閉loading樣式
+            vm.status.fileUploading = false
           } else {
             // 上傳失敗時，出現樣式
             vm.$bus.$emit('message:push', response.data.message, 'danger')

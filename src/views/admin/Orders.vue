@@ -90,13 +90,12 @@ export default {
     getOrders (page = 1) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/orders?page=${page}`
       const vm = this
-      vm.isLoading = true // 讀取資料時開起
+      vm.isLoading = true
       vm.$http.get(api).then(response => {
-        // console.log(response)
         // 取得訂單資料//
         vm.orders = response.data.orders
         vm.pagination = response.data.pagination
-        vm.isLoading = false // 完成後關閉loading功能
+        vm.isLoading = false
       })
     }
   },

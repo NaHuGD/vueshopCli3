@@ -59,11 +59,11 @@ import newImg5 from '@/assets/images/news/05.jpg'
 export default {
   data () {
     return {
-      newImg1: newImg1,
-      newImg2: newImg2,
-      newImg3: newImg3,
-      newImg4: newImg4,
-      newImg5: newImg5
+      newImg1,
+      newImg2,
+      newImg3,
+      newImg4,
+      newImg5
     }
   },
   created () {
@@ -110,7 +110,6 @@ export default {
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       @include pad() {
-        // max-width: 345px;
         padding: 0 15px;
       }
     }

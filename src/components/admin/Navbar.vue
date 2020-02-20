@@ -20,11 +20,12 @@ export default {
   methods: {
     signout () {
       const vm = this
-      const url = `${process.env.VUE_APP_APIPATH}/logout` // 登出api
+      // 登出api
+      const url = `${process.env.VUE_APP_APIPATH}/logout`
       vm.$http.post(url).then(response => {
         if (response.data.success) {
-          // 確認登出時
-          vm.$router.push('/login') // 導致登入頁面
+          // 確認登出時,導致登入頁面
+          vm.$router.push('/login')
         }
       })
     }

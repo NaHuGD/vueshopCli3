@@ -112,12 +112,12 @@ import e4Img05 from '@/assets/images/news/05.jpg'
 export default {
   data () {
     return {
-      banner: banner,
-      e1Img01: e1Img01,
-      e1Img02: e1Img02,
-      e1Img03: e1Img03,
-      e1Img04: e1Img04,
-      e2: e2,
+      banner,
+      e1Img01,
+      e1Img02,
+      e1Img03,
+      e1Img04,
+      e2,
       swiperNum: [
         {
           img: e4Img01,
@@ -150,7 +150,8 @@ export default {
             '下一站,我們即將帶領大家走入健身房,提供獨家的「攻略要點」,協助「健身房新手」不再像無頭蒼蠅於健身房裡亂竄'
         }
       ],
-      screenWidth: document.documentElement.clientWidth, // 螢幕寬度
+      // 螢幕寬度
+      screenWidth: document.documentElement.clientWidth,
       swiperOption: {
         loop: true,
         loopFillGroupWithBlank: true,

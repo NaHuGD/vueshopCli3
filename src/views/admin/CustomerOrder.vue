@@ -230,10 +230,12 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      product: {}, // 單一資料存放
+      // 單一資料存放
+      product: {},
       status: {
         // 判斷畫面哪個元素正在讀取中
-        loadingItem: '' // 存放值為產品id
+        // 存放值為產品id
+        loadingItem: ''
       },
       form: {
         // 建立對應資料結購
@@ -245,8 +247,10 @@ export default {
         },
         message: ''
       },
-      coupon_code: '', // 折扣碼
-      couponMessage: '' // 優惠碼有無正確資訊
+      // 折扣碼
+      coupon_code: '',
+      // 優惠碼有無正確資訊
+      couponMessage: ''
     }
   },
   methods: {
@@ -259,7 +263,6 @@ export default {
       vm.$http.get(url).then(response => {
         vm.product = response.data.product
         $('#productModal').modal('show')
-        // console.log('查看更多', response)
         vm.status.loadingItem = ''
       })
     },
@@ -274,9 +277,9 @@ export default {
         qty
       }
       vm.$http.post(url, { data: cart }).then(response => {
-        // console.log('加到購物車', response)
         vm.status.loadingItem = ''
-        vm.getCart() // 加入後取得購物車資料
+        // 加入後取得購物車資料
+        vm.getCart()
         $('#productModal').modal('hide')
       })
     },
@@ -285,7 +288,8 @@ export default {
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
       vm.$store.state.isLoading = true
       vm.$http.delete(url).then(response => {
-        vm.getCart() // 刪除後取得購物車內容
+        // 刪除後取得購物車內容
+        vm.getCart()
         vm.$store.state.isLoading = false
       })
     },
@@ -294,12 +298,12 @@ export default {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
       const coupon = {
-        code: vm.coupon_code // 剛剛宣告的變數
+        code: vm.coupon_code
       }
       vm.$store.state.isLoading = true
       vm.$http.post(url, { data: coupon }).then(response => {
         vm.couponMessage = response.data.message
-        vm.getCart() // 取得購物車內容
+        vm.getCart()
         vm.$store.state.isLoading = false
       })
     },
@@ -313,7 +317,6 @@ export default {
         if (result) {
           // email格式正確時發送訂單
           vm.$http.post(url, { data: order }).then(response => {
-            // console.log('訂單', response)
             if (response.data.success) {
               // 訂單確認建立 導頁至結帳畫面
               vm.$router.push(`/customer_checkout/${response.data.orderId}`)
@@ -321,7 +324,7 @@ export default {
             vm.$store.state.isLoading = false
           })
         } else {
-          // console.log('欄位不完整')
+          alert('欄位不完整')
         }
       })
     }

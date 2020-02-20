@@ -193,7 +193,6 @@ export default {
         // 編輯時
         vm.modalTitle = false
         vm.tempCoupon = Object.assign({}, item)
-        // console.log('編輯時', item)
       }
     },
     updateCoupon () {
@@ -205,14 +204,12 @@ export default {
         api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`
         vm.$http.post(api, { data: vm.tempCoupon }).then(response => {
           vm.getCoupon()
-          // console.log('新增優惠', response)
         })
       } else {
         // 編輯時的確認
         api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`
         vm.$http.put(api, { data: vm.tempCoupon }).then(response => {
           vm.getCoupon()
-          // console.log('更新優惠', response)
         })
       };
       vm.isLoading = false
@@ -235,7 +232,7 @@ export default {
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`
       vm.isLoading = true
       vm.$http.get(url, vm.tempProduct).then(response => {
-        // 取得優惠卷//
+        // 取得優惠卷
         vm.coupons = response.data.coupons
         vm.pagination = response.data.pagination
         vm.isLoading = false

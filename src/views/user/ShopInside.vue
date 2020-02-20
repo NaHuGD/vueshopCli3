@@ -108,8 +108,10 @@ export default {
       isLoading: false,
       isSize: false,
       itemId: '',
-      products: '', // 全部商品
-      product: '', // 單筆商品
+      // 全部商品
+      products: '',
+      // 單筆商品
+      product: '',
       moreLook: [],
       num: '1',
       likeData: []
@@ -133,10 +135,12 @@ export default {
         })
         vm.products = newArray
         for (let i = 0; i < 4; i++) {
-          // 隨機顯示物件中的商品//
+          // 隨機顯示物件中的商品
           const num = Math.floor(Math.random() * vm.products.length)
-          vm.moreLook.push(vm.products[num]) // 將隨機的商品新增到新物件//
-          vm.products.splice(num, 1) // 新增後刪除該筆資料位置,避免重複//
+          // 將隨機的商品新增到新物件
+          vm.moreLook.push(vm.products[num])
+          // 新增後刪除該筆資料位置,避免重複
+          vm.products.splice(num, 1)
         }
       })
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
@@ -146,7 +150,7 @@ export default {
       })
     },
     goPath (id) {
-      // 透過id到指定內頁//
+      // 透過id到指定內頁
       const vm = this
       vm.$router.push({ path: `/shop_inside/${id}` })
       location.reload()
@@ -160,13 +164,13 @@ export default {
       }
     },
     tasteValue () {
-      // 選擇口味//
+      // 選擇口味
       const vm = this
       vm.$store.state.cart.carts.size = document.querySelector('#tasteValue').value
       vm.isSize = false
     },
     protectiveValue () {
-      // 選擇尺寸//
+      // 選擇尺寸
       const vm = this
       vm.$store.state.cart.carts.size = document.querySelector('#protectiveValue').value
       vm.isSize = false
@@ -187,7 +191,7 @@ export default {
         vm.isLoading = false
       } else {
         vm.$http.post(url, { data: cart }).then(response => {
-          // 加入購物車,response=商品資料//
+          // 加入購物車,response=商品資料
           vm.getCart()
           vm.$bus.$emit('bagToggle:push', false)
           vm.isLoading = false
@@ -208,7 +212,7 @@ export default {
         vm.isLoading = false
       } else {
         vm.$http.post(url, { data: cart }).then(response => {
-          // 直接購買,導頁並更新購物車//
+          // 直接購買,導頁並更新購物車
           vm.getCart()
         })
         vm.$router.push('/checkProduct')
@@ -250,7 +254,8 @@ export default {
   created () {
     const vm = this
     vm.itemId = vm.$route.params.itemId
-    vm.getProduct(vm.itemId) // 將指定商品id帶入
+    // 將指定商品id帶入
+    vm.getProduct(vm.itemId)
     vm.getCart()
     vm.getLocalData()
   }

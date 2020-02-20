@@ -33,7 +33,8 @@ const i18n = new VueI18n({
   locale: 'zhTW'
 })
 Vue.use(VeeValidate, {
-  events: 'input|blur', // 這是為了讓使用者離開該欄位時觸發驗證
+  // 讓使用者離開該欄位時觸發驗證
+  events: 'input|blur',
   i18n,
   dictionary: {
     zhTW
@@ -43,8 +44,8 @@ Vue.use(VueAwesomeSwiper)
 
 Vue.filter('currency', currencyFilter)
 Vue.filter('date', dateFilter)
-
-axios.defaults.withCredentials = true// 開啟跨域
+// 開啟跨域
+axios.defaults.withCredentials = true
 
 new Vue({
   i18n,
@@ -54,25 +55,26 @@ new Vue({
 }).$mount('#app')
 
 router.beforeEach((to, from, next) => {
-  // to到達的頁面//
-  // from從哪個頁面過去//
-  // next//
-  if (to.meta.requiresAuth) { // 進入的網址
+  // to 到達的頁面
+  // from 從哪個頁面過去
+  // next 進入的網址
+  if (to.meta.requiresAuth) {
     const api = `${process.env.VUE_APP_APIPATH}/api/user/check`
     axios.post(api).then((response) => {
-      if (response.data.success) { // 帳號登入成功時(true)
-        next() // 登入狀態時
+      if (response.data.success) {
+        // 帳號登入成功時(true)
+        next()
       } else {
+        // 不是登入狀態時，回到登入頁面，讓頁面自動跳回login
         next({
           path: '/login'
-        }) // 不是登入狀態時，回到登入頁面，讓頁面自動跳回login
+        })
       }
     })
   } else {
     next()
   }
 })
-
 // 跳轉後頁面回到頂部
 router.afterEach((to, from, next) => {
   window.scrollTo(0, 0)

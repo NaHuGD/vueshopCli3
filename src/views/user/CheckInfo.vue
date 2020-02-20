@@ -65,7 +65,7 @@
           </div>
           <div>
             <label class="py-3">運送方式*</label>
-            <select class="form-control" id="ship" @change.prevent="shipValue">
+            <select class="form-control" id="ship" v-model="form.user.ship">
               <option value="home">宅配到府</option>
               <option value="fm">全家門市取貨服務</option>
               <option value="711">7-11門市取貨服務</option>
@@ -113,11 +113,9 @@
             </div>
             <span class="text-danger mt-2 d-block" v-if="errors.has('address')">請輸入正確地址</span>
           </div>
-          <!-- </div> -->
-          <!-- <div class="main col-11 col-md-9"> -->
           <div>
             <label class="py-3">付款方式*</label>
-            <select class="form-control" id="payMethod" @change.prevent="payMethodValue">
+            <select class="form-control" id="payMethod" v-model="form.user.payMethod">
               <option value="delivery">貨到付款</option>
               <option value="credit">信用卡付款</option>
             </select>
@@ -142,7 +140,8 @@
                     <select
                       class="form-control col mr-1"
                       id="cardMonth"
-                      @change.prevent="cardMonth"
+                      v-model="form.user.card.date.month"
+                      @focus.prevent="isFlipped = true"
                     >
                       <option value selected disabled>月份</option>
                       <option value="01">一月</option>
@@ -158,7 +157,10 @@
                       <option value="11">十一月</option>
                       <option value="12">十二月</option>
                     </select>
-                    <select class="form-control col" id="cardYear" @change.prevent="cardYear">
+                    <select class="form-control col" id="cardYear"
+                      v-model="form.user.card.date.year"
+                      @focus.prevent="isFlipped = true"
+                    >
                       <option value selected disabled>年分</option>
                       <option :value="2018+item" v-for="(item,key) in 15" :key="key">{{2018+item}}</option>
                     </select>
@@ -216,9 +218,9 @@ export default {
   },
   data () {
     return {
-      card: card,
+      card,
+      cardBg,
       products: {},
-      cardBg: cardBg,
       isLoading: false,
       isFlipped: true,
       form: {
@@ -254,7 +256,6 @@ export default {
         vm.products = response.data.data
         vm.$bus.$emit('cartitem:push', response.data.data)
         vm.isLoading = false
-        // console.log('getCart', response)
       })
     },
     createOrder () {
@@ -271,9 +272,8 @@ export default {
         if (result) {
           // email格式正確時發送訂單
           vm.$http.post(url, { data: order }).then(response => {
-            // console.log('訂單', response)
             if (response.data.success) {
-              // console.log('訂單確認建立 導頁至結帳畫面')
+              // 訂單確認建立 導頁至結帳畫面
               vm.$router.push(`/confirm/${response.data.orderId}`)
             } else {
               alert(response.data.message)
@@ -281,31 +281,13 @@ export default {
             vm.isLoading = false
           })
         } else {
+          // 欄位不完整
           window.scrollTo({
             top: 0,
             behavior: 'smooth'
           })
-          // console.log('欄位不完整')
         }
       })
-    },
-    shipValue () {
-      const vm = this
-      vm.form.user.ship = document.querySelector('#ship').value
-    },
-    payMethodValue () {
-      const vm = this
-      vm.form.user.payMethod = document.querySelector('#payMethod').value
-    },
-    cardMonth () {
-      const vm = this
-      vm.isFlipped = true
-      vm.form.user.card.date.month = document.querySelector('#cardMonth').value
-    },
-    cardYear () {
-      const vm = this
-      vm.isFlipped = true
-      vm.form.user.card.date.year = document.querySelector('#cardYear').value
     }
   },
   created () {
