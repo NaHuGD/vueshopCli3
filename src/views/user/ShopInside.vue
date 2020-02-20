@@ -100,6 +100,8 @@
 </template>
 
 <script>
+// import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
@@ -110,7 +112,6 @@ export default {
       product: '', // 單筆商品
       moreLook: [],
       num: '1',
-      size: 'null',
       likeData: []
     }
   },
@@ -161,13 +162,13 @@ export default {
     tasteValue () {
       // 選擇口味//
       const vm = this
-      vm.size = document.querySelector('#tasteValue').value
+      vm.$store.state.cart.carts.size = document.querySelector('#tasteValue').value
       vm.isSize = false
     },
     protectiveValue () {
       // 選擇尺寸//
       const vm = this
-      vm.size = document.querySelector('#protectiveValue').value
+      vm.$store.state.cart.carts.size = document.querySelector('#protectiveValue').value
       vm.isSize = false
     },
     addtoCart (id) {
@@ -178,9 +179,9 @@ export default {
       const cart = {
         product_id: id,
         qty: vm.num,
-        size: vm.size
+        size: vm.$store.state.cart.carts.size
       }
-      if (vm.size === 'null') {
+      if (vm.$store.state.cart.carts.size === undefined) {
         alert('請選擇尺寸/口味')
         vm.isSize = true
         vm.isLoading = false
@@ -199,9 +200,9 @@ export default {
       const cart = {
         product_id: id,
         qty: vm.num,
-        size: vm.size
+        size: vm.$store.state.cart.carts.size
       }
-      if (vm.size === 'null') {
+      if (vm.$store.state.cart.carts.size === undefined) {
         alert('請選擇尺寸/口味')
         vm.isSize = true
         vm.isLoading = false
@@ -214,16 +215,7 @@ export default {
       }
     },
     getCart () {
-      // 取得購物車內容
-      const vm = this
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      vm.isLoading = true
-      vm.$http.get(url).then(response => {
-        // 將購物車資料,總數透過eventbus傳遞//
-        vm.$bus.$emit('cartnum:push', response.data.data.carts.length)
-        vm.$bus.$emit('cartitem:push', response.data.data)
-        vm.isLoading = false
-      })
+      this.$store.dispatch('getCart')
     },
     getLocalData () {
       const vm = this
@@ -252,6 +244,8 @@ export default {
       vm.likeData.splice(num, 1)
       localStorage.setItem('likeData', JSON.stringify(vm.likeData))
     }
+  },
+  computed: {
   },
   created () {
     const vm = this

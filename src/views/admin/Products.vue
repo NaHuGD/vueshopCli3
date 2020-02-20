@@ -241,7 +241,7 @@ export default {
   },
   data () {
     return {
-      products: [],
+      products: {},
       pagination: {}, // 分頁效果
       tempProduct: {
         in_stock: 0
@@ -350,6 +350,8 @@ export default {
           }
         })
     }
+  },
+  computed: {
   },
   created () {
     // 補上created

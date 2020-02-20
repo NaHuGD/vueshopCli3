@@ -30,31 +30,33 @@
       <div :class="{'bagBg':bagToggle === false}" @click.prevent="bagToggle = true"></div>
       <a class="headerBag" @click.prevent="bagToggle = !bagToggle">
         <i :class="{'iconActive':!bagToggle}" class="fa fa-shopping-cart"></i>
-        <span>{{ CartNumber }}</span>
+        <span>{{ cart.carts.length }}</span>
       </a>
       <div id="headerBagInfo" :class="{'bagActive':bagToggle}">
         <div class="bagBgActive"></div>
-        <div class="text-center mb-3" v-if="CartItem.carts == ''">您的購物車是空的</div>
-        <div class="bagItem" v-for="(item,key) in CartItem.carts" :key="key">
-          <div>
-            <img :src="item.product.imageUrl" width="50" />
+        <div class="text-center mb-3" v-if="cart.carts === ''">您的購物車是空的</div>
+        <div v-if="cart.carts">
+          <div class="bagItem" v-for="item in cart.carts" :key="item.id">
             <div>
-              <div class="cartItemDelete" @click.prevent="cartItemDelete(item)">
-                <i class="fa fa-times"></i>
+              <img :src="item.product.imageUrl" width="50" />
+              <div>
+                <div class="cartItemDelete" @click.prevent="cartItemDelete(item)">
+                  <i class="fa fa-times"></i>
+                </div>
+                <p>{{item.product.title}}</p>
+                <span class="d-block">
+                  <p>{{item.size}}</p>
+                  <p>x{{item.qty}}</p>
+                  <p>{{item.product.price | currency }}/{{item.product.unit}}</p>
+                </span>
               </div>
-              <p>{{item.product.title}}</p>
-              <span class="d-block">
-                <p>{{item.size}}</p>
-                <p>x{{item.qty}}</p>
-                <p>{{item.product.price | currency }}/{{item.product.unit}}</p>
-              </span>
             </div>
           </div>
         </div>
         <div class="bagPrice">
           <div>
             <p class="d-inline-block">NTD.</p>
-            <p class="d-inline-block">{{CartItem.total | currency }}</p>
+            <p class="d-inline-block">{{cart.total | currency }}</p>
           </div>
           <button class="d-block" @click.prevent="goCheckProduct">查看購物車</button>
         </div>
@@ -113,11 +115,12 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'UserNavbar',
   data () {
     return {
-      isLoading: false,
       isMobNav: false,
       bagToggle: true,
       isAnimateOut: false,
@@ -125,12 +128,11 @@ export default {
       isSearch: false,
       isMenuActive: '',
       isMenuActiveMob: '',
-      CartNumber: '',
-      CartItem: {},
       id: ''
     }
   },
   methods: {
+    ...mapActions(['getCart']),
     goShop () {
       const vm = this
       vm.$router.push({
@@ -152,33 +154,17 @@ export default {
       })
       vm.isMobNav = false
     },
-    getCart () {
-      // 取得購物車內容
-      const vm = this
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      vm.isLoading = true
-      vm.$http.get(url).then(response => {
-        // 接受到購物車資訊時用eventbus傳遞//
-        vm.$bus.$emit('cartnum:push', response.data.data.carts.length)
-        vm.$bus.$emit('cartitem:push', response.data.data)
-        vm.isLoading = false
-      })
-    },
-    getCartNum (num) {
-      const vm = this
-      vm.CartNumber = num
-    },
     getCartItem (item) {
       const vm = this
       vm.CartItem = item
     },
     cartItemDelete (item) {
       const vm = this
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`
       vm.$http.delete(url).then(response => {
         vm.getCart()
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
       })
     },
     mobNavFn () {
@@ -207,6 +193,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['isLoading', 'cart']),
     menuActiveFn () {
       const vm = this
       const routeName = vm.$route.name
@@ -239,14 +226,6 @@ export default {
   },
   created () {
     const vm = this
-    vm.$bus.$on('cartnum:push', function (num) {
-      // 接收購物車陣列總數//
-      vm.getCartNum(num)
-    })
-    vm.$bus.$on('cartitem:push', function (item) {
-      // 接收購物車資訊//
-      vm.getCartItem(item)
-    })
     vm.$bus.$on('bagToggle:push', function (item) {
       // 新增後顯示購物車
       vm.bagToggle = item

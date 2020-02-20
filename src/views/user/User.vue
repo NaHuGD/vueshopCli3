@@ -13,6 +13,7 @@
 import UserNavbar from '@/components/user/UserNavbar'
 import UserGotop from '@/components/user/UserGotop'
 import UserFooter from '@/components/user/UserFooter'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -22,6 +23,9 @@ export default {
   },
   data () {
     return {}
+  },
+  computed: {
+    ...mapGetters(['cart'])
   }
 }
 </script>

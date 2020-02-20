@@ -100,12 +100,6 @@ export default {
       })
     }
   },
-  // computed: {
-  //   sortdate (item) {
-  //     // console.log('item',item.create_at);
-  //     // return item.orders.create_at;
-  //   }
-  // },
   created () {
     const vm = this
     vm.getOrders()

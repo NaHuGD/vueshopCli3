@@ -2,7 +2,7 @@
   <div>
     <CheckSchedule />
     <loading :active.sync="isLoading"></loading>
-    <div id="checkProduct" v-if="CartItem.carts != ''" class="main row col-10 py-3">
+    <div id="checkProduct" v-if="cart.carts != ''" class="main row col-10 py-3">
       <div class="col-md-8 p-0 pr-md-3">
         <table class="bagTitle">
           <tr class="row">
@@ -16,7 +16,7 @@
         <table
           class="bagInfo"
           :class="{'sale':couponSuccess}"
-          v-for="(item,key) in CartItem.carts"
+          v-for="(item,key) in cart.carts"
           :key="key"
         >
           <tr class="row">
@@ -46,11 +46,11 @@
         <table class="w-100">
           <tr>
             <th class="pb-4">小計</th>
-            <td class="text-right">{{CartItem.total | currency}}</td>
+            <td class="text-right">{{cart.total | currency}}</td>
           </tr>
           <tr v-if="couponSuccess" class="text-success">
             <th class="pb-4">折扣價</th>
-            <td class="text-right">{{CartItem.final_total | currency}}</td>
+            <td class="text-right">{{cart.final_total | currency}}</td>
           </tr>
           <tr>
             <th class="pb-4">運費</th>
@@ -60,7 +60,7 @@
         <table class="table">
           <tr class="pt-4">
             <th class="pl-0">總計</th>
-            <td class="text-right pr-0">{{CartItem.final_total + 80 | currency}}</td>
+            <td class="text-right pr-0">{{cart.final_total + 80 | currency}}</td>
           </tr>
         </table>
         <button class="goCheckOut" @click.prevent="goCheckOutFn">下一步</button>
@@ -99,6 +99,7 @@
 <script>
 import CheckSchedule from '@/components/user/CheckSchedule'
 import barcodeImg from '@/assets/images/checkout/barcode.jpg'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -107,36 +108,20 @@ export default {
   data () {
     return {
       barcodeImg: barcodeImg,
-      isLoading: false,
-      CartItem: {},
       coupon_code: '',
       couponSuccess: '',
       couponMessage: ''
     }
   },
   methods: {
-    getCart () {
-      // 取得購物車內容
-      const vm = this
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      vm.isLoading = true
-      vm.$http.get(url).then(response => {
-        vm.$bus.$emit('cartitem:push', response.data.data)
-        vm.isLoading = false
-        // console.log('getCart', response)
-      })
-    },
-    getCartItem (item) {
-      const vm = this
-      vm.CartItem = item
-    },
+    ...mapActions(['getCart']),
     cartItemDelete (item) {
       const vm = this
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`
       vm.$http.delete(url).then(response => {
         vm.getCart()
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
       })
     },
     addCoupons () {
@@ -145,13 +130,13 @@ export default {
       const coupon = {
         code: vm.coupon_code
       }
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       vm.$http.post(url, { data: coupon }).then(response => {
         // 套用優惠卷//
         vm.couponSuccess = response.data.success
         vm.couponMessage = response.data.message
         vm.getCart()
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
       })
     },
     goCheckOutFn () {
@@ -163,13 +148,12 @@ export default {
       })
     }
   },
+  computed: {
+    ...mapGetters(['isLoading', 'cart'])
+  },
   created () {
     const vm = this
     vm.getCart()
-    vm.$bus.$on('cartitem:push', function (item) {
-      // 抓取購物車資訊//
-      vm.getCartItem(item)
-    })
   }
 }
 </script>

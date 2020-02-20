@@ -105,7 +105,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in cart.carts" :key="item.id">
+            <tr v-for="(item,key) in cart.carts" :key="key">
               <td>
                 <button class="btn btn-danger btn-sm" @click="deleteCart(item.id)">
                   <i class="fa fa-trash" title="刪除"></i>
@@ -225,11 +225,11 @@
 
 <script>
 import $ from 'jquery'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
     return {
-      products: [],
       product: {}, // 單一資料存放
       status: {
         // 判斷畫面哪個元素正在讀取中
@@ -245,24 +245,12 @@ export default {
         },
         message: ''
       },
-      isLoading: false,
-      cart: {}, // 存放購物車資料
       coupon_code: '', // 折扣碼
       couponMessage: '' // 優惠碼有無正確資訊
     }
   },
   methods: {
-    getProducts () {
-      const vm = this
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=:page`
-      // console.log(url)
-      vm.isLoading = true
-      vm.$http.get(url).then(response => {
-        vm.products = response.data.products
-        // console.log(response)
-        vm.isLoading = false
-      })
-    },
+    ...mapActions(['getCart', 'getProducts']),
     getProduct (id) {
       // 查看更多
       const vm = this
@@ -292,27 +280,13 @@ export default {
         $('#productModal').modal('hide')
       })
     },
-    getCart () {
-      // 取得購物車內容
-      const vm = this
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      // console.log(url)
-      vm.isLoading = true
-      vm.$http.get(url).then(response => {
-        vm.cart = response.data.data
-        // console.log(response)
-        vm.isLoading = false
-      })
-    },
     deleteCart (id) {
-      // console.log(id)
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       vm.$http.delete(url).then(response => {
-        // console.log('刪除', response.data.message)
         vm.getCart() // 刪除後取得購物車內容
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
       })
     },
     addCoupon () {
@@ -322,12 +296,11 @@ export default {
       const coupon = {
         code: vm.coupon_code // 剛剛宣告的變數
       }
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       vm.$http.post(url, { data: coupon }).then(response => {
-        // console.log('優惠卷', response.data)
         vm.couponMessage = response.data.message
         vm.getCart() // 取得購物車內容
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
       })
     },
     createOrder () {
@@ -335,7 +308,7 @@ export default {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
       const order = vm.form
-      // vm.isLoading = true;
+      vm.$store.state.isLoading = true
       vm.$validator.validate().then(result => {
         if (result) {
           // email格式正確時發送訂單
@@ -345,12 +318,18 @@ export default {
               // 訂單確認建立 導頁至結帳畫面
               vm.$router.push(`/customer_checkout/${response.data.orderId}`)
             }
-            vm.isLoading = false
+            vm.$store.state.isLoading = false
           })
         } else {
           // console.log('欄位不完整')
         }
       })
+    }
+  },
+  computed: {
+    ...mapGetters(['isLoading', 'products']),
+    cart () {
+      return this.$store.state.cart
     }
   },
   created () {

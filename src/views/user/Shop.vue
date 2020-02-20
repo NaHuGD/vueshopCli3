@@ -87,30 +87,19 @@
 </template>
 
 <script>
-// import $ from 'jquery'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
     return {
-      isLoading: false,
       isLike: false,
-      products: [],
       isMenuActive: '全部商品',
       searchId: '',
       likeData: []
     }
   },
   methods: {
-    getProducts (page = 1) {
-      // 取得api資料
-      const vm = this
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
-      vm.isLoading = true // 讀取資料時開起
-      vm.$http.get(api).then(response => {
-        vm.products = response.data.products
-        vm.isLoading = false // 完成後關閉loading功能
-      })
-    },
+    ...mapActions(['getProducts']),
     getAll () {
       const vm = this
       vm.$router.push('/shop/all')
@@ -165,6 +154,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['isLoading', 'products']),
     filteredProducts () {
       const vm = this
       const routeName = vm.$route.name
