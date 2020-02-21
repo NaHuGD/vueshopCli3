@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row w-100 m-auto pt150">
-      <div class="col-sm-8 col-10 m-auto" style="height:140px;">
+      <div class="col-10 col-sm-8 col-md-6 m-auto" style="height:140px;">
         <div class="checkSchedule">
           <span></span>
           <div class="checkProduct">

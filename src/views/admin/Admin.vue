@@ -1,7 +1,7 @@
 <template>
     <div>
         <Navbar/>
-        <Alert/>
+        <!-- <Alert/> -->
         <div>
             <div class="row m-0">
                 <Sidebar></Sidebar>

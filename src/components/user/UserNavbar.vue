@@ -37,7 +37,7 @@
         <div class="text-center mb-3" v-if="cart.carts.length < 1">您的購物車是空的</div>
         <div v-if="cart.carts">
           <div class="bagItem" v-for="item in cart.carts" :key="item.id">
-            <div>
+            <div v-if="item.product">
               <img :src="item.product.imageUrl" width="50" />
               <div>
                 <div class="cartItemDelete" @click.prevent="cartItemDelete(item)">

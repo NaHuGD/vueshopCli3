@@ -94,12 +94,11 @@ export default {
     return {
       isLike: false,
       isMenuActive: '全部商品',
-      searchId: '',
-      likeData: []
+      searchId: ''
     }
   },
   methods: {
-    ...mapActions(['getProducts']),
+    ...mapActions(['getProducts', 'getLocalData']),
     getAll () {
       const vm = this
       vm.$router.push('/shop/all')
@@ -124,13 +123,9 @@ export default {
         behavior: 'smooth'
       })
     },
-    getLocalData () {
-      const vm = this
-      vm.likeData = JSON.parse(localStorage.getItem('likeData')) || []
-    },
     getIfLocalData (item) {
       const vm = this
-      return vm.likeData.some(function (ele) {
+      return vm.$store.state.likeData.some(function (ele) {
         return item.id === ele.id
       })
     },
@@ -140,21 +135,21 @@ export default {
         title: item.title,
         id: item.id
       }
-      vm.likeData.push(likeArr)
-      localStorage.setItem('likeData', JSON.stringify(vm.likeData))
+      vm.$store.state.likeData.push(likeArr)
+      localStorage.setItem('likeData', JSON.stringify(vm.$store.state.likeData))
     },
     removeLike (item) {
       const vm = this
-      const num = vm.likeData.findIndex(function (ele) {
+      const num = vm.$store.state.likeData.findIndex(function (ele) {
         return ele.id === item.id
       })
-      vm.likeData.splice(num, 1)
+      vm.$store.state.likeData.splice(num, 1)
       // 更新localstrage資料
-      localStorage.setItem('likeData', JSON.stringify(vm.likeData))
+      localStorage.setItem('likeData', JSON.stringify(vm.$store.state.likeData))
     }
   },
   computed: {
-    ...mapGetters(['isLoading', 'products']),
+    ...mapGetters(['isLoading', 'products', 'LIKEDATA']),
     filteredProducts () {
       const vm = this
       const routeName = vm.$route.name
@@ -176,10 +171,10 @@ export default {
             return item.category === '乳清'
           })
           return filtered
-        case 'Like' :
+        case 'Like':
           vm.isMenuActive = '最愛商品'
           filtered = vm.products.filter(function (item, index, arr) {
-            return vm.likeData.some(function (ele) {
+            return vm.$store.state.likeData.some(function (ele) {
               return item.id === ele.id
             })
           })
@@ -220,7 +215,7 @@ export default {
     }
     & > button {
       background: $color-black;
-      color:#fff;
+      color: #fff;
       width: 100%;
       text-align: center;
       margin-bottom: 10px;
@@ -420,8 +415,8 @@ export default {
       text-align: center;
       padding: 15px;
       border: 2px solid #fff;
-      @include iphone5(){
-        padding:10px;
+      @include iphone5() {
+        padding: 10px;
       }
     }
   }

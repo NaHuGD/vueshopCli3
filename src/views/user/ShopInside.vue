@@ -100,12 +100,11 @@
 </template>
 
 <script>
-// import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
     return {
-      isLoading: false,
       isSize: false,
       itemId: '',
       // 全部商品
@@ -113,16 +112,16 @@ export default {
       // 單筆商品
       product: '',
       moreLook: [],
-      num: '1',
-      likeData: []
+      num: '1'
     }
   },
   methods: {
+    ...mapActions(['getCart', 'getLocalData']),
     getProduct (id) {
       // 取得指定商品資料
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       vm.$http.get(url).then(response => {
         const newArray = response.data.products.filter(function (
           item,
@@ -146,7 +145,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
       vm.$http.get(api).then(response => {
         vm.product = response.data.product
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
       })
     },
     goPath (id) {
@@ -183,7 +182,7 @@ export default {
       // qty加入的數量
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       const cart = {
         product_id: id,
         qty: vm.num,
@@ -192,13 +191,13 @@ export default {
       if (vm.$store.state.cart.carts.size === undefined) {
         alert('請選擇尺寸/口味')
         vm.isSize = true
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
       } else {
         vm.$http.post(url, { data: cart }).then(response => {
           // 加入購物車,response=商品資料
           vm.getCart()
           vm.$bus.$emit('bagToggle:push', false)
-          vm.isLoading = false
+          vm.$store.state.isLoading = false
         })
       }
     },
@@ -213,7 +212,7 @@ export default {
       if (vm.$store.state.cart.carts.size === undefined) {
         alert('請選擇尺寸/口味')
         vm.isSize = true
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
       } else {
         vm.$http.post(url, { data: cart }).then(response => {
           // 直接購買,導頁並更新購物車
@@ -222,16 +221,9 @@ export default {
         vm.$router.push('/checkProduct')
       }
     },
-    getCart () {
-      this.$store.dispatch('getCart')
-    },
-    getLocalData () {
-      const vm = this
-      vm.likeData = JSON.parse(localStorage.getItem('likeData')) || []
-    },
     getIfLocalData (item) {
       const vm = this
-      return vm.likeData.some(function (ele) {
+      return vm.$store.state.likeData.some(function (ele) {
         return item.id === ele.id
       })
     },
@@ -241,19 +233,21 @@ export default {
         title: item.title,
         id: item.id
       }
-      vm.likeData.push(likeArr)
-      localStorage.setItem('likeData', JSON.stringify(vm.likeData))
+      vm.$store.state.likeData.push(likeArr)
+      localStorage.setItem('likeData', JSON.stringify(vm.$store.state.likeData))
     },
     removeLike (item) {
       const vm = this
-      const num = vm.likeData.findIndex(ele => {
+      const num = vm.$store.state.likeData.findIndex(ele => {
         return ele.title === item.title
       })
-      vm.likeData.splice(num, 1)
-      localStorage.setItem('likeData', JSON.stringify(vm.likeData))
+      vm.$store.state.likeData.splice(num, 1)
+      localStorage.setItem('likeData', JSON.stringify(vm.$store.state.likeData))
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters(['isLoading', 'likeData'])
+  },
   created () {
     const vm = this
     vm.itemId = vm.$route.params.itemId
@@ -329,7 +323,7 @@ export default {
       text-align: justify;
     }
   }
-  h6{
+  h6 {
     clear: both;
   }
   .aboutLike {

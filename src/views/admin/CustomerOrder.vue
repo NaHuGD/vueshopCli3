@@ -104,8 +104,8 @@
               <th>單價</th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="(item,key) in cart.carts" :key="key">
+          <tbody v-for="(item,key) in cart.carts" :key="key">
+            <tr v-if="item.product">
               <td>
                 <button class="btn btn-danger btn-sm" @click="deleteCart(item.id)">
                   <i class="fa fa-trash" title="刪除"></i>
@@ -325,15 +325,13 @@ export default {
           })
         } else {
           alert('欄位不完整')
+          vm.$store.state.isLoading = false
         }
       })
     }
   },
   computed: {
-    ...mapGetters(['isLoading', 'products']),
-    cart () {
-      return this.$store.state.cart
-    }
+    ...mapGetters(['isLoading', 'products', 'cart'])
   },
   created () {
     const vm = this

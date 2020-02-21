@@ -15,7 +15,8 @@ export default new Vuex.Store({
         size: ''
       }
     },
-    paginations: ''
+    paginations: '',
+    likeData: []
   },
   actions: {
     updateLoading (context, status) {
@@ -39,6 +40,9 @@ export default new Vuex.Store({
         context.commit('CART', response.data.data)
         context.commit('LOADING', false)
       })
+    },
+    getLocalData (context) {
+      context.commit('LIKEDATA', (JSON.parse(localStorage.getItem('likeData')) || []))
     }
   },
   mutations: {
@@ -50,6 +54,9 @@ export default new Vuex.Store({
     },
     CART (state, payload) {
       state.cart = payload
+    },
+    LIKEDATA (state, payload) {
+      state.likeData = payload
     }
   },
   getters: {
@@ -61,6 +68,9 @@ export default new Vuex.Store({
     },
     cart (state) {
       return state.cart
+    },
+    LIKEDATA (state) {
+      return state.likeData
     }
   },
   modules: {

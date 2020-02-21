@@ -153,26 +153,6 @@ export default {
         loop: true,
         loopFillGroupWithBlank: true,
         autoplay: true,
-        on: {
-          // init: function () {
-          //   const vm = this
-          //   const screenWidth = document.documentElement.clientWidth
-          //   if (screenWidth <= 769) {
-          //     vm.params.slidesPerView = 1
-          //   } else {
-          //     vm.params.slidesPerView = 3
-          //   }
-          // },
-          resize: function () {
-            // const vm = this
-            // const screenWidth = document.documentElement.clientWidth
-            // if (screenWidth <= 769) {
-            //   vm.params.slidesPerView = 1
-            // } else {
-            //   vm.params.slidesPerView = 3
-            // }
-          }
-        },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
@@ -229,7 +209,6 @@ export default {
     img {
       width: 100%;
       height: 100%;
-      max-height: 610px;
     }
     .info {
       position: absolute;
@@ -238,6 +217,7 @@ export default {
       transform: translate(-50%, -50%);
       border: 1px solid rgba(255, 255, 255, 0.8);
       & > div {
+        white-space: nowrap;
         background: rgba(255, 255, 255, 0.8);
         margin: 10px;
         padding: 40px;
