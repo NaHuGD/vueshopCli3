@@ -234,6 +234,7 @@
 <script>
 import $ from 'jquery'
 import Pagination from '../../components/admin/Pagination'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -249,7 +250,6 @@ export default {
         in_stock: 0
       },
       isNew: false,
-      isLoading: false,
       status: {
         fileUploading: false
       },
@@ -262,10 +262,10 @@ export default {
       // 'https://vue-course-api.hexschool.io/api/lovfee/products'取得api路徑
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`
       const vm = this
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       vm.$http.get(api).then(response => {
         // 取得每筆商品資料//
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
         vm.products = response.data.products
         vm.pagination = response.data.pagination
       })
@@ -366,6 +366,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['isLoading'])
   },
   created () {
     // 補上created

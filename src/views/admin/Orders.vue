@@ -78,10 +78,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
-      isLoading: false,
       orders: '',
       pagination: ''
     }
@@ -90,14 +91,17 @@ export default {
     getOrders (page = 1) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/orders?page=${page}`
       const vm = this
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       vm.$http.get(api).then(response => {
         // 取得訂單資料//
         vm.orders = response.data.orders
         vm.pagination = response.data.pagination
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
       })
     }
+  },
+  computed: {
+    ...mapGetters(['isLoading'])
   },
   created () {
     const vm = this

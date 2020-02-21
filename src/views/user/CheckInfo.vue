@@ -3,19 +3,21 @@
     <CheckSchedule />
     <div class="container">
       <div class="checkInfoMain row">
-        <div class="col-12 col-md-5 pb-3">
+        <div class="col-12 col-md-5 pb-3 pl-md-0">
           <div class="mainleft">
             <p class="h4 py-3">購物清單：</p>
-            <div class="py-2 row bagInfo" v-for="(item, key) in products.carts" :key="key">
-              <img :src="item.product.imageUrl" :alt="item.product.title" class="pr-md-0 col-5" />
-              <div class="d-inline col pr-md-0">
-                <p class="pb-1">{{ item.product.title }}</p>
-                <p class="pb-1">{{ item.size }}</p>
-                <p class="pb-1">價格:{{ item.product.price | currency }}</p>
-                <p class="pb-1">數量: {{ item.qty }}</p>
+            <div v-for="(item, key) in cart.carts" :key="key">
+              <div v-if="item.product" class="py-2 row bagInfo">
+                <img :src="item.product.imageUrl" :alt="item.product.title" class="pr-md-0 col-5" />
+                <div class="d-inline col pr-md-0">
+                  <p class="pb-1">{{ item.product.title }}</p>
+                  <p class="pb-1">{{ item.size }}</p>
+                  <p class="pb-1">價格:{{ item.product.price | currency }}</p>
+                  <p class="pb-1">數量: {{ item.qty }}</p>
+                </div>
               </div>
             </div>
-            <div class="h6 total">總價(含運):{{ products.total + 80 | currency }}</div>
+            <div class="h6 total">總價(含運):{{ cart.total + 80 | currency }}</div>
           </div>
         </div>
         <form @submit.prevent="createOrder" class="col-12 col-md">
@@ -212,6 +214,7 @@
 import CheckSchedule from '@/components/user/CheckSchedule'
 import card from '@/assets/images/checkout/card_bg.png'
 import cardBg from '@/assets/images/checkout/card_back_bg.png'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -221,8 +224,6 @@ export default {
     return {
       card,
       cardBg,
-      products: {},
-      isLoading: false,
       isFlipped: true,
       form: {
         // 建立對應資料結購
@@ -248,17 +249,7 @@ export default {
     }
   },
   methods: {
-    getCart () {
-      // 取得購物車內容
-      const vm = this
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      vm.isLoading = true
-      vm.$http.get(url).then(response => {
-        vm.products = response.data.data
-        vm.$bus.$emit('cartitem:push', response.data.data)
-        vm.isLoading = false
-      })
-    },
+    ...mapActions(['getCart']),
     createOrder () {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
@@ -268,7 +259,7 @@ export default {
       const m = date.getMonth()
       const d = date.getDate()
       vm.form.user.nowDate = `${y}/${m + 1}/${d}`
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       vm.$validator.validate().then(result => {
         if (result) {
           // email格式正確時發送訂單
@@ -279,7 +270,7 @@ export default {
             } else {
               alert(response.data.message)
             }
-            vm.isLoading = false
+            vm.$store.state.isLoading = false
           })
         } else {
           // 欄位不完整
@@ -290,6 +281,9 @@ export default {
         }
       })
     }
+  },
+  computed: {
+    ...mapGetters(['isLoading', 'cart'])
   },
   created () {
     this.getCart()

@@ -49,35 +49,37 @@
             v-for="(item,key) in filteredProducts"
             :key="key"
           >
-            <div class="border-0 shadow-sm shop_info" @click.prevent="goInside(item.id)">
-              <span
-                class="sale_style"
-                :class="{'soldOutStyle':item.in_stock === 0}"
-                v-if="item.origin_price != 0"
-              >SALE</span>
-              <img
-                :src="item.imageUrl"
-                :class="{'soldOutStyle':item.in_stock === 0}"
-                :alt="item.title"
-              />
-            </div>
-            <div class="item_info" @click.prevent="goInside(item.id)">
-              <p class="pdname" :class="{'soldOutStyle':item.in_stock === 0}">{{item.title}}</p>
-              <p class="price" :class="{'soldOutStyle':item.in_stock === 0}">
-                <span :class="{'saleFont':item.origin_price != 0}">{{item.price | currency}}</span>
-                <span class="old" v-if="item.origin_price != 0">{{item.origin_price | currency}}</span>
-              </p>
-              <span class="like">
-                <i
-                  class="fa fa-heart addLike"
-                  @click.stop="removeLike(item)"
-                  v-if="getIfLocalData(item)"
-                ></i>
-                <i class="fa fa-heart-o" @click.stop="addLike(item)" v-else></i>
-              </span>
-            </div>
-            <div class="soldOut" v-if="item.in_stock === 0">
-              <p>SOLD OUT</p>
+            <div v-if="item.is_enabled === 1">
+              <div class="border-0 shadow-sm shop_info" @click.prevent="goInside(item.id)">
+                <span
+                  class="sale_style"
+                  :class="{'soldOutStyle':item.in_stock === 0}"
+                  v-if="item.origin_price != 0"
+                >SALE</span>
+                <img
+                  :src="item.imageUrl"
+                  :class="{'soldOutStyle':item.in_stock === 0}"
+                  :alt="item.title"
+                />
+              </div>
+              <div class="item_info" @click.prevent="goInside(item.id)">
+                <p class="pdname" :class="{'soldOutStyle':item.in_stock === 0}">{{item.title}}</p>
+                <p class="price" :class="{'soldOutStyle':item.in_stock === 0}">
+                  <span :class="{'saleFont':item.origin_price != 0}">{{item.price | currency}}</span>
+                  <span class="old" v-if="item.origin_price != 0">{{item.origin_price | currency}}</span>
+                </p>
+                <span class="like">
+                  <i
+                    class="fa fa-heart addLike"
+                    @click.stop="removeLike(item)"
+                    v-if="getIfLocalData(item)"
+                  ></i>
+                  <i class="fa fa-heart-o" @click.stop="addLike(item)" v-else></i>
+                </span>
+              </div>
+              <div class="soldOut" v-if="item.in_stock === 0">
+                <p>SOLD OUT</p>
+              </div>
             </div>
           </div>
         </div>
@@ -136,7 +138,10 @@ export default {
         id: item.id
       }
       vm.$store.state.likeData.push(likeArr)
-      localStorage.setItem('likeData', JSON.stringify(vm.$store.state.likeData))
+      localStorage.setItem(
+        'likeData',
+        JSON.stringify(vm.$store.state.likeData)
+      )
     },
     removeLike (item) {
       const vm = this
@@ -145,7 +150,10 @@ export default {
       })
       vm.$store.state.likeData.splice(num, 1)
       // 更新localstrage資料
-      localStorage.setItem('likeData', JSON.stringify(vm.$store.state.likeData))
+      localStorage.setItem(
+        'likeData',
+        JSON.stringify(vm.$store.state.likeData)
+      )
     }
   },
   computed: {

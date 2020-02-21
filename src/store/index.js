@@ -15,7 +15,6 @@ export default new Vuex.Store({
         size: ''
       }
     },
-    paginations: '',
     likeData: []
   },
   actions: {

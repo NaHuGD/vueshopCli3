@@ -161,13 +161,13 @@
 
 <script>
 import $ from 'jquery'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
     return {
       pagination: '',
       modalTitle: '',
-      isLoading: false,
       coupons: {},
       tempCoupon: {
         title: '',
@@ -199,7 +199,7 @@ export default {
       // 新增優惠卷
       const vm = this
       let api
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       if (vm.isNew) {
         api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`
         vm.$http.post(api, { data: vm.tempCoupon }).then(response => {
@@ -212,32 +212,35 @@ export default {
           vm.getCoupon()
         })
       };
-      vm.isLoading = false
+      vm.$store.state.isLoading = false
       $('#couponModal').modal('hide')
     },
     removeCoupon (item) {
       // 刪除優惠卷
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${item.id}`
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       vm.$http.delete(url).then(response => {
         vm.coupons = response.data.coupons
         vm.getCoupon()
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
       })
     },
     getCoupon (page = 1) {
       // 取得資料
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       vm.$http.get(url, vm.tempProduct).then(response => {
         // 取得優惠卷
         vm.coupons = response.data.coupons
         vm.pagination = response.data.pagination
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
       })
     }
+  },
+  computed () {
+    mapGetters(['isLoading'])
   },
   created () {
     const vm = this

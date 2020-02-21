@@ -103,13 +103,13 @@
 
 <script>
 import CheckSchedule from '@/components/user/CheckSchedule'
+import { mapGetters } from 'vuex'
 export default {
   components: {
     CheckSchedule
   },
   data () {
     return {
-      isLoading: false,
       payingCheck: true,
       isAlert: false,
       isIcon: false,
@@ -126,10 +126,10 @@ export default {
       // 取得訂單資料
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`
-      vm.isLoading = true
+      vm.$store.state.isLoading = true
       vm.$http.get(url).then(response => {
         vm.order = response.data.order
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
         vm.payingCheck = !vm.order.is_paid
       })
     },
@@ -137,7 +137,7 @@ export default {
       const vm = this
       if (vm.payingCheck) {
         const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`
-        vm.isLoading = true
+        vm.$store.state.isLoading = true
         vm.$http.post(url).then(response => {
           if (response.data.success) {
             // 付款完成時,重新取得訂單資料
@@ -145,7 +145,7 @@ export default {
           }
         })
         document.querySelector('.paying').classList.add('active')
-        vm.isLoading = false
+        vm.$store.state.isLoading = false
         vm.payingCheck = false
       }
       setTimeout(() => {
@@ -177,6 +177,9 @@ export default {
         }, 10)
       }
     }
+  },
+  computed: {
+    ...mapGetters(['isLoading'])
   },
   created () {
     const vm = this
