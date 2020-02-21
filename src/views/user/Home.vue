@@ -346,7 +346,10 @@ export default {
       height: 375px;
     }
     @include md() {
-      padding: 20px;
+      padding: 0 100px;
+    }
+    @include mobile() {
+      padding: 40px;
     }
     & > div:nth-child(1) {
       @include pad {
@@ -435,7 +438,10 @@ export default {
       height: 375px;
     }
     @include md() {
-      padding: 20px;
+      padding: 0 100px;
+    }
+    @include mobile() {
+      padding: 40px;
     }
     & > div {
       @include pad {
@@ -463,8 +469,6 @@ export default {
       }
       @include md() {
         order: 1;
-      }
-      @include pad {
       }
     }
   }
@@ -507,11 +511,14 @@ export default {
       overflow: hidden;
       padding: 100px;
       @include desktop() {
-        padding: 0 50px;
+        padding: 50px;
       }
       @include md() {
         height: 50%;
-        padding: 20px;
+        padding: 100px;
+      }
+      @include mobile() {
+        padding: 40px;
       }
       & > p:nth-child(1) {
         font-family: "Dancing Script";
