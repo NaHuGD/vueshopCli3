@@ -67,15 +67,15 @@
           <p class="py-4 my-md-4 font-weight-bold">凱力理念</p>
           <p
             class="my-md-4"
-          >隨著健身產業的新興，全民的健身意識抬頭，到健身房報到已經成了不少人每天的必須行程，凱力健人嚴選致力於提供運動夥伴們最優質的健身護具，及品質最高的乳清蛋白，讓運動夥伴們可以專心訓練，由凱力做最強大的後盾與你們一同成長.</p>
+          >隨著健身產業的新興，全民的健身意識抬頭，到健身房報到已經成了不少人每天的必須行程，凱力健人嚴選致力於提供運動夥伴們最優質的健身護具，及品質最高的乳清蛋白，讓運動夥伴們可以專心訓練，由凱力做最強大的後盾與你們一同成長。</p>
           <p>KaizBB</p>
         </div>
       </div>
     </div>
     <div class="event04">
       <p align="center" class="h3 pb-4">LATEST ARTICLES</p>
-      <swiper :options="swiperOption" class="swiper">
-        <swiper-slide class="box" v-for="(slide,index) in swiperNum" :key="index">
+      <swiper :options="swiperOption" class="swiper" @resize="swiperWidth">
+        <swiper-slide class="box" v-for="(slide,index) in swiperFn" :key="index">
           <router-link to="/news">
             <div class="bgImg" :style="{backgroundImage:`url(${slide.img})`}"></div>
             <div class="info">
@@ -154,23 +154,23 @@ export default {
         loopFillGroupWithBlank: true,
         autoplay: true,
         on: {
-          init: function () {
-            const vm = this
-            const screenWidth = document.documentElement.clientWidth
-            if (screenWidth <= 769) {
-              vm.params.slidesPerView = 1
-            } else {
-              vm.params.slidesPerView = 3
-            }
-          },
+          // init: function () {
+          //   const vm = this
+          //   const screenWidth = document.documentElement.clientWidth
+          //   if (screenWidth <= 769) {
+          //     vm.params.slidesPerView = 1
+          //   } else {
+          //     vm.params.slidesPerView = 3
+          //   }
+          // },
           resize: function () {
-            const vm = this
-            const screenWidth = document.documentElement.clientWidth
-            if (screenWidth <= 769) {
-              vm.params.slidesPerView = 1
-            } else {
-              vm.params.slidesPerView = 3
-            }
+            // const vm = this
+            // const screenWidth = document.documentElement.clientWidth
+            // if (screenWidth <= 769) {
+            //   vm.params.slidesPerView = 1
+            // } else {
+            //   vm.params.slidesPerView = 3
+            // }
           }
         },
         navigation: {
@@ -193,6 +193,22 @@ export default {
         },
         1000
       )
+    },
+    swiperWidth (screenWidth) {
+      const vm = this
+      vm.screenWidth = document.documentElement.clientWidth
+    }
+  },
+  computed: {
+    swiperFn () {
+      const vm = this
+      if (vm.screenWidth >= 769) {
+        vm.swiperOption.slidesPerView = 3
+        return vm.swiperNum
+      } else {
+        vm.swiperOption.slidesPerView = 1
+        return vm.swiperNum
+      }
     }
   }
 }
