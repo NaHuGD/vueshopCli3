@@ -20,15 +20,18 @@
             v-for="(item,key) in cart.carts"
             :key="key"
           >
-            <tr class="row">
+            <tr class="row" v-if="item.product">
               <td class="col-sm-2 col-3 w-100 pr-0">
                 <img class="col-12 p-0" :src="item.product.imageUrl" :alt="item.product.title" />
                 <p class="col-12 p-0">{{item.product.title}}</p>
               </td>
               <td class="col-sm col-2 text-center">{{item.size}}</td>
-              <td class="col-sm col-2 text-center">
-                {{item.qty}}
-              </td>
+              <td class="col-sm col-2 text-center">{{item.qty}}</td>
+              <!-- <td class="col-sm col-2 text-center">
+                <select v-model="item.qty" @change.prevent="changeCartFn(item.id)">
+                  <option :value="num" v-for="num in 10" :key="num.id">{{num}}</option>
+                </select>
+              </td> -->
               <td class="col-sm col-3 text-center">{{item.product.price | currency}}</td>
               <td class="col-sm col-2 text-center" @click.prevent="cartItemDelete(item)">
                 <button>
@@ -93,8 +96,8 @@
         </div>
       </div>
     </div>
-    <div class="main pb-2 col-10" v-if="cart.carts.length < 1">
-      <p class="text-center h5">您的購物車目前是空的!!</p>
+    <div class="main mb-3 mx-auto py-3 col-10" v-if="cart.carts.length < 1">
+      <router-link to="shop/all" class="text-center h5 m-0 d-block">點我前往購物</router-link>
     </div>
   </div>
 </template>
@@ -112,7 +115,10 @@ export default {
       barcodeImg,
       coupon_code: '',
       couponSuccess: '',
-      couponMessage: ''
+      couponMessage: '',
+      status: {
+        loadingItem: ''
+      }
     }
   },
   methods: {
@@ -149,9 +155,24 @@ export default {
         behavior: 'smooth'
       })
     }
+    // changeCartFn (id, qty = 1) {
+    //   console.log(this.$store.state)
+    //   // 加入購物車，傳入值預設為1
+    //   const vm = this
+    //   const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+    //   const cart = {
+    //     // 定義資料結購
+    //     product_id: id,
+    //     qty
+    //   }
+    //   vm.$http.post(url, { data: cart }).then(response => {
+    //     // 加入後取得購物車資料
+    //     vm.getCart()
+    //   })
+    // }
   },
   computed: {
-    ...mapGetters(['isLoading', 'cart'])
+    ...mapGetters(['isLoading', 'cart', 'products'])
   },
   created () {
     const vm = this
@@ -162,4 +183,12 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/helpers/breakpoint.scss";
+a {
+  text-decoration: none;
+  color: $color-darkRed;
+  transition: 0.3s;
+  &:hover {
+    opacity: 0.7;
+  }
+}
 </style>
