@@ -211,7 +211,7 @@ export default {
         vm.$http.put(api, { data: vm.tempCoupon }).then(response => {
           vm.getCoupon()
         })
-      };
+      }
       vm.$store.dispatch('updateLoading', false)
       $('#couponModal').modal('hide')
     },
