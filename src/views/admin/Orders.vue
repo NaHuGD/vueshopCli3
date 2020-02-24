@@ -91,12 +91,12 @@ export default {
     getOrders (page = 1) {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/orders?page=${page}`
       const vm = this
-      vm.$store.state.isLoading = true
+      vm.$store.dispatch('updateLoading', true)
       vm.$http.get(api).then(response => {
         // 取得訂單資料//
         vm.orders = response.data.orders
         vm.pagination = response.data.pagination
-        vm.$store.state.isLoading = false
+        vm.$store.dispatch('updateLoading', false)
       })
     }
   },

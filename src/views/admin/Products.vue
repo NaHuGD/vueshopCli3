@@ -262,10 +262,10 @@ export default {
       // 'https://vue-course-api.hexschool.io/api/lovfee/products'取得api路徑
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`
       const vm = this
-      vm.$store.state.isLoading = true
+      vm.$store.dispatch('updateLoading', true)
       vm.$http.get(api).then(response => {
         // 取得每筆商品資料//
-        vm.$store.state.isLoading = false
+        vm.$store.dispatch('updateLoading', false)
         vm.products = response.data.products
         vm.pagination = response.data.pagination
       })

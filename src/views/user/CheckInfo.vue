@@ -259,7 +259,7 @@ export default {
       const m = date.getMonth()
       const d = date.getDate()
       vm.form.user.nowDate = `${y}/${m + 1}/${d}`
-      vm.$store.state.isLoading = true
+      vm.$store.dispatch('updateLoading', true)
       vm.$validator.validate().then(result => {
         if (result) {
           // email格式正確時發送訂單
@@ -270,7 +270,7 @@ export default {
             } else {
               alert(response.data.message)
             }
-            vm.$store.state.isLoading = false
+            vm.$store.dispatch('updateLoading', false)
           })
         } else {
           // 欄位不完整
@@ -278,6 +278,7 @@ export default {
             top: 0,
             behavior: 'smooth'
           })
+          vm.$store.dispatch('updateLoading', false)
         }
       })
     }

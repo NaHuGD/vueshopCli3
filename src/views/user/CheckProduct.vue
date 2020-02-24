@@ -127,11 +127,11 @@ export default {
     ...mapActions(['getCart']),
     cartItemDelete (item) {
       const vm = this
-      vm.$store.state.isLoading = true
+      vm.$store.dispatch('updateLoading', true)
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`
       vm.$http.delete(url).then(response => {
         vm.getCart()
-        vm.$store.state.isLoading = false
+        vm.$store.dispatch('updateLoading', false)
       })
     },
     addCoupons () {
@@ -140,13 +140,13 @@ export default {
       const coupon = {
         code: vm.coupon_code
       }
-      vm.$store.state.isLoading = true
+      vm.$store.dispatch('updateLoading', true)
       vm.$http.post(url, { data: coupon }).then(response => {
         // 套用優惠卷//
         vm.couponSuccess = response.data.success
         vm.couponMessage = response.data.message
         vm.getCart()
-        vm.$store.state.isLoading = false
+        vm.$store.dispatch('updateLoading', false)
       })
     },
     goCheckOutFn () {

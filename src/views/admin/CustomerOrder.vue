@@ -286,11 +286,11 @@ export default {
     deleteCart (id) {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
-      vm.$store.state.isLoading = true
+      vm.$store.dispatch('updateLoading', true)
       vm.$http.delete(url).then(response => {
         // 刪除後取得購物車內容
         vm.getCart()
-        vm.$store.state.isLoading = false
+        vm.$store.dispatch('updateLoading', false)
       })
     },
     addCoupon () {
@@ -300,11 +300,11 @@ export default {
       const coupon = {
         code: vm.coupon_code
       }
-      vm.$store.state.isLoading = true
+      vm.$store.dispatch('updateLoading', true)
       vm.$http.post(url, { data: coupon }).then(response => {
         vm.couponMessage = response.data.message
         vm.getCart()
-        vm.$store.state.isLoading = false
+        vm.$store.dispatch('updateLoading', false)
       })
     },
     createOrder () {
@@ -312,7 +312,7 @@ export default {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
       const order = vm.form
-      vm.$store.state.isLoading = true
+      vm.$store.dispatch('updateLoading', true)
       vm.$validator.validate().then(result => {
         if (result) {
           // email格式正確時發送訂單
@@ -321,11 +321,11 @@ export default {
               // 訂單確認建立 導頁至結帳畫面
               vm.$router.push(`/customer_checkout/${response.data.orderId}`)
             }
-            vm.$store.state.isLoading = false
+            vm.$store.dispatch('updateLoading', false)
           })
         } else {
           alert('欄位不完整')
-          vm.$store.state.isLoading = false
+          vm.$store.dispatch('updateLoading', false)
         }
       })
     }

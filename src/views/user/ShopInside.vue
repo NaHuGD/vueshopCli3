@@ -121,7 +121,7 @@ export default {
       // 取得指定商品資料
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
-      vm.$store.state.isLoading = true
+      vm.$store.dispatch('updateLoading', true)
       vm.$http.get(url).then(response => {
         const newArray = response.data.products.filter(function (
           item,
@@ -145,7 +145,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`
       vm.$http.get(api).then(response => {
         vm.product = response.data.product
-        vm.$store.state.isLoading = false
+        vm.$store.dispatch('updateLoading', false)
       })
     },
     goPath (id) {
@@ -182,7 +182,7 @@ export default {
       // qty加入的數量
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      vm.$store.state.isLoading = true
+      vm.$store.dispatch('updateLoading', true)
       const cart = {
         product_id: id,
         qty: vm.num,
@@ -191,13 +191,13 @@ export default {
       if (vm.$store.state.cart.carts.size === undefined) {
         alert('請選擇尺寸/口味')
         vm.isSize = true
-        vm.$store.state.isLoading = false
+        vm.$store.dispatch('updateLoading', false)
       } else {
         vm.$http.post(url, { data: cart }).then(response => {
           // 加入購物車,response=商品資料
           vm.getCart()
           vm.$bus.$emit('bagToggle:push', false)
-          vm.$store.state.isLoading = false
+          vm.$store.dispatch('updateLoading', false)
         })
       }
     },
@@ -212,7 +212,7 @@ export default {
       if (vm.$store.state.cart.carts.size === undefined) {
         alert('請選擇尺寸/口味')
         vm.isSize = true
-        vm.$store.state.isLoading = false
+        vm.$store.dispatch('updateLoading', false)
       } else {
         vm.$http.post(url, { data: cart }).then(response => {
           // 直接購買,導頁並更新購物車

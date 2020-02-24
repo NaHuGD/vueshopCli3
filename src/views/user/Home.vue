@@ -74,8 +74,8 @@
     </div>
     <div class="event04">
       <p align="center" class="h3 pb-4">LATEST ARTICLES</p>
-      <swiper :options="swiperOption" class="swiper" @resize="swiperWidth">
-        <swiper-slide class="box" v-for="(slide,index) in swiperFn" :key="index">
+      <swiper :options="swiperOption" class="swiper">
+        <swiper-slide class="box" v-for="(slide,index) in swiperNum" :key="index">
           <router-link to="/news">
             <div class="bgImg" :style="{backgroundImage:`url(${slide.img})`}"></div>
             <div class="info">
@@ -157,6 +157,14 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         },
+        breakpoints: {
+          768: {
+            slidesPerView: 2
+          },
+          480: {
+            slidesPerView: 1
+          }
+        },
         slidesPerView: 3,
         spaceBetween: 10,
         slidesPerGroup: 1,
@@ -173,10 +181,6 @@ export default {
         },
         1000
       )
-    },
-    swiperWidth (screenWidth) {
-      const vm = this
-      vm.screenWidth = document.documentElement.clientWidth
     }
   },
   computed: {

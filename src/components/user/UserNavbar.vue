@@ -161,11 +161,11 @@ export default {
     },
     cartItemDelete (item) {
       const vm = this
-      vm.$store.state.isLoading = true
+      vm.$store.dispatch('updateLoading', true)
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`
       vm.$http.delete(url).then(response => {
         vm.getCart()
-        vm.$store.state.isLoading = false
+        vm.$store.dispatch('updateLoading', false)
       })
     },
     mobNavFn () {
