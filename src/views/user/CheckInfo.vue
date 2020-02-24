@@ -364,62 +364,75 @@ export default {
   .indexCard {
     position: relative;
     margin: 0 auto;
-    max-width: 360px;
     overflow: hidden;
+    max-width: 360px;
     height: 260px;
-    @include mobile {
-      max-width: 260px;
+    @include lg {
+      max-width: 250px;
       height: 200px;
     }
+    @include mobile {
+      max-width: 260px;
+    }
     img {
-      width: 360px;
+      // width: 360px;
+      width:100%;
+      @include lg {
+        // width: 250px;
+      }
       @include mobile {
-        width: 260px;
+        // width: 260px;
       }
     }
     .number {
       position: absolute;
       margin: 0 auto;
-      top: 150px;
-      left: 60px;
+      top: 65%;
+      left:15%;
       font-size: 20px;
       line-height: 25px;
       font-weight: bold;
       font-family: "微軟正黑體";
       color: #fff;
+      @include lg {
+        font-size:1rem;
+      }
       @include mobile {
-        top: 115px;
-        left: 25px;
+        font-size: 0.8rem;
       }
     }
     .date {
       position: absolute;
       margin: 0 auto;
-      top: 190px;
-      left: 210px;
+      top: 77%;
+      left: 60%;
       font-size: 16px;
       line-height: 25px;
       font-weight: bold;
       font-family: "微軟正黑體";
       color: #fff;
+      @include lg {
+        font-size:1rem;
+      }
       @include mobile {
-        top: 140px;
-        left: 145px;
+        font-size: 0.8rem;
       }
     }
     .ccv {
       position: absolute;
       margin: 0 auto;
-      top: 122px;
-      left: 240px;
+      top: 50%;
+      left: 65%;
       font-size: 20px;
       line-height: 25px;
       font-weight: bold;
       font-family: "微軟正黑體";
       color: #000;
+      @include lg {
+        font-size:1rem;
+      }
       @include mobile {
-        top: 88px;
-        left: 160px;
+        font-size: 0.8rem;
       }
     }
     .cardFront {
