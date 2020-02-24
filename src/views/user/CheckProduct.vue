@@ -26,12 +26,14 @@
                 <p class="col-12 p-0">{{item.product.title}}</p>
               </td>
               <td class="col-sm col-2 text-center">{{item.size}}</td>
-              <td class="col-sm col-2 text-center">{{item.qty}}</td>
-              <!-- <td class="col-sm col-2 text-center">
-                <select v-model="item.qty" @change.prevent="changeCartFn(item.id)">
+              <td class="col-sm col-2 text-center">
+                <select
+                  v-model="item.qty"
+                  @change.prevent="changeCartFn(item.id,item.product.id, item.qty, item.size)"
+                >
                   <option :value="num" v-for="num in 10" :key="num.id">{{num}}</option>
                 </select>
-              </td> -->
+              </td>
               <td class="col-sm col-3 text-center">{{item.product.price | currency}}</td>
               <td class="col-sm col-2 text-center" @click.prevent="cartItemDelete(item)">
                 <button>
@@ -154,22 +156,29 @@ export default {
         top: 0,
         behavior: 'smooth'
       })
+    },
+    changeCartFn (id, productId, qty, size) {
+      const vm = this
+      vm.$store.dispatch('updateLoading', true)
+      const delAPI = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
+      const addAPI = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      const changeCart = {
+        product_id: productId,
+        qty: qty,
+        size: size
+      }
+      vm.$http
+        .all([
+          vm.$http.delete(delAPI),
+          vm.$http.post(addAPI, { data: changeCart })
+        ])
+        .then(
+          vm.$http.spread((delResp, addResp) => {
+            vm.getCart()
+            vm.$store.dispatch('updateLoading', false)
+          })
+        )
     }
-    // changeCartFn (id, qty = 1) {
-    //   console.log(this.$store.state)
-    //   // 加入購物車，傳入值預設為1
-    //   const vm = this
-    //   const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-    //   const cart = {
-    //     // 定義資料結購
-    //     product_id: id,
-    //     qty
-    //   }
-    //   vm.$http.post(url, { data: cart }).then(response => {
-    //     // 加入後取得購物車資料
-    //     vm.getCart()
-    //   })
-    // }
   },
   computed: {
     ...mapGetters(['isLoading', 'cart', 'products'])
