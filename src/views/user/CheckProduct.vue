@@ -124,16 +124,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getCart']),
-    cartItemDelete (item) {
-      const vm = this
-      vm.$store.dispatch('updateLoading', true)
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`
-      vm.$http.delete(url).then(response => {
-        vm.getCart()
-        vm.$store.dispatch('updateLoading', false)
-      })
-    },
+    ...mapActions(['cartItemDelete']),
+    ...mapActions('cartsModules', ['getCart']),
     addCoupons () {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
@@ -181,7 +173,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['isLoading', 'cart', 'products'])
+    ...mapGetters(['isLoading', 'products']),
+    ...mapGetters('cartsModules', ['cart'])
   },
   created () {
     const vm = this

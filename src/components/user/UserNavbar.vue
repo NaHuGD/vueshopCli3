@@ -27,8 +27,8 @@
       </div>
     </header>
     <div :class="{'zindex':!bagToggle}">
-      <div :class="{'bagBg':bagToggle === false}" @click.prevent="bagToggle = true"></div>
-      <a class="headerBag" @click.prevent="bagToggle = !bagToggle">
+      <div :class="{'bagBg':bagToggle === false}" @click="bagToggleFn"></div>
+      <a class="headerBag" @click="bagToggleFn(false)">
         <i :class="{'iconActive':!bagToggle}" class="fa fa-shopping-cart"></i>
         <span v-if="cart.carts.length >= 1">{{ cart.carts.length }}</span>
       </a>
@@ -123,7 +123,6 @@ export default {
   data () {
     return {
       isMobNav: false,
-      bagToggle: true,
       isAnimateOut: false,
       isCheckOut: false,
       isSearch: false,
@@ -133,7 +132,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getCart']),
+    ...mapActions(['bagToggleFn', 'cartItemDelete']),
+    ...mapActions('cartsModules', ['getCart']),
     goShop () {
       const vm = this
       vm.$router.push({
@@ -159,15 +159,6 @@ export default {
       const vm = this
       vm.CartItem = item
     },
-    cartItemDelete (item) {
-      const vm = this
-      vm.$store.dispatch('updateLoading', true)
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`
-      vm.$http.delete(url).then(response => {
-        vm.getCart()
-        vm.$store.dispatch('updateLoading', false)
-      })
-    },
     mobNavFn () {
       const vm = this
       vm.isMobNav = false
@@ -181,15 +172,16 @@ export default {
       })
       vm.isSearch = false
     },
-    goCheckProduct () {
+    goCheckProduct (context) {
       const vm = this
-      if (vm.$store.state.cart.carts.length >= 1) {
-        vm.bagToggle = true
+      if (vm.$store.state.cartsModules.cart.carts.length >= 1) {
+        vm.$store.dispatch('bagToggleFn', true)
+        console.log(vm, vm.$router)
         vm.$router.push({
           path: '/checkProduct'
         })
       } else {
-        vm.bagToggle = true
+        vm.$store.dispatch('bagToggleFn', true)
         vm.$router.push({
           path: '/shop/all'
         })
@@ -197,7 +189,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['isLoading', 'cart']),
+    ...mapGetters(['isbagToggleFn', 'bagToggle', 'isLoading']),
+    ...mapGetters('cartsModules', ['cart']),
     menuActiveFn () {
       const vm = this
       const routeName = vm.$route.name
@@ -230,10 +223,6 @@ export default {
   },
   created () {
     const vm = this
-    vm.$bus.$on('bagToggle:push', function (item) {
-      // 新增後顯示購物車
-      vm.bagToggle = item
-    })
     vm.getCart()
   }
 }

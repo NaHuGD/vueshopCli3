@@ -1,21 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import cartsModules from './carts'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  strict: true,
+  namespaced: true,
   state: {
-    strict: true,
-    namespaced: true,
     isLoading: false,
     products: [],
-    cart: {
-      carts: {
-        size: ''
-      }
-    },
-    likeData: []
+    likeData: [],
+    bagToggle: true
   },
   actions: {
     updateLoading (context, status) {
@@ -30,13 +27,14 @@ export default new Vuex.Store({
         context.commit('LOADING', false)
       })
     },
-    getCart (context) {
-      // 取得購物車內容
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+    bagToggleFn (context, state) {
+      context.commit('BAGTOGGLE', state)
+    },
+    cartItemDelete (context, item) {
       context.commit('LOADING', true)
-      axios.get(url).then(response => {
-        // 接受到購物車資訊時用eventbus傳遞
-        context.commit('CART', response.data.data)
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`
+      axios.delete(url).then(response => {
+        context.dispatch('cartsModules/getCart')
         context.commit('LOADING', false)
       })
     },
@@ -51,11 +49,11 @@ export default new Vuex.Store({
     PRODUCTS (state, payload) {
       state.products = payload
     },
-    CART (state, payload) {
-      state.cart = payload
-    },
     LIKEDATA (state, payload) {
       state.likeData = payload
+    },
+    BAGTOGGLE (state, payload) {
+      state.bagToggle = payload
     }
   },
   getters: {
@@ -65,14 +63,14 @@ export default new Vuex.Store({
     products (state) {
       return state.products
     },
-    cart (state) {
-      return state.cart
-    },
-    LIKEDATA (state) {
+    likeData (state) {
       return state.likeData
+    },
+    bagToggle (state) {
+      return state.bagToggle
     }
   },
   modules: {
-
+    cartsModules
   }
 })

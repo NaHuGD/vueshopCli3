@@ -54,7 +54,7 @@
                 </select>
               </div>
               <div class="addNumber mt-2 col-6">
-                <select name class="form-control" v-model="num">
+                <select name class="form-control" id="cartNum" @change.prevent="cartNumFn">
                   <option :value="num" v-for="num in 10" :key="num.id">{{num}}</option>
                 </select>
               </div>
@@ -63,9 +63,9 @@
           </div>
           <div class="text-danger text-center" v-if="product.in_stock === 0">商品已售完</div>
           <div class="addShop text-center" v-else>
-            <button class="col-5" @click.prevent="addtoCart(product.id,num)">加入購物車</button>
+            <button class="col-5" @click.prevent="addtoCart(product.id)">加入購物車</button>
             <span class="col"></span>
-            <button class="col-5" @click.prevent="buyNow(product.id)">直接購買</button>
+            <button class="col-5" @click.prevent="buyNow(product.id)" to="/shop/all">直接購買</button>
           </div>
           <h6 class="h5 pt-4">商品描述:</h6>
           <ul class="ml-2">
@@ -111,12 +111,12 @@ export default {
       products: '',
       // 單筆商品
       product: '',
-      moreLook: [],
-      num: '1'
+      moreLook: []
     }
   },
   methods: {
-    ...mapActions(['getCart', 'getLocalData']),
+    ...mapActions(['getLocalData']),
+    ...mapActions('cartsModules', ['cartNumFn', 'addtoCart']),
     getProduct (id) {
       // 取得指定商品資料
       const vm = this
@@ -165,7 +165,7 @@ export default {
     tasteValue () {
       // 選擇口味
       const vm = this
-      vm.$store.state.cart.carts.size = document.querySelector(
+      vm.$store.state.cartsModules.cart.carts.size = document.querySelector(
         '#tasteValue'
       ).value
       vm.isSize = false
@@ -173,50 +173,27 @@ export default {
     protectiveValue () {
       // 選擇尺寸
       const vm = this
-      vm.$store.state.cart.carts.size = document.querySelector(
+      vm.$store.state.cartsModules.cart.carts.size = document.querySelector(
         '#protectiveValue'
       ).value
       vm.isSize = false
-    },
-    addtoCart (id) {
-      // qty加入的數量
-      const vm = this
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      vm.$store.dispatch('updateLoading', true)
-      const cart = {
-        product_id: id,
-        qty: vm.num,
-        size: vm.$store.state.cart.carts.size
-      }
-      if (vm.$store.state.cart.carts.size === undefined) {
-        alert('請選擇尺寸/口味')
-        vm.isSize = true
-        vm.$store.dispatch('updateLoading', false)
-      } else {
-        vm.$http.post(url, { data: cart }).then(response => {
-          // 加入購物車,response=商品資料
-          vm.getCart()
-          vm.$bus.$emit('bagToggle:push', false)
-          vm.$store.dispatch('updateLoading', false)
-        })
-      }
     },
     buyNow (id) {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       const cart = {
         product_id: id,
-        qty: vm.num,
-        size: vm.$store.state.cart.carts.size
+        qty: vm.$store.state.cartsModules.cartNum,
+        size: vm.$store.state.cartsModules.cart.carts.size
       }
-      if (vm.$store.state.cart.carts.size === undefined) {
+      if (vm.$store.state.cartsModules.cart.carts.size === undefined) {
         alert('請選擇尺寸/口味')
         vm.isSize = true
         vm.$store.dispatch('updateLoading', false)
       } else {
         vm.$http.post(url, { data: cart }).then(response => {
           // 直接購買,導頁並更新購物車
-          vm.getCart()
+          vm.$store.dispatch('cartsModules/getCart')
         })
         vm.$router.push('/checkProduct')
       }
@@ -234,7 +211,10 @@ export default {
         id: item.id
       }
       vm.$store.state.likeData.push(likeArr)
-      localStorage.setItem('likeData', JSON.stringify(vm.$store.state.likeData))
+      localStorage.setItem(
+        'likeData',
+        JSON.stringify(vm.$store.state.likeData)
+      )
     },
     removeLike (item) {
       const vm = this
@@ -242,7 +222,10 @@ export default {
         return ele.title === item.title
       })
       vm.$store.state.likeData.splice(num, 1)
-      localStorage.setItem('likeData', JSON.stringify(vm.$store.state.likeData))
+      localStorage.setItem(
+        'likeData',
+        JSON.stringify(vm.$store.state.likeData)
+      )
     }
   },
   computed: {
@@ -253,7 +236,6 @@ export default {
     vm.itemId = vm.$route.params.itemId
     // 將指定商品id帶入
     vm.getProduct(vm.itemId)
-    vm.getCart()
     vm.getLocalData()
   }
 }
