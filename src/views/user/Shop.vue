@@ -72,7 +72,7 @@
                   <i
                     class="fa fa-heart addLike"
                     @click.stop="removeLike(item)"
-                    v-if="getIfLocalData(item)"
+                    v-if="getFilterLocalData(item)"
                   ></i>
                   <i class="fa fa-heart-o" @click.stop="addLike(item)" v-else></i>
                 </span>
@@ -96,11 +96,12 @@ export default {
     return {
       isLike: false,
       isMenuActive: '全部商品',
-      searchId: ''
+      searchId: '',
+      likeData: []
     }
   },
   methods: {
-    ...mapActions(['getProducts', 'getLocalData']),
+    ...mapActions(['getProducts']),
     getAll () {
       const vm = this
       const path = '/shop/all'
@@ -130,9 +131,13 @@ export default {
         behavior: 'smooth'
       })
     },
-    getIfLocalData (item) {
+    getLocalData () {
       const vm = this
-      return vm.$store.state.likeData.some(function (ele) {
+      vm.likeData = JSON.parse(localStorage.getItem('likeData')) || []
+    },
+    getFilterLocalData (item) {
+      const vm = this
+      return vm.likeData.some(function (ele) {
         return item.id === ele.id
       })
     },
@@ -142,27 +147,27 @@ export default {
         title: item.title,
         id: item.id
       }
-      vm.$store.state.likeData.push(likeArr)
+      vm.likeData.push(likeArr)
       localStorage.setItem(
         'likeData',
-        JSON.stringify(vm.$store.state.likeData)
+        JSON.stringify(vm.likeData)
       )
     },
     removeLike (item) {
       const vm = this
-      const num = vm.$store.state.likeData.findIndex(function (ele) {
+      const num = vm.likeData.findIndex(function (ele) {
         return ele.id === item.id
       })
-      vm.$store.state.likeData.splice(num, 1)
+      vm.likeData.splice(num, 1)
       // 更新localstrage資料
       localStorage.setItem(
         'likeData',
-        JSON.stringify(vm.$store.state.likeData)
+        JSON.stringify(vm.likeData)
       )
     }
   },
   computed: {
-    ...mapGetters(['isLoading', 'products', 'LIKEDATA']),
+    ...mapGetters(['isLoading', 'products']),
     filteredProducts () {
       const vm = this
       const routeName = vm.$route.name
@@ -187,7 +192,7 @@ export default {
         case 'Like':
           vm.isMenuActive = '最愛商品'
           filtered = vm.products.filter(function (item, index, arr) {
-            return vm.$store.state.likeData.some(function (ele) {
+            return vm.likeData.some(function (ele) {
               return item.id === ele.id
             })
           })

@@ -16,7 +16,7 @@
             <i
               class="fa fa-heart text-danger"
               @click.stop="removeLike(product)"
-              v-if="getIfLocalData(product)"
+              v-if="getFilterLocalData(product)"
             ></i>
             <i class="fa fa-heart-o text-dark" @click.stop="addLike(product)" v-else></i>
           </span>
@@ -111,11 +111,11 @@ export default {
       products: '',
       // 單筆商品
       product: '',
-      moreLook: []
+      moreLook: [],
+      likeData: []
     }
   },
   methods: {
-    ...mapActions(['getLocalData']),
     ...mapActions('cartsModules', ['cartNumFn', 'addtoCart']),
     getProduct (id) {
       // 取得指定商品資料
@@ -198,9 +198,13 @@ export default {
         vm.$router.push('/checkProduct')
       }
     },
-    getIfLocalData (item) {
+    getLocalData () {
       const vm = this
-      return vm.$store.state.likeData.some(function (ele) {
+      vm.likeData = JSON.parse(localStorage.getItem('likeData')) || []
+    },
+    getFilterLocalData (item) {
+      const vm = this
+      return vm.likeData.some(function (ele) {
         return item.id === ele.id
       })
     },
@@ -210,26 +214,26 @@ export default {
         title: item.title,
         id: item.id
       }
-      vm.$store.state.likeData.push(likeArr)
+      vm.likeData.push(likeArr)
       localStorage.setItem(
         'likeData',
-        JSON.stringify(vm.$store.state.likeData)
+        JSON.stringify(vm.likeData)
       )
     },
     removeLike (item) {
       const vm = this
-      const num = vm.$store.state.likeData.findIndex(ele => {
+      const num = vm.likeData.findIndex(ele => {
         return ele.title === item.title
       })
-      vm.$store.state.likeData.splice(num, 1)
+      vm.likeData.splice(num, 1)
       localStorage.setItem(
         'likeData',
-        JSON.stringify(vm.$store.state.likeData)
+        JSON.stringify(vm.likeData)
       )
     }
   },
   computed: {
-    ...mapGetters(['isLoading', 'likeData'])
+    ...mapGetters(['isLoading'])
   },
   created () {
     const vm = this

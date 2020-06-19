@@ -11,7 +11,6 @@ export default new Vuex.Store({
   state: {
     isLoading: false,
     products: [],
-    likeData: [],
     bagToggle: true
   },
   actions: {
@@ -37,9 +36,6 @@ export default new Vuex.Store({
         context.dispatch('cartsModules/getCart')
         context.commit('LOADING', false)
       })
-    },
-    getLocalData (context) {
-      context.commit('LIKEDATA', (JSON.parse(localStorage.getItem('likeData')) || []))
     }
   },
   mutations: {
@@ -48,9 +44,6 @@ export default new Vuex.Store({
     },
     PRODUCTS (state, payload) {
       state.products = payload
-    },
-    LIKEDATA (state, payload) {
-      state.likeData = payload
     },
     BAGTOGGLE (state, payload) {
       state.bagToggle = payload
@@ -62,9 +55,6 @@ export default new Vuex.Store({
     },
     products (state) {
       return state.products
-    },
-    likeData (state) {
-      return state.likeData
     },
     bagToggle (state) {
       return state.bagToggle
