@@ -30,11 +30,7 @@ export default {
     gotopShow () {
       window.addEventListener('scroll', function () {
         const gotop = document.querySelector('.gotop')
-        if (document.documentElement.scrollTop > 100) {
-          gotop.style.display = 'block'
-        } else {
-          gotop.style.display = 'none'
-        }
+        document.documentElement.scrollTop > 100 ? gotop.style.display = 'block' : gotop.style.display = 'none'
       })
     }
   },

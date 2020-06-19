@@ -136,9 +136,8 @@ export default {
     ...mapActions('cartsModules', ['getCart']),
     goShop () {
       const vm = this
-      vm.$router.push({
-        path: '/shop/all'
-      })
+      const path = '/shop/all'
+      vm.$route.path !== path && vm.$router.push(path)
       vm.isMobNav = false
     },
     goDiscount () {
@@ -166,9 +165,10 @@ export default {
     goProducts () {
       // 搜尋商品頁
       const vm = this
+      const path = `/search/${vm.id}`
       vm.$bus.$emit('searchId:push', vm.id)
-      vm.$router.push({
-        path: `/search/${vm.id}`
+      vm.$route.path !== path && vm.$router.push({
+        path: path
       })
       vm.isSearch = false
     },
@@ -182,9 +182,7 @@ export default {
         })
       } else {
         vm.$store.dispatch('bagToggleFn', true)
-        vm.$router.push({
-          path: '/shop/all'
-        })
+        this.goShop()
       }
     }
   },

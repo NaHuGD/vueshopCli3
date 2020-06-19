@@ -19,13 +19,9 @@ export default {
     UserNavbar,
     UserGotop,
     UserFooter
-  },
-  data () {
-    return {}
   }
 }
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/user.scss";
 </style>

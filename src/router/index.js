@@ -66,7 +66,6 @@ const routes = [
           {
             // 商品id
             path: ':id',
-            name: 'ShopSearch',
             component: () => import('@/views/user/Shop')
           }
         ]
@@ -79,7 +78,6 @@ const routes = [
         children: [
           {
             path: ':itemId',
-            name: 'ShopInside',
             component: () => import('@/views/user/ShopInside')
           }
         ]
@@ -128,7 +126,6 @@ const routes = [
   },
   {
     path: '/admin',
-    name: 'Admin',
     component: () => import('@/views/admin/Admin'),
     children: [
       {
@@ -154,7 +151,6 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Admin',
     component: () => import('@/views/admin/Admin'),
     children: [
       {

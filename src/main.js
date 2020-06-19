@@ -18,7 +18,7 @@ import 'swiper/dist/css/swiper.css'
 import 'eslint-loader/index'
 
 import './bus'
-import './fadein'
+import './plugins/fadein'
 import currencyFilter from './filters/currency'
 import dateFilter from './filters/date'
 

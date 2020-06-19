@@ -48,7 +48,7 @@ export default {
     initMap () {
       const vm = this
       // 透過 Map 物件建構子建立新地圖 map 物件實例，並將地圖呈現在 id 為 map 的元素中
-      // eslint-disable-next-line no-undef
+      const google = window.google
       vm.map = new google.maps.Map(document.querySelector('.map'), {
         styles: [
           {
@@ -206,13 +206,14 @@ export default {
     setMarker () {
       const vm = this
       // 建立一個新地標
-      // eslint-disable-next-line no-undef,no-unused-vars
+      const google = window.google
       const marker = new google.maps.Marker({
         // 設定地標的座標
         position: { lat: vm.lat, lng: vm.lng },
         // 設定地標要放在哪一個地圖
         map: vm.map
       })
+      window.marker = marker
     }
   },
   mounted () {

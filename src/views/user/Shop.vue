@@ -103,19 +103,24 @@ export default {
     ...mapActions(['getProducts', 'getLocalData']),
     getAll () {
       const vm = this
-      vm.$router.push('/shop/all')
+      const path = '/shop/all'
+      // 避免重複點擊時報錯
+      vm.$route.path !== path && vm.$router.push(path)
     },
     getProtective () {
       const vm = this
-      vm.$router.push('/shop/protective')
+      const path = '/shop/protective'
+      vm.$route.path !== path && vm.$router.push(path)
     },
     getWhey () {
       const vm = this
-      vm.$router.push('/shop/whey')
+      const path = '/shop/whey'
+      vm.$route.path !== path && vm.$router.push(path)
     },
     getLike () {
       const vm = this
-      vm.$router.push('/shop/like')
+      const path = '/shop/like'
+      vm.$route.path !== path && vm.$router.push(path)
     },
     goInside (id) {
       const vm = this

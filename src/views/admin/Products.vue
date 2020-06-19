@@ -264,14 +264,14 @@ export default {
       const vm = this
       vm.$store.dispatch('updateLoading', true)
       vm.$http.get(api).then(response => {
-        // 取得每筆商品資料//
+        // 取得每筆商品資料
         vm.$store.dispatch('updateLoading', false)
         vm.products = response.data.products
         vm.pagination = response.data.pagination
       })
     },
     openModal (isNew, item) {
-      // 打開表單,item=點選的商品資料//
+      // 打開表單,item=點選的商品資料
       const vm = this
       if (isNew) {
         vm.tempProduct = {}
@@ -286,7 +286,7 @@ export default {
       $('#productModal').modal('show')
     },
     removeData (item) {
-      // 刪除資料//
+      // 刪除資料
       const vm = this
       vm.tempProduct = item
       $('#delProductModal').modal('show')
@@ -298,12 +298,12 @@ export default {
         vm.products = response.data.products
         $('#delProductModal').modal('hide')
         if (response.data.success) {
-          // 刪除資料//
+          // 刪除資料
           vm.getProducts()
         } else {
+          // 資料刪除失敗
           $('#delProductModal').modal('hide')
           vm.getProducts()
-          // 資料刪除失敗
         }
       })
     },
@@ -372,7 +372,6 @@ export default {
     // 補上created
     const vm = this
     vm.getProducts()
-    // vm.$bus.$emit('message:push','這裡是一段訊息','success');//訊息提示
   }
 }
 </script>

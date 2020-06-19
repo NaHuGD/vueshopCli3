@@ -134,7 +134,7 @@ export default {
       }
       vm.$store.dispatch('updateLoading', true)
       vm.$http.post(url, { data: coupon }).then(response => {
-        // 套用優惠卷//
+        // 套用優惠卷
         vm.couponSuccess = response.data.success
         vm.couponMessage = response.data.message
         vm.getCart()

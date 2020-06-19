@@ -93,7 +93,7 @@ export default {
       const vm = this
       vm.$store.dispatch('updateLoading', true)
       vm.$http.get(api).then(response => {
-        // 取得訂單資料//
+        // 取得訂單資料
         vm.orders = response.data.orders
         vm.pagination = response.data.pagination
         vm.$store.dispatch('updateLoading', false)
