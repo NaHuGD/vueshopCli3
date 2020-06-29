@@ -2,46 +2,52 @@
   <div>
     <CheckSchedule />
     <loading :active.sync="isLoading"></loading>
-    <div class="container">
-      <div class="checkProduct main row p-3 mb-3" v-if="cart.carts != ''">
+    <div class="container mt-3">
+      <div class="checkProduct main row mb-3 mb-sm-5" v-if="cart.carts != ''">
         <div class="col-md-8 p-0 pr-md-3">
-          <table class="bagTitle">
-            <tr class="row">
-              <th>品名</th>
-              <th>尺寸/口味</th>
-              <th>數量</th>
-              <th>單價</th>
-              <th>刪除</th>
-            </tr>
-          </table>
-          <table
-            class="bagInfo"
-            :class="{'sale':couponSuccess}"
-            v-for="(item,key) in cart.carts"
-            :key="key"
-          >
-            <tr class="row" v-if="item.product">
-              <td class="col-sm-2 col-3 w-100 pr-0">
-                <img class="col-12 p-0" :src="item.product.imageUrl" :alt="item.product.title" />
-                <p class="col-12 p-0">{{item.product.title}}</p>
-              </td>
-              <td class="col-sm col-2 text-center">{{item.size}}</td>
-              <td class="col-sm col-2 text-center">
-                <select
-                  v-model="item.qty"
-                  @change.prevent="changeCartFn(item.id,item.product.id, item.qty, item.size)"
-                >
-                  <option :value="num" v-for="num in 10" :key="num.id">{{num}}</option>
-                </select>
-              </td>
-              <td class="col-sm col-3 text-center">{{item.product.price | currency}}</td>
-              <td class="col-sm col-2 text-center" @click.prevent="cartItemDelete(item)">
-                <button>
-                  <i class="fa fa-times"></i>
-                </button>
-              </td>
-            </tr>
-          </table>
+          <div class="bagTitle text-center">
+            <div class="row">
+              <div class="col">品名</div>
+              <div class="col">尺寸/口味</div>
+              <div class="col">數量</div>
+              <div class="col">單價</div>
+              <div class="col mobNone">刪除</div>
+            </div>
+          </div>
+            <div v-for="(item,index) in cart.carts" :key="index"  class="bagInfo text-center" :class="{'sale':couponSuccess}">
+              <swiper :options="swiperOption">
+                <swiper-slide>
+                  <div class="row align-items-center" v-if="item.product">
+                      <div class="col">
+                      <img class="" :src="item.product.imageUrl" :alt="item.product.title" />
+                      <p class="text-left">{{item.product.title}}</p>
+                      </div>
+                      <div class="col">{{item.size}}</div>
+                      <div class="col">
+                      <select
+                          v-model="item.qty"
+                          @change.prevent="changeCartFn(item.id,item.product.id, item.qty, item.size)"
+                      >
+                          <option :value="num" v-for="num in 10" :key="num.id">{{num}}</option>
+                      </select>
+                      </div>
+                      <div class="col">{{item.product.price | currency}}</div>
+                      <div class="col cartDelete" @click.prevent="cartItemDelete(item)" v-if="slideDeleteFn === false">
+                        <button>
+                          <i class="fa fa-times"></i>
+                        </button>
+                      </div>
+                  </div>
+                </swiper-slide>
+                <swiper-slide class="swiperDelete" v-if="slideDeleteFn">
+                  <div class="cartDelete" @click.prevent="cartItemDelete(item)">
+                    <button>
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </div>
+                </swiper-slide>
+              </swiper>
+            </div>
         </div>
         <div class="priceInfo col-md-4 py-3">
           <table class="title">
@@ -120,6 +126,10 @@ export default {
       couponMessage: '',
       status: {
         loadingItem: ''
+      },
+      currentWidth: document.body.clientWidth,
+      swiperOption: {
+        slidesPerView: 'auto'
       }
     }
   },
@@ -134,7 +144,7 @@ export default {
       }
       vm.$store.dispatch('updateLoading', true)
       vm.$http.post(url, { data: coupon }).then(response => {
-        // 套用優惠卷
+        // 套用優惠卷//
         vm.couponSuccess = response.data.success
         vm.couponMessage = response.data.message
         vm.getCart()
@@ -174,11 +184,24 @@ export default {
   },
   computed: {
     ...mapGetters(['isLoading', 'products']),
-    ...mapGetters('cartsModules', ['cart'])
+    ...mapGetters('cartsModules', ['cart']),
+    slideDeleteFn () {
+      console.log('computed')
+      // 判斷是否顯示slide滑塊
+      return this.currentWidth <= 480 && true
+    }
   },
   created () {
     const vm = this
     vm.getCart()
+  },
+  mounted () {
+    return (
+      // 監聽視窗變化
+      window.onresize = () => {
+        this.currentWidth = document.body.clientWidth
+      }
+    )
   }
 }
 </script>
@@ -191,6 +214,124 @@ a {
   transition: 0.3s;
   &:hover {
     opacity: 0.7;
+  }
+}
+/*checkProduct*/
+.checkProduct {
+  margin: 0 auto;
+  padding: 1rem !important;
+  @include mobile {
+    padding: 0rem !important;
+  }
+}
+.bagTitle {
+  background: #f3f3f3;
+  margin-bottom: 1rem;
+  display: block;
+  padding: 0.75rem;
+  & > div {
+    // 針對手機此吋調整title大小
+    & > div {
+      @include mobile{
+        font-size: 12px;
+      }
+    }
+    & > div:nth-child(1){
+      @include mobile {
+        min-width: 120px;
+      }
+      @include iphone5 {
+        min-width: 0px;
+      }
+    }
+    & > div:nth-child(2){
+      white-space: nowrap;
+    }
+  }
+}
+.bagInfo {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  position: relative;
+  width: 100%;
+  background: #f3f3f3;
+  overflow: hidden;
+  @include mobile() {
+    padding: 0;
+  }
+  // 調整品名文字
+  .row > div:nth-child(1) {
+    @include mobile {
+      min-width: 120px;
+      padding: .5rem 0 .5rem 1.5rem;
+    }
+    @include iphone5 {
+      min-width: 0px;
+    }
+    & > p{
+      white-space: nowrap;
+      @include mobile {
+        font-size: 14px;
+      }
+    }
+  }
+  // 調整尺寸口味文字
+  .row > div:nth-child(2) {
+    @include mobile {
+      font-size: 12px;
+    }
+  }
+  img {
+    width: 100%;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    background: $color-bg;
+    border-radius: 100%;
+    @include mobile() {
+      width: 0;
+    }
+  }
+  .swiperDelete {
+    max-width:100px;
+    height:auto;
+    background: $color-red;
+    &:hover{
+      opacity: .9;
+    }
+  }
+  .cartDelete {
+    @include mobile(){
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      i {
+        color: $color-white;
+      }
+    }
+  }
+}
+.priceInfo {
+  background: #f3f3f3;
+  width: 100%;
+  @include mobile() {
+    margin: 0;
+  }
+  .title {
+    font-family: "微軟正黑體", "Microsoft JhengHei", "Segoe UI Semibold", "Segoe UI", "Lucida Grande", Verdana, Arial,
+      Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+    @include pad() {
+      font-size: 1.2rem;
+    }
   }
 }
 </style>

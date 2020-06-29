@@ -68,7 +68,7 @@
           <p
             class="my-md-4"
           >隨著健身產業的新興，全民的健身意識抬頭，到健身房報到已經成了不少人每天的必須行程，凱力健人嚴選致力於提供運動夥伴們最優質的健身護具，及品質最高的乳清蛋白，讓運動夥伴們可以專心訓練，由凱力做最強大的後盾與你們一同成長。</p>
-          <p>KaizBB</p>
+          <p>KaizBB.2020</p>
         </div>
       </div>
     </div>
@@ -224,16 +224,16 @@ export default {
         white-space: nowrap;
         background: rgba(255, 255, 255, 0.8);
         margin: 10px;
-        padding: 40px;
+        padding: 0 40px;
         animation-name: bannerAnimate;
         animation-duration: 2s;
         animation-iteration-count: infinite;
         animation-timing-function: cubic-bezier(0.5, 0.5, 0.5, 0.5);
         @include pad() {
-          padding: 30px;
+          padding: 0 30px;
         }
         @include mobile() {
-          padding: 10px;
+          padding: 0 10px;
         }
         & > p {
           font-weight: bold;
@@ -322,7 +322,7 @@ export default {
     width: 100%;
     height: 100%;
     text-align: center;
-    padding: 100px;
+    padding: 0 100px;
     @include desktop() {
       padding: 0 50px;
     }
@@ -333,7 +333,7 @@ export default {
       padding: 0 100px;
     }
     @include mobile() {
-      padding: 40px;
+      padding: 0 40px;
     }
     & > div:nth-child(1) {
       @include pad {
@@ -414,7 +414,7 @@ export default {
   .box2 {
     align-items: center;
     text-align: center;
-    padding: 100px;
+    padding: 0 100px;
     @include desktop() {
       padding: 0 50px;
     }
@@ -491,23 +491,32 @@ export default {
       background: rgba(0, 0, 0, 0.8);
       color: white;
       text-align: center;
-      align-items: center;
       overflow: hidden;
-      padding: 100px;
+      padding:0 100px;
       @include desktop() {
-        padding: 50px;
+        padding:0 50px;
       }
       @include md() {
         height: 50%;
-        padding: 100px;
+        padding:0 100px;
       }
       @include mobile() {
-        padding: 40px;
+        padding:0 40px;
       }
       & > p:nth-child(1) {
+        margin-top: 10rem;
         font-family: "Dancing Script";
         font-weight: bold;
         transform: skewY(-10deg);
+        @include desktop() {
+          margin-top: 5rem;
+        }
+        @include md() {
+           margin-top: 7rem;
+        }
+        @include mobile() {
+           margin-top: 2.5rem;
+        }
       }
       & > p:nth-child(3) {
         line-height: 2rem;
@@ -522,10 +531,11 @@ export default {
         }
       }
       & > p:nth-child(4) {
+        padding-top: 2rem;
         font-family: "Dancing Script";
         font-weight: bold;
-        font-size: 2rem;
-        padding-top: 2rem;
+        font-size: .8rem;
+        text-align: right;
         @include iphoneX {
           padding-top: 1rem;
         }

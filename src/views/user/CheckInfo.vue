@@ -249,7 +249,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getCart']),
+    ...mapActions('cartsModules', ['getCart']),
     createOrder () {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
@@ -284,10 +284,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['isLoading', 'cart'])
+    ...mapGetters(['isLoading']),
+    ...mapGetters('cartsModules', ['cart'])
   },
   created () {
-    this.getCart()
+    const vm = this
+    vm.getCart()
   },
   mounted () {
     document.querySelector('.checkInfo').style = 'border:3px solid #8d3742'
@@ -306,14 +308,13 @@ export default {
 .checkInfoMain {
   color: $color-darkGray;
   position: relative;
-  width: 80%;
   margin: 0 auto;
-  @include mobile() {
-    width: 100%;
-  }
   .mainleft {
-    background: #f3f3f3;
     padding: 15px;
+    background: #f3f3f3;
+    @include mobile {
+      margin-top: 15px;
+    }
     .bagInfo {
       align-items: center;
       & > div {

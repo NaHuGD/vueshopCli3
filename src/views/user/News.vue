@@ -1,79 +1,59 @@
 <template>
   <div class="news pt150">
     <div class="row m-0 p-0">
-      <div class="box col-12 col-md-6">
-        <img :src="newImg1" alt />
-        <div class="info">
-          <h2 class="py-2 h4">健身飲食篇</h2>
-          <p class="mb-2">不管你是要減重、增肌或是為了健康，運動後的30分鐘到1小時內，聰明攝取一份,運動後補充一份均衡營養的輕食很重要，內容以碳水化合物與蛋白質的</p>
-          <p>撰寫日期：2019/8/18</p>
-          <p>觀看人數：7596</p>
+      <div class="box col-12 col-md-6" v-for="(item, index) in newsList" :key="item+index">
+        <img :src="require(`@/assets/images/news/0${index+1}.jpg`)" alt />
+        <div>
+          <div class="info">
+            <h2 class="py-2 h4">{{item.title}}</h2>
+            <p class="mb-2">{{item.text}}</p>
+            <p>{{item.date}}</p>
+            <p><i class="fa fa-eye"></i>：{{item.look}}</p>
+          </div>
+          <div class="more">查看更多</div>
         </div>
-        <div class="more">查看更多</div>
-      </div>
-      <div class="box col-12 col-md-6">
-        <img :src="newImg2" alt />
-        <div class="info">
-          <h2 class="py-2 h4">有氧運動迷失</h2>
-          <p class="mb-2">當你決定開始健身，身邊的朋友都會跟你說乳清蛋白很重要，一定要喝，不然 ... 蛋白質是掌管人體生理機能相當重要的營養素，而對於健身、運動、體重管理的 ... 讓你的減重過程更有效率，又不用擔心營養不足，是個非常健康的減肥法，身體也會更結實。 ... 只想增加肌肉比例，不想增重的人，你需要的是一般乳清蛋白。</p>
-          <p>撰寫日期：2019/5/13</p>
-          <p>觀看人數：6723</p>
-        </div>
-        <div class="more">查看更多</div>
-      </div>
-    </div>
-    <div class="row m-0 p-0">
-      <div class="box col-12 col-md-6">
-        <img :src="newImg3" alt />
-        <div class="info">
-          <h2 class="py-2 h4">適合老人的運動有哪些？</h2>
-          <p class="mb-2">所謂要活就要動，老了也別忘記運動。適合老人的運動類型有3種，包含可提升心肺功能的有氧運動、可強化骨頭和肌肉的肌力訓練，及幫助保</p>
-          <p>撰寫日期：2018/12/27</p>
-          <p>觀看人數：3563</p>
-        </div>
-        <div class="more">查看更多</div>
-      </div>
-      <div class="box col-12 col-md-6">
-        <img :src="newImg4" alt />
-        <div class="info">
-          <h2 class="py-2 h4">吃蛋白棒前要搞清楚的5件事情</h2>
-          <p class="mb-2">隨著食品加工業的發展，以及人們對營養食品需求的增進，熱愛健康的人群已經不再滿足於簡單的多種維生素以及乳清蛋白粉產品。各類蛋白</p>
-          <p>撰寫日期：2018/10/19</p>
-          <p>觀看人數：2283</p>
-        </div>
-        <div class="more">查看更多</div>
-      </div>
-    </div>
-    <div class="row m-0 p-0">
-      <div class="box col-12 col-md-6">
-        <img :src="newImg5" alt />
-        <div class="info">
-          <h2 class="py-2 h4">第一次健身就上手</h2>
-          <p class="mb-2">下一站，我們即將帶領大家走入健身房，提供獨家的「攻略要點」，協助「健身房新手」不再像無頭蒼蠅於健身房裡亂竄</p>
-          <p>撰寫日期：2018/8/13</p>
-          <p>5233</p>
-        </div>
-        <div class="more">查看更多</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import newImg1 from '@/assets/images/news/01.jpg'
-import newImg2 from '@/assets/images/news/02.jpg'
-import newImg3 from '@/assets/images/news/03.jpg'
-import newImg4 from '@/assets/images/news/04.jpg'
-import newImg5 from '@/assets/images/news/05.jpg'
 
 export default {
   data () {
     return {
-      newImg1,
-      newImg2,
-      newImg3,
-      newImg4,
-      newImg5
+      newsList: [
+        {
+          title: '健身飲食篇',
+          text: '不管你是要減重、增肌或是為了健康，運動後的30分鐘到1小時內，聰明攝取一份,運動後補充一份均衡營養的輕食很重要，內容以碳水化合物與蛋白質的',
+          date: '2019/8/18',
+          look: '7596'
+        },
+        {
+          title: '有氧運動迷失',
+          text: '當你決定開始健身，身邊的朋友都會跟你說乳清蛋白很重要，一定要喝，不然 ... 蛋白質是掌管人體生理機能相當重要的營養素，而對於健身、運動、體重管理的 ... 讓你的減重過程更有效率，又不用擔心營養不足，是個非常健康的減肥法，身體也會更結實。 ... 只想增加肌肉比例，不想增重的人，你需要的是一般乳清蛋白。',
+          date: '2019/5/13',
+          look: '6723'
+        },
+        {
+          title: '適合老人的運動有哪些？',
+          text: '所謂要活就要動，老了也別忘記運動。適合老人的運動類型有3種，包含可提升心肺功能的有氧運動、可強化骨頭和肌肉的肌力訓練，及幫助保',
+          date: '2018/12/27',
+          look: '3563'
+        },
+        {
+          title: '吃蛋白棒前要搞清楚的5件事情',
+          text: '隨著食品加工業的發展，以及人們對營養食品需求的增進，熱愛健康的人群已經不再滿足於簡單的多種維生素以及乳清蛋白粉產品。各類蛋白',
+          date: '2018/10/19',
+          look: '2283'
+        },
+        {
+          title: '第一次健身就上手',
+          text: '下一站，我們即將帶領大家走入健身房，提供獨家的「攻略要點」，協助「健身房新手」不再像無頭蒼蠅於健身房裡亂竄',
+          date: '2018/8/13',
+          look: '5233'
+        }
+      ]
     }
   },
   created () {
@@ -98,7 +78,7 @@ export default {
     img {
       width: 100%;
     }
-    & > .info {
+    .info {
       & > p:nth-child(2){
       text-align: justify;
       }

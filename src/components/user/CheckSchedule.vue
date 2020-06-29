@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row w-100 m-auto pt150">
-      <div class="col-10 col-sm-8 col-md-6 m-auto" style="height:140px;">
+      <div class="container m-auto" style="height:140px;">
         <div class="checkSchedule">
           <span></span>
           <div class="checkProduct">
@@ -79,6 +79,11 @@ export default {
       white-space: nowrap;
       color: $color-darkRed;
       font-weight: bold;
+      @include mobile {
+        width: 1%;
+        left: 25%;
+        white-space: normal;
+      }
     }
   }
   .checkInfo {
@@ -106,6 +111,9 @@ export default {
       white-space: nowrap;
       color: $color-gray;
       font-weight: bold;
+      @include mobile {
+        white-space: normal;
+      }
     }
   }
   .checkOut {
@@ -132,6 +140,9 @@ export default {
       white-space: nowrap;
       color: $color-gray;
       font-weight: bold;
+      @include mobile {
+        white-space: normal;
+      }
     }
   }
 }
