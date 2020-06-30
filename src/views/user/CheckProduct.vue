@@ -170,16 +170,11 @@ export default {
         size: size
       }
       vm.$http
-        .all([
-          vm.$http.delete(delAPI),
-          vm.$http.post(addAPI, { data: changeCart })
-        ])
-        .then(
-          vm.$http.spread((delResp, addResp) => {
-            vm.getCart()
-            vm.$store.dispatch('updateLoading', false)
-          })
-        )
+        .all([vm.$http.delete(delAPI), vm.$http.post(addAPI, { data: changeCart })])
+        .then(vm.$http.spread((delResp, addResp) => {
+          vm.getCart()
+          vm.$store.dispatch('updateLoading', false)
+        }))
     },
     mergeCart () {
       console.log('merge cart')

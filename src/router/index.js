@@ -174,7 +174,7 @@ const router = new VueRouter({
 })
 // 解除路由報錯
 const originalPush = VueRouter.prototype.push
-VueRouter.prototype.push = function push(location) {
+VueRouter.prototype.push = function push (location) {
   return originalPush.call(this, location).catch(err => err)
 }
 

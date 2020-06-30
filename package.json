@@ -2,11 +2,14 @@
   "name": "vueshop",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/NaHuGD/vueshopCli3",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js"
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.0",
