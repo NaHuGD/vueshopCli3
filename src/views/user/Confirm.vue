@@ -3,7 +3,7 @@
     <loading :active.sync="isLoading"></loading>
     <CheckSchedule />
     <form @submit.prevent="paying">
-      <div class="mx-auto mb-4 container">
+      <div class="mx-auto my-4 container">
         <div class="Confirm">
           <div class="row p-2 py-md-4">
             <span class="col-12 col-md-6 pb-2 pb-md-0">

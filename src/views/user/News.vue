@@ -100,7 +100,7 @@ export default {
       }
       @include pad() {
         position: absolute;
-        bottom: 0;
+        bottom: 3px;
         color: white;
         background: $color-bgActive;
         margin-right: 15px;

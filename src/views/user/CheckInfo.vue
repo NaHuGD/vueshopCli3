@@ -130,21 +130,27 @@
                     <label for class="pb-2 col px-0">信用卡卡號*</label>
                     <input
                       type="text"
-                      class="inputBorder col"
+                      class="col"
+                      :class="{'form-control is-invalid' : !isCardNumber, 'inputBorder' : isCardNumber}"
                       placeholder="請輸入十六位數值之信用卡卡號"
                       name
+                      maxlength="16"
                       v-model="form.user.card.number"
                       @focus.prevent="isFlipped = true"
+                      @input.prevent="inputCardNumner()"
+                      @change.prevent="checkCardNumber()"
                     />
+                  <div v-if="!isCardNumber" class="text-danger mt-2 d-block">請輸入正確信用卡卡號</div>
                   </div>
                   <div class="py-2">
                     <label for class="pb-2 col px-0">卡片到期日*</label>
                     <div class="row px-3">
                       <select
                         class="form-control col mr-1"
-                        id="cardMonth"
+                        :class="{borderErr:!isCardMonth}"
                         v-model="form.user.card.date.month"
                         @focus.prevent="isFlipped = true"
+                        @change.prevent="checkCardMonth()"
                       >
                         <option value selected disabled>月份</option>
                         <option value="01">一月</option>
@@ -162,31 +168,37 @@
                       </select>
                       <select
                         class="form-control col"
-                        id="cardYear"
+                        :class="{borderErr:!isCardYear}"
                         v-model="form.user.card.date.year"
                         @focus.prevent="isFlipped = true"
+                        @change.prevent="checkCardYear()"
                       >
                         <option value selected disabled>年分</option>
                         <option :value="2018+item" v-for="(item,key) in 15" :key="key">{{2018+item}}</option>
                       </select>
                     </div>
+                    <div v-if="!(isCardMonth && isCardYear)" class="text-danger mt-2 d-block">請選擇卡片到期日</div>
                   </div>
                   <div class="py-2">
                     <label for class="pb-2 col px-0">卡片檢查碼*</label>
                     <input
                       type="text"
-                      class="inputBorder col"
+                      class="col"
+                      :class="{'form-control is-invalid' : !isCardCcv, 'inputBorder' : isCardCcv}"
                       placeholder="卡片背面後三碼"
                       maxlength="3"
                       v-model="form.user.card.ccv"
                       @focus.prevent="isFlipped = false"
+                      @input.prevent="inputCardCcv()"
+                      @change.prevent="checkCardCcv()"
                     />
+                    <div v-if="!isCardCcv" class="text-danger mt-2 d-block">請輸入正確檢查碼</div>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="indexCard" :class="{'rotateBack':isFlipped === false}">
                     <div class="cardFront">
-                      <div class="number">{{form.user.card.number}}</div>
+                      <div class="number">{{form.user.card.number.replace(/(\d{4}-?)(\d{4}-?)(\d{4}-?)(\d{4})/g, '$1-$2-$3-$4')}}</div>
                       <div class="date">{{form.user.card.date.month}}/{{form.user.card.date.year}}</div>
                       <img :src="card" alt="信用卡" class="pt-3" />
                     </div>
@@ -225,6 +237,10 @@ export default {
       card,
       cardBg,
       isFlipped: true,
+      isCardNumber: Boolean,
+      isCardMonth: Boolean,
+      isCardYear: Boolean,
+      isCardCcv: Boolean,
       form: {
         // 建立對應資料結購
         user: {
@@ -235,12 +251,12 @@ export default {
           address: '',
           payMethod: 'delivery',
           card: {
-            number: '1234-5678-9012-3456',
+            number: '',
             date: {
               month: '',
               year: ''
             },
-            ccv: '556'
+            ccv: ''
           },
           nowDate: ''
         },
@@ -250,6 +266,36 @@ export default {
   },
   methods: {
     ...mapActions('cartsModules', ['getCart']),
+    inputCardNumner () {
+      const vm = this
+      vm.form.user.card.number = vm.form.user.card.number.replace(/[a-z\W]/ig, '')
+      vm.checkCardNumber()
+    },
+    checkCardNumber () {
+      const vm = this
+      vm.isCardNumber = false
+      if (/^[0-9]{16}$/g.test(vm.form.user.card.number)) vm.isCardNumber = true
+    },
+    checkCardMonth () {
+      const vm = this
+      if (vm.form.user.card.date.month !== '') vm.isCardMonth = true
+    },
+    checkCardYear () {
+      const vm = this
+      if (vm.form.user.card.date.year !== '') vm.isCardYear = true
+    },
+    inputCardCcv () {
+      const vm = this
+      // 禁止檢查碼欄位輸入亂碼
+      vm.form.user.card.ccv = vm.form.user.card.ccv.replace(/[a-z\W]/ig, '')
+      vm.checkCardCcv()
+    },
+    checkCardCcv () {
+      // 判斷檢查碼
+      const vm = this
+      vm.isCardCcv = false
+      if (/^[0-9]{3}$/g.test(vm.form.user.card.ccv)) vm.isCardCcv = true
+    },
     createOrder () {
       const vm = this
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
@@ -260,6 +306,13 @@ export default {
       const d = date.getDate()
       vm.form.user.nowDate = `${y}/${m + 1}/${d}`
       vm.$store.dispatch('updateLoading', true)
+      // 信用卡支付時確認格式
+      if (vm.form.user.payMethod === 'credit') {
+        if (!/^[0-9]{16}$/g.test(vm.form.user.card.number)) vm.isCardNumber = false
+        if (vm.form.user.card.date.month === '') vm.isCardMonth = false
+        if (vm.form.user.card.date.year === '') vm.isCardYear = false
+        if (!/^[0-9]{3}$/g.test(vm.form.user.card.ccv)) vm.isCardCcv = false
+      }
       vm.$validator.validate().then(result => {
         if (result) {
           // email格式正確時發送訂單
@@ -328,8 +381,9 @@ export default {
       }
     }
     .total {
-      border-top: 1px solid black;
       padding-top: 0.5rem;
+      border-top: 1px solid black;
+      text-align: right;
     }
   }
   .mainInfo {
@@ -344,6 +398,9 @@ export default {
       border: 1px solid $color-darkGray;
       border-radius: 5px;
       height: 35px;
+    }
+    .borderErr {
+      border: 1px solid #dc3545;
     }
     textarea {
       border: 1px solid $color-darkGray;
@@ -453,14 +510,14 @@ export default {
     }
   }
   .CheckOut {
+    padding: 15px 10px;
+    margin: 0 0 0 auto;
     width: 100%;
     max-width: 205px;
     cursor: pointer;
     font-weight: bold;
     display: block;
-    margin: 0 0 0 auto;
     position: relative;
-    padding: 15px 10px;
     background: $color-darkRed;
     color: #fff;
     letter-spacing: 0.3rem;

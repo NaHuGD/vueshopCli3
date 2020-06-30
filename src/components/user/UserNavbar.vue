@@ -142,16 +142,14 @@ export default {
     },
     goDiscount () {
       const vm = this
-      vm.$router.push({
-        path: '/discount'
-      })
+      const path = '/discount'
+      vm.$route.path !== path && vm.$router.push(path)
       vm.isMobNav = false
     },
     goNews () {
       const vm = this
-      vm.$router.push({
-        path: '/News'
-      })
+      const path = '/News'
+      vm.$route.path !== path && vm.$router.push(path)
       vm.isMobNav = false
     },
     getCartItem (item) {
