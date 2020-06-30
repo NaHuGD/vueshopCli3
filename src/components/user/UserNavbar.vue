@@ -152,29 +152,23 @@ export default {
       vm.$route.path !== path && vm.$router.push(path)
       vm.isMobNav = false
     },
-    getCartItem (item) {
-      const vm = this
-      vm.CartItem = item
-    },
     mobNavFn () {
       const vm = this
       vm.isMobNav = false
     },
     goProducts () {
       // 搜尋商品頁
+      console.log('search')
       const vm = this
       const path = `/search/${vm.id}`
       vm.$bus.$emit('searchId:push', vm.id)
-      vm.$route.path !== path && vm.$router.push({
-        path: path
-      })
+      vm.$route.path !== path && vm.$router.push(path)
       vm.isSearch = false
     },
     goCheckProduct (context) {
       const vm = this
       if (vm.$store.state.cartsModules.cart.carts.length >= 1) {
         vm.$store.dispatch('bagToggleFn', true)
-        console.log(vm, vm.$router)
         vm.$router.push({
           path: '/checkProduct'
         })

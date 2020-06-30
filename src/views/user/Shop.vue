@@ -427,6 +427,9 @@ export default {
     height: 102%;
     justify-content: center;
     align-items: center;
+    @include mobile {
+      transform: translateY(-20%);
+    }
     p {
       color: #fff;
       font-weight: bold;

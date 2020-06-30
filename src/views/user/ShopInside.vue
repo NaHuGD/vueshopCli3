@@ -293,13 +293,13 @@ export default {
       & > button:nth-child(1) {
         background: $color-darkGray;
         color: #fff;
-        padding: 1rem;
+        padding: 1rem 0;
         float: left;
       }
       & > button:nth-child(3) {
         background: $color-darkRed;
         color: #fff;
-        padding: 1rem;
+        padding: 1rem 0;
         float: right;
       }
     }

@@ -180,13 +180,15 @@ export default {
             vm.$store.dispatch('updateLoading', false)
           })
         )
+    },
+    mergeCart () {
+      console.log('merge cart')
     }
   },
   computed: {
     ...mapGetters(['isLoading', 'products']),
     ...mapGetters('cartsModules', ['cart']),
     slideDeleteFn () {
-      console.log('computed')
       // 判斷是否顯示slide滑塊
       return this.currentWidth <= 480 && true
     }
@@ -194,6 +196,7 @@ export default {
   created () {
     const vm = this
     vm.getCart()
+    vm.mergeCart()
   },
   mounted () {
     return (
