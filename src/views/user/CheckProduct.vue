@@ -129,7 +129,14 @@ export default {
       },
       currentWidth: document.body.clientWidth,
       swiperOption: {
-        slidesPerView: 'auto'
+        slidesPerView: 'auto',
+        resistanceRatio: 0.2,
+        on: {
+          // 點擊刪除時回到第一個
+          click: function () {
+            this.slideTo(0)
+          }
+        }
       }
     }
   },
@@ -177,7 +184,32 @@ export default {
         }))
     },
     mergeCart () {
-      console.log('merge cart')
+      const { carts } = this.$store.state.cartsModules.cart
+      const newArr = carts.map(item => {
+        return {
+          product_id: item.product_id,
+          title: item.product.title,
+          qty: item.qty,
+          size: item.size,
+          price: item.product.price,
+          imageUrl: item.product.imageUrl
+        }
+      })
+      const filterArr = newArr.reduce((final, current) => {
+        // 判斷數值(id, size)是否重複
+        const repeatItem = final.some(item => item.product_id === current.product_id && item.size === current.size)
+        if (repeatItem) {
+          // 重複時總數(qty)相加
+          // current為重複的值,forEach的item為不重複的值
+          // 再次判斷有重複的值才相加
+          final.forEach(item => { if (item.product_id === current.product_id && item.size === current.size)item.qty += parseInt(current.qty) })
+        } else {
+          // 不重複時代表累加陣列(final)無該筆資料,做push
+          final.push(current)
+        }
+        return final
+      }, [])
+      console.log(filterArr)
     }
   },
   computed: {
@@ -188,10 +220,10 @@ export default {
       return this.currentWidth <= 480 && true
     }
   },
-  created () {
+  async created () {
     const vm = this
-    vm.getCart()
-    vm.mergeCart()
+    await vm.getCart()
+    await vm.mergeCart()
   },
   mounted () {
     return (

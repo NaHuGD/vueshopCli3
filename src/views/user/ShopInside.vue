@@ -29,10 +29,10 @@
             <div class="row">
               <div class="addSize mt-2 col-6">
                 <select
-                  :class="{'redBorder':isSize}"
+                  :class="{'borderErr':isSize}"
                   class="form-control"
                   id="tasteValue"
-                  @change.prevent="tasteValue"
+                  @change="tasteValue"
                   v-if="product.category !== '護具'"
                 >
                   <option value selected disabled>口味</option>
@@ -41,7 +41,7 @@
                   <option value="香草">香草</option>
                 </select>
                 <select
-                  :class="{'redBorder':isSize}"
+                  :class="{'borderErr':isSize}"
                   class="form-control"
                   id="protectiveValue"
                   @change.prevent="protectiveValue"
@@ -165,9 +165,7 @@ export default {
     tasteValue () {
       // 選擇口味
       const vm = this
-      vm.$store.state.cartsModules.cart.carts.size = document.querySelector(
-        '#tasteValue'
-      ).value
+      vm.$store.state.cartsModules.cart.carts.size = document.querySelector('#tasteValue').value
       vm.isSize = false
     },
     protectiveValue () {
@@ -329,7 +327,7 @@ export default {
     }
   }
 }
-.redBorder {
+.borderErr {
   border: 1px solid $color-red;
 }
 </style>

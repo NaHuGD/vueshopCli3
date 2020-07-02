@@ -29,10 +29,10 @@ export default new Vuex.Store({
     bagToggleFn (context, state) {
       context.commit('BAGTOGGLE', state)
     },
-    cartItemDelete (context, item) {
-      context.commit('LOADING', true)
+    async cartItemDelete (context, item) {
+      await context.commit('LOADING', true)
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`
-      axios.delete(url).then(response => {
+      await axios.delete(url).then(response => {
         context.dispatch('cartsModules/getCart')
         context.commit('LOADING', false)
       })

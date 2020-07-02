@@ -395,6 +395,7 @@ export default {
     padding: 18px;
     .inputBorder,
     select {
+      padding: 0.375rem 0.75rem;
       border: 1px solid $color-darkGray;
       border-radius: 5px;
       height: 35px;
