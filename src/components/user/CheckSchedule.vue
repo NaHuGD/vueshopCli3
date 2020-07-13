@@ -37,11 +37,19 @@ export default {
   animation-name: scheduleInfo;
   animation-iteration-count: infinite;
   animation-duration: 0.5s;
+  @include mobile {
+    animation-name: none;
+    background:linear-gradient(to right, $color-darkRed 50%, $color-gray 50%) !important;
+  }
 }
 .scheduleConfirmAnimation {
   animation-name: scheduleConfirm;
   animation-iteration-count: infinite;
   animation-duration: 0.5s;
+  @include mobile {
+    animation-name: none;
+    background: $color-darkRed !important;
+  }
 }
 .checkSchedule {
   position: relative;

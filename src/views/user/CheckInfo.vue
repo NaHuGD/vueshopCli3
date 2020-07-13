@@ -2,7 +2,7 @@
   <div>
     <CheckSchedule />
     <div class="container">
-      <div class="checkInfoMain row">
+      <div class="checkInfoMain row" v-if="cart.carts.length > 0">
         <div class="col-12 col-md-5 pb-3 pl-md-0">
           <div class="mainleft">
             <p class="h4 py-3">購物清單：</p>
@@ -218,6 +218,9 @@
           <button class="CheckOut mb-4">前往結帳</button>
         </form>
       </div>
+      <div class="main mb-3 mx-auto py-3 col-10" v-else>
+        <router-link to="shop/all" class="text-center h5 m-0 d-block">點我前往購物</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -358,6 +361,14 @@ export default {
 <style lang="scss" secoped>
 @import "@/assets/scss/helpers/breakpoint.scss";
 
+a,a:active {
+  text-decoration: none;
+  color: $color-darkRed;
+  transition: 0.3s;
+  &:hover {
+    opacity: 0.7;
+  }
+}
 .checkInfoMain {
   color: $color-darkGray;
   position: relative;

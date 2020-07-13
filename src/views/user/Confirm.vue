@@ -3,8 +3,8 @@
     <loading :active.sync="isLoading"></loading>
     <CheckSchedule />
     <form @submit.prevent="paying">
-      <div class="mx-auto my-4 container">
-        <div class="Confirm">
+      <div class="mx-auto my-4 px-4">
+        <div class="Confirm container">
           <div class="row p-2 py-md-4">
             <span class="col-12 col-md-6 pb-2 pb-md-0">
               <p>訂購人:{{order.user.name}}</p>
@@ -202,14 +202,16 @@ export default {
 
 <style lang="scss" secoped>
 @import "@/assets/scss/helpers/breakpoint.scss";
-
+form {
+  padding: 0 15px;
+}
 .Confirm {
+  padding: 15px;
+  margin: 0 auto;
   position: relative;
   box-shadow: 0px 1px 3px 1px $color-bgActive;
-  padding: 15px;
   border-radius: 8px 8px 0 0;
   width: 80%;
-  margin: 0 auto;
   @include mobile() {
     width: 100%;
   }

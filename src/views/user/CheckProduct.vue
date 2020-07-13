@@ -2,7 +2,7 @@
   <div>
     <CheckSchedule />
     <loading :active.sync="isLoading"></loading>
-    <div class="container mt-3" v-if="cart.carts !== ''">
+    <div class="container mt-3" v-if="cart.carts.length > 0">
       <div class="checkProduct main row mb-3 mb-sm-5">
         <div class="col-md-8 p-0 pr-md-3">
           <div class="bagTitle text-center">
