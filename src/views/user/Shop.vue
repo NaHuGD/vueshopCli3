@@ -124,6 +124,7 @@ export default {
       vm.$route.path !== path && vm.$router.push(path)
     },
     goInside (id) {
+      console.log('goInside',id)
       const vm = this
       vm.$router.push(`/shop_inside/${id}`)
       window.scrollTo({
@@ -428,7 +429,8 @@ export default {
     justify-content: center;
     align-items: center;
     @include mobile {
-      transform: translateY(-20%);
+      transform: translateY(0%);
+      height: 95%;
     }
     p {
       color: #fff;

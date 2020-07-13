@@ -249,7 +249,7 @@ export default {
           email: '',
           ship: 'home',
           address: '',
-          payMethod: 'delivery',
+          payMethod: 'credit',
           card: {
             number: '',
             date: {
@@ -338,7 +338,7 @@ export default {
   },
   computed: {
     ...mapGetters(['isLoading']),
-    ...mapGetters('cartsModules', ['cart'])
+    ...mapGetters('cartsModules', ['cart', 'carts'])
   },
   created () {
     const vm = this

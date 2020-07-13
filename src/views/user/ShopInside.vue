@@ -35,7 +35,7 @@
                   @change="tasteValue"
                   v-if="product.category !== '護具'"
                 >
-                  <option value selected disabled>口味</option>
+                  <option selected disabled>口味</option>
                   <option value="草莓">草莓</option>
                   <option value="巧克力">巧克力</option>
                   <option value="香草">香草</option>
@@ -47,7 +47,7 @@
                   @change.prevent="protectiveValue"
                   v-else
                 >
-                  <option value selected disabled>尺寸</option>
+                  <option selected disabled>尺寸</option>
                   <option value="L">L</option>
                   <option value="M">M</option>
                   <option value="S">S</option>
@@ -63,7 +63,7 @@
           </div>
           <div class="text-danger text-center" v-if="product.in_stock === 0">商品已售完</div>
           <div class="addShop text-center" v-else>
-            <button class="col-5" @click.prevent="addtoCart(product.id)">加入購物車</button>
+            <button class="col-5" @click.prevent="addtoCart(product)">加入購物車</button>
             <span class="col"></span>
             <button class="col-5" @click.prevent="buyNow(product.id)" to="/shop/all">直接購買</button>
           </div>
@@ -123,6 +123,7 @@ export default {
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       vm.$store.dispatch('updateLoading', true)
       vm.$http.get(url).then(response => {
+        console.log(response.data.products)
         const newArray = response.data.products.filter(function (
           item,
           index,

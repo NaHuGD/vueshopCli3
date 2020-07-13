@@ -21,8 +21,8 @@ export default new Vuex.Store({
       // 取得api資料
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       context.commit('LOADING', true)
-      axios.get(api).then(response => {
-        context.commit('PRODUCTS', response.data.products)
+      axios.get(api).then(res => {
+        context.commit('PRODUCTS', res.data.products)
         context.commit('LOADING', false)
       })
     },
@@ -30,9 +30,10 @@ export default new Vuex.Store({
       context.commit('BAGTOGGLE', state)
     },
     async cartItemDelete (context, item) {
+      console.log('cartItemDelete',item)
       await context.commit('LOADING', true)
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${item.id}`
-      await axios.delete(url).then(response => {
+      await axios.delete(url).then(res => {
         context.dispatch('cartsModules/getCart')
         context.commit('LOADING', false)
       })

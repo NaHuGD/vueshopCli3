@@ -2,8 +2,8 @@
   <div>
     <CheckSchedule />
     <loading :active.sync="isLoading"></loading>
-    <div class="container mt-3">
-      <div class="checkProduct main row mb-3 mb-sm-5" v-if="cart.carts != ''">
+    <div class="container mt-3" v-if="cart.carts !== ''">
+      <div class="checkProduct main row mb-3 mb-sm-5">
         <div class="col-md-8 p-0 pr-md-3">
           <div class="bagTitle text-center">
             <div class="row">
@@ -28,7 +28,7 @@
                           v-model="item.qty"
                           @change.prevent="changeCartFn(item.id,item.product.id, item.qty, item.size)"
                       >
-                          <option :value="num" v-for="num in 10" :key="num.id">{{num}}</option>
+                          <option :value="num" v-for="num in item.qty" :key="num.id">{{num}}</option>
                       </select>
                       </div>
                       <div class="col">{{item.product.price | currency}}</div>
@@ -176,45 +176,16 @@ export default {
         qty: qty,
         size: size
       }
-      vm.$http
-        .all([vm.$http.delete(delAPI), vm.$http.post(addAPI, { data: changeCart })])
-        .then(vm.$http.spread((delResp, addResp) => {
-          vm.getCart()
-          vm.$store.dispatch('updateLoading', false)
-        }))
-    },
-    mergeCart () {
-      const { carts } = this.$store.state.cartsModules.cart
-      const newArr = carts.map(item => {
-        return {
-          product_id: item.product_id,
-          title: item.product.title,
-          qty: item.qty,
-          size: item.size,
-          price: item.product.price,
-          imageUrl: item.product.imageUrl
-        }
-      })
-      const filterArr = newArr.reduce((final, current) => {
-        // 判斷數值(id, size)是否重複
-        const repeatItem = final.some(item => item.product_id === current.product_id && item.size === current.size)
-        if (repeatItem) {
-          // 重複時總數(qty)相加
-          // current為重複的值,forEach的item為不重複的值
-          // 再次判斷有重複的值才相加
-          final.forEach(item => { if (item.product_id === current.product_id && item.size === current.size)item.qty += parseInt(current.qty) })
-        } else {
-          // 不重複時代表累加陣列(final)無該筆資料,做push
-          final.push(current)
-        }
-        return final
-      }, [])
-      console.log(filterArr)
+      vm.$http.all([vm.$http.delete(delAPI), vm.$http.post(addAPI, { data: changeCart })])
+      .then(vm.$http.spread((delResp, addResp) => {
+        vm.getCart()
+        vm.$store.dispatch('updateLoading', false)
+      }))
     }
   },
   computed: {
     ...mapGetters(['isLoading', 'products']),
-    ...mapGetters('cartsModules', ['cart']),
+    ...mapGetters('cartsModules', ['cart', 'mergeCart']),
     slideDeleteFn () {
       // 判斷是否顯示slide滑塊
       return this.currentWidth <= 480 && true
@@ -223,7 +194,6 @@ export default {
   async created () {
     const vm = this
     await vm.getCart()
-    await vm.mergeCart()
   },
   mounted () {
     return (
