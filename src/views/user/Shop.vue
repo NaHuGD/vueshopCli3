@@ -124,7 +124,6 @@ export default {
       vm.$route.path !== path && vm.$router.push(path)
     },
     goInside (id) {
-      console.log('goInside',id)
       const vm = this
       vm.$router.push(`/shop_inside/${id}`)
       window.scrollTo({

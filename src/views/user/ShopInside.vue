@@ -32,10 +32,10 @@
                   :class="{'borderErr':isSize}"
                   class="form-control"
                   id="tasteValue"
-                  @change="tasteValue"
+                  @change.prevent="tasteValue"
                   v-if="product.category !== '護具'"
                 >
-                  <option selected disabled>口味</option>
+                  <option value="undefined" selected disabled>口味</option>
                   <option value="草莓">草莓</option>
                   <option value="巧克力">巧克力</option>
                   <option value="香草">香草</option>
@@ -47,7 +47,7 @@
                   @change.prevent="protectiveValue"
                   v-else
                 >
-                  <option selected disabled>尺寸</option>
+                  <option value="undefined" selected disabled>尺寸</option>
                   <option value="L">L</option>
                   <option value="M">M</option>
                   <option value="S">S</option>
@@ -65,7 +65,7 @@
           <div class="addShop text-center" v-else>
             <button class="col-5" @click.prevent="addtoCart(product)">加入購物車</button>
             <span class="col"></span>
-            <button class="col-5" @click.prevent="buyNow(product.id)" to="/shop/all">直接購買</button>
+            <button class="col-5" @click.prevent="buyNow(product)" to="/shop/all">直接購買</button>
           </div>
           <h6 class="h5 pt-4">商品描述:</h6>
           <ul class="ml-2">
@@ -101,6 +101,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import axios from 'axios'
 
 export default {
   data () {
@@ -123,7 +124,6 @@ export default {
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       vm.$store.dispatch('updateLoading', true)
       vm.$http.get(url).then(response => {
-        console.log(response.data.products)
         const newArray = response.data.products.filter(function (
           item,
           index,
@@ -166,35 +166,59 @@ export default {
     tasteValue () {
       // 選擇口味
       const vm = this
-      vm.$store.state.cartsModules.cart.carts.size = document.querySelector('#tasteValue').value
+      vm.$store.state.cartsModules.cart.carts.size = document.getElementById('tasteValue').value
       vm.isSize = false
     },
     protectiveValue () {
       // 選擇尺寸
       const vm = this
-      vm.$store.state.cartsModules.cart.carts.size = document.querySelector(
-        '#protectiveValue'
-      ).value
+      vm.$store.state.cartsModules.cart.carts.size = document.getElementById('protectiveValue').value
       vm.isSize = false
     },
-    buyNow (id) {
+    buyNow (product) {
       const vm = this
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      const cart = {
-        product_id: id,
-        qty: vm.$store.state.cartsModules.cartNum,
-        size: vm.$store.state.cartsModules.cart.carts.size
-      }
-      if (vm.$store.state.cartsModules.cart.carts.size === undefined) {
+      const addAPI = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      vm.$store.dispatch('updateLoading', false)
+      if (vm.$store.state.cartsModules.cart.carts.size === undefined || vm.$store.state.cartsModules.cart.carts.size === 'undefined') {
         alert('請選擇尺寸/口味')
         vm.isSize = true
-        vm.$store.dispatch('updateLoading', false)
       } else {
-        vm.$http.post(url, { data: cart }).then(response => {
-          // 直接購買,導頁並更新購物車
-          vm.$store.dispatch('cartsModules/getCart')
-        })
+        const { carts } = vm.$store.state.cartsModules.cart
+        if (carts.some(item => item.product.title === product.title && item.size === vm.$store.state.cartsModules.cart.carts.size)){
+          let deletId = String
+          let currentQty = Number
+          carts.map(item => {
+            if (item.product.title === product.title && item.size === vm.$store.state.cartsModules.cart.carts.size) {
+              // 取得當前的qty做累加
+              currentQty = item.qty
+              // 取得外層刪除ID值
+              deletId = item.id
+            }
+          })
+          const cart = {
+            product_id: product.id,
+            qty: vm.$store.state.cartsModules.cartNum + currentQty,
+            size: vm.$store.state.cartsModules.cart.carts.size
+          }
+          const delAPI = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${deletId}`
+          axios.all([axios.delete(delAPI), axios.post(addAPI, { data: cart })])
+          .then(res => {
+            // 直接購買,導頁並更新購物車
+            vm.$store.dispatch('cartsModules/getCart')
+          })
+        } else {
+          const cart = {
+            product_id: product.id,
+            qty: vm.$store.state.cartsModules.cartNum,
+            size: vm.$store.state.cartsModules.cart.carts.size
+          }
+          vm.$http.post(addAPI, { data: cart }).then(response => {
+            // 直接購買,導頁並更新購物車
+            vm.$store.dispatch('cartsModules/getCart')
+          })
+        }
         vm.$router.push('/checkProduct')
+        vm.$store.dispatch('updateLoading', true)
       }
     },
     getLocalData () {

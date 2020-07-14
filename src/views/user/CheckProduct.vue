@@ -185,7 +185,7 @@ export default {
   },
   computed: {
     ...mapGetters(['isLoading', 'products']),
-    ...mapGetters('cartsModules', ['cart', 'mergeCart']),
+    ...mapGetters('cartsModules', ['cart']),
     slideDeleteFn () {
       // 判斷是否顯示slide滑塊
       return this.currentWidth <= 480 && true
