@@ -26,8 +26,6 @@ export default {
       context.commit('CARTNUM', parseInt(document.querySelector('#cartNum').value))
     },
     addtoCart(context, product) {
-      const nowSize = this.state.cartsModules.size
-      console.log(nowSize)
       // qty加入的數量
       const vm = this
       if (vm.state.cartsModules.size === undefined || vm.state.cartsModules.size === 'undefined') {
@@ -76,7 +74,6 @@ export default {
           })
         }
       }
-      this.state.cartsModules.size = nowSize
     }
   },
   mutations: {

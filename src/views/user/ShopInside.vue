@@ -167,7 +167,6 @@ export default {
     tasteValue () {
       // 選擇口味
       const vm = this
-      console.log(document.getElementById('tasteValue').value)
       vm.$store.state.cartsModules.size = document.getElementById('tasteValue').value
       vm.isSize = false
     },

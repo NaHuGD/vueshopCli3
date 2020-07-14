@@ -1,19 +1,13 @@
 # vueshop
 
-## Project setup
-```
-npm install
-```
+### 使用六角學院提供API，打造具備後台可管理的線上購物平台
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### 使用技術:
+- vue
+- vuex
+- axios
+- bootStrap4
+- babel
+- less
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![image](https://github.com/lexsaints/powershell/blob/master/IMG/ps2.png)
