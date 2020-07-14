@@ -217,9 +217,9 @@ export default {
       window.marker = marker
     }
   },
-  mounted () {
+  async mounted () {
     const vm = this
-    vm.initMap()
+    await vm.initMap()
     vm.setMarker()
   }
 }
