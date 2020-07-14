@@ -34,8 +34,9 @@
                   id="tasteValue"
                   @change.prevent="tasteValue"
                   v-if="product.category !== '護具'"
+                  v-model="size"
                 >
-                  <option value="undefined" selected disabled>口味</option>
+                  <option value="undefined" disabled>口味</option>
                   <option value="草莓">草莓</option>
                   <option value="巧克力">巧克力</option>
                   <option value="香草">香草</option>
@@ -166,29 +167,30 @@ export default {
     tasteValue () {
       // 選擇口味
       const vm = this
-      vm.$store.state.cartsModules.cart.carts.size = document.getElementById('tasteValue').value
+      console.log(document.getElementById('tasteValue').value)
+      vm.$store.state.cartsModules.size = document.getElementById('tasteValue').value
       vm.isSize = false
     },
     protectiveValue () {
       // 選擇尺寸
       const vm = this
-      vm.$store.state.cartsModules.cart.carts.size = document.getElementById('protectiveValue').value
+      vm.$store.state.cartsModules.size = document.getElementById('protectiveValue').value
       vm.isSize = false
     },
     buyNow (product) {
       const vm = this
       const addAPI = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       vm.$store.dispatch('updateLoading', false)
-      if (vm.$store.state.cartsModules.cart.carts.size === undefined || vm.$store.state.cartsModules.cart.carts.size === 'undefined') {
+      if (vm.$store.state.cartsModules.size === undefined || vm.$store.state.cartsModules.size === 'undefined') {
         alert('請選擇尺寸/口味')
         vm.isSize = true
       } else {
         const { carts } = vm.$store.state.cartsModules.cart
-        if (carts.some(item => item.product.title === product.title && item.size === vm.$store.state.cartsModules.cart.carts.size)){
+        if (carts.some(item => item.product.title === product.title && item.size === vm.$store.state.cartsModules.size)){
           let deletId = String
           let currentQty = Number
           carts.map(item => {
-            if (item.product.title === product.title && item.size === vm.$store.state.cartsModules.cart.carts.size) {
+            if (item.product.title === product.title && item.size === vm.$store.state.cartsModules.size) {
               // 取得當前的qty做累加
               currentQty = item.qty
               // 取得外層刪除ID值
@@ -198,7 +200,7 @@ export default {
           const cart = {
             product_id: product.id,
             qty: vm.$store.state.cartsModules.cartNum + currentQty,
-            size: vm.$store.state.cartsModules.cart.carts.size
+            size: vm.$store.state.cartsModules.size
           }
           const delAPI = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${deletId}`
           axios.all([axios.delete(delAPI), axios.post(addAPI, { data: cart })])
@@ -210,7 +212,7 @@ export default {
           const cart = {
             product_id: product.id,
             qty: vm.$store.state.cartsModules.cartNum,
-            size: vm.$store.state.cartsModules.cart.carts.size
+            size: vm.$store.state.cartsModules.size
           }
           vm.$http.post(addAPI, { data: cart }).then(response => {
             // 直接購買,導頁並更新購物車
@@ -256,7 +258,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['isLoading'])
+    ...mapGetters(['isLoading']),
+    ...mapGetters('cartsModules', ['size']),
   },
   created () {
     const vm = this

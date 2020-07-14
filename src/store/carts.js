@@ -4,10 +4,9 @@ export default {
   namespaced: true,
   state: {
     cart: {
-      carts: {
-        // size: ''
-      }
+      carts: {}
     },
+    size: 'undefined',
     cartNum: 1
   },
   actions: {
@@ -27,21 +26,23 @@ export default {
       context.commit('CARTNUM', parseInt(document.querySelector('#cartNum').value))
     },
     addtoCart(context, product) {
+      const nowSize = this.state.cartsModules.size
+      console.log(nowSize)
       // qty加入的數量
       const vm = this
-      if (vm.state.cartsModules.cart.carts.size === undefined || vm.state.cartsModules.cart.carts.size === 'undefined') {
+      if (vm.state.cartsModules.size === undefined || vm.state.cartsModules.size === 'undefined') {
         alert('請選擇尺寸/口味')
-        context.commit('LOADING', false, { root: true })
       } else {
+        context.commit('LOADING', true, { root: true })
         const { carts } = vm.state.cartsModules.cart
         const addAPI = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
         // 判斷id size是否重複
-        if (carts.some(item => item.product.title === product.title && item.size === vm.state.cartsModules.cart.carts.size)) {
+        if (carts.some(item => item.product.title === product.title && item.size === vm.state.cartsModules.size)) {
           let deletId = String
           let currentQty = Number
           // 重複=>將數量累加後,刪除原本的資料,在重新post新的資料
           carts.map(item => {
-            if (item.product.title === product.title && item.size === vm.state.cartsModules.cart.carts.size) {
+            if (item.product.title === product.title && item.size === vm.state.cartsModules.size) {
               // 取得當前的qty做累加
               currentQty = item.qty
               // 取得外層刪除ID值
@@ -51,7 +52,7 @@ export default {
           const cart = {
             product_id: product.id,
             qty: vm.state.cartsModules.cartNum + currentQty,
-            size: vm.state.cartsModules.cart.carts.size
+            size: vm.state.cartsModules.size
           }
           const delAPI = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${deletId}`
           axios.all([axios.delete(delAPI), axios.post(addAPI, { data: cart })])
@@ -60,15 +61,13 @@ export default {
               context.commit('BAGTOGGLE', false, { root: true })
               context.commit('LOADING', false, { root: true })
             })
-          context.commit('LOADING', true, { root: true })
         } else {
           const cart = {
             product_id: product.id,
             qty: vm.state.cartsModules.cartNum,
-            size: vm.state.cartsModules.cart.carts.size
+            size: vm.state.cartsModules.size
           }
           // 不重複=>直接post新的資料
-          context.commit('LOADING', true, { root: true })
           axios.post(addAPI, { data: cart }).then(res => {
             // 加入購物車,res=商品資料
             context.dispatch('getCart')
@@ -77,6 +76,7 @@ export default {
           })
         }
       }
+      this.state.cartsModules.size = nowSize
     }
   },
   mutations: {
@@ -90,6 +90,9 @@ export default {
   getters: {
     cart(state) {
       return state.cart
+    },
+    size(state) {
+      return state.size
     }
   }
 }
