@@ -29,7 +29,6 @@ export default {
     addtoCart(context, product) {
       // qty加入的數量
       const vm = this
-      console.log(vm.state.cartsModules.cart.carts.size)
       if (vm.state.cartsModules.cart.carts.size === undefined || vm.state.cartsModules.cart.carts.size === 'undefined') {
         alert('請選擇尺寸/口味')
         context.commit('LOADING', false, { root: true })

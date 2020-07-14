@@ -158,7 +158,6 @@ export default {
     },
     goProducts () {
       // 搜尋商品頁
-      console.log('search')
       const vm = this
       const path = `/search/${vm.id}`
       vm.$bus.$emit('searchId:push', vm.id)
