@@ -8,7 +8,7 @@
 - axios
 - bootStrap4
 - babel
-- less
+- scss
 
 ## 結帳畫面
 ![image](./src/assets/images/demo/checkout/c1.png)
